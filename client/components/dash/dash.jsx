@@ -12,27 +12,30 @@ import Profile from '../dash/profile';
 import './dash.scss';
 
 class DisplaysAll extends Component {
-        render (){
-                const {
-                        
-                } = this.props;
+	render (){
+		const {
+			dash
+		} = this.props;
 
-                return (
-                        <div className='display-all-container'>
-                                <Nav />
-                                <div className='page'>
-                                    <Profile />
-                                    <div className='row001'>
-                                            <Question />
-                                            <Answer />
-                                    </div>
-                                </div>
-                        </div>
-                );
-        }
+		return (
+			<div className='display-all-container'>
+				<Nav />
+				<div className='page'>
+					<Profile />
+					{(dash.view.showPrompt
+		        ? <div className='row001'>
+								<Question />
+								<Answer />
+							</div>    
+		        : <div className='row001'>Click "Start!" to get prompt</div>
+					)}
+				</div>
+			</div>
+		);
+	}
 }
 
 export default connect(
-    (state) => ({ displays: state.displays }),
-    // { selectDisplay }
+		(state) => ({ dash: state.dash }),
+		// { selectDisplay }
 )(DisplaysAll);
