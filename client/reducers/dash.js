@@ -99,7 +99,7 @@ const submitAnswer = (state, action) => {
 export default function dash (state = initialState, action) {
   return ({
     [actionTypes.START_EXAM_SUCCESS]: startExam,
-    [actionTypes.SET_COUNDOWN_TIMER]: setCountdownTimer,
+    [actionTypes.SET_COUNTDOWN_TIMER]: setCountdownTimer,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer
   }[action.type] || ((s) => s))(state, action);
 }
