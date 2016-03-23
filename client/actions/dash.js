@@ -28,6 +28,16 @@ export function startExam (params) {
   };
 }
 
+export function setCountdownTimerDispatch(time) {
+  return async dispatch => {
+    console.log('pineapples');
+    dispatch({
+      type: actionTypes.SET_COUNTDOWN_TIMER,
+      timeRemaining: time
+    });
+  }
+}
+
 export function submitAnswer (params) {
   return async dispatch => {
     dispatch({

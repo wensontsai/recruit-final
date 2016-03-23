@@ -1,55 +1,105 @@
 import * as actionTypes from '../actionTypes/dash';
+import merge from 'lodash.merge';
+import { setCountdownTimerDispatch } from '../actions/dash';
+
 
 const initialState = {
   data: {
     emailCode: '',
     userId: '',
+    questionNum: null,
+    endTime: "March 31 2016 23:59:59 GMT+02:00"
   },
   view: {
-    showPrompt: null
+    timeRemaining: {},
+    showPrompt: null,
   }
 };
 
-// when app initializes
-// grab email code for user from URI
-// and set initialState
+// ------------------clock--------------------------- //
+
+var t, clock, timeinterval;
+
+const getTimeRemaining = (endtime) => {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+
+  console.log(new Date());
+  var seconds = Math.floor( (t/1000) % 60 );
+  var minutes = Math.floor( (t/1000/60) % 60 );
+  var hours = Math.floor( (t/(1000*60*60)) % 24 );
+  var days = Math.floor( t/(1000*60*60*24) );
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+};
+
+const initializeClock = (id, endtime) => {
+  var timeinterval = setInterval(function(){
+    var t = getTimeRemaining(initialState.data.endTime);
+
+    if(t.total<=0){
+      clearInterval(timeinterval);
+    }
+  },1000);
+};
+
+const updateClock = () => {
+  var t = getTimeRemaining(initialState.data.endTime);
+  console.log(t);
+
+  // Dispatch Action to trigger newState //
+  setCountdownTimerDispatch(t);
+  //                                     //
+
+  if(t.total<=0){
+    clearInterval(timeinterval);
+  }
+};
+
+// ------------------clock------------------------------- //
 
 const startExam = (state, action) => {
-  let newState = Object.assign({}, state);
-  console.log("WTFFFFFF");
-  console.log(action.result.prompt);
+  // COUNTDOWN TIMER //
+  updateClock();
+  var timeinterval = setInterval(updateClock,1000);
+  //                //
 
-  newState.data = {
-    currentPrompt: action.result.prompt
-  };
 
-  newState.view = {
-    showPrompt: true
-  };
-  return newState;
+  return merge({}, state, {
+    data: {
+      currentPrompt: action.result.prompt,
+      // get the end time from server/DB, set here as the following:
+      // endTime: action.result.endTime
+      endTime: 'March 31 2015 23:59:59 GMT+02:00'
+    },
+    view: {
+      showPrompt: true
+    }
+  });
 };
 
-const sendCommand = (state, action) => {
-  let newState = Object.assign({}, state);
-
-  newState.displaysObject[action.result.display] = {
-    status: action.result.command
-  }
-  newState.currentDisplay = {
-    name: action.result.display,
-    status: action.result.command
-  }
-  return newState;
+const setCountdownTimer = (state, action) => {
+  return merge({}, state, {
+      view: {
+        timeRemaining: action.timeRemaining
+      }
+    });
 }
 
 const submitAnswer = (state, action) => {
-  let newState = Object.assign({}, state);
-  console.log('submit successful');
+
+
 };
+
 
 export default function dash (state = initialState, action) {
   return ({
     [actionTypes.START_EXAM_SUCCESS]: startExam,
+    [actionTypes.SET_COUNDOWN_TIMER]: setCountdownTimer,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer
   }[action.type] || ((s) => s))(state, action);
 }

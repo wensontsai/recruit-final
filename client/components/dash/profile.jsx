@@ -18,17 +18,21 @@ class Profile extends Component {
                 <div>
                   User information goes here:
                 </div>
-                {'\n'}
-                <div>
-                  when you are ready to begin, click here:
-                </div>
-                  <button className='btn btn-sm'
-                    onClick={() => startExam(dash)}
-                    >Start!
-                  </button>
-                <div className='countdown-timer'>
-                  01:00:83 remaining
-                </div>
+                {(dash.view.showPrompt
+                  ? <div className='status'>
+                      Remaining Time: 
+                      <div className='countdown-timer'>
+                        01:00:83 {dash.view.timeRemaining.seconds}
+                      </div>  
+                    </div>
+                  : <div className='status'>
+                      When you are ready to begin, click here  
+                      <button className='btn btn-sm'
+                        onClick={() => startExam(dash)}
+                        >Start!
+                      </button>
+                    </div>
+                )}        
             </div>
         );
     }

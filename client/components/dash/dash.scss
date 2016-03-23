@@ -1,10 +1,10 @@
-.display-all-container .page{
+.display-all-container .page {
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-.display-all-container .page .row001{
+.display-all-container .page .row001 {
   margin-top: 1rem;
   flex-direction: row;
   display: inline-flex;
@@ -23,6 +23,13 @@
   padding: 1rem;
   height: 175px;
   flex: 1 auto;
+}
+.profile-view .status {
+  margin: 2rem auto;
+}
+.profile-view .countdown-timer {
+  font-size: 2em;
+  font-weight: 800;
 }
 .question-view {
   height: 450px;
@@ -50,6 +57,6 @@
   padding: 1rem;
 }
 
-.submit-answer button{
+.submit-answer button {
   float: right;
 }
