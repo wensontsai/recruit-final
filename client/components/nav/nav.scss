@@ -1,0 +1,38 @@
+$nav-background: #40525e;
+$nav-title: #D19275;
+
+.nav {
+	background-color: $nav-background;
+	border: gray 1px solid;
+	border-radius: 15px;
+	margin: 1rem 0;
+	padding: 1.5rem;
+	display: flex;
+	flex: 1 100%;
+}
+.nav-title > a,
+.nav-title {
+	font-size: 3.5rem;
+	color: $nav-title;
+	margin: 0.5rem;
+	flex: 5;
+	/*font-family: 'Megrim';*/
+	/*font-family: 'Flamenco'; */
+	font-family: 'Monofett';
+	font-weight: 200;
+
+}
+.nav-title > a:hover{
+	text-decoration: none;
+}
+.nav-links {
+	display: inline-flex;
+	flex: 0.5;
+	align-items: center;
+	text-align: right;
+	/*justify-content: center;*/
+}
+.nav-links > a{
+	padding: 1rem;
+	margin: 0 0 0 1rem;
+}
