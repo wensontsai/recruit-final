@@ -39,7 +39,7 @@ app.use('/api', apiRoutes);
 
 apiRoutes.post('/startExam', function(req, res){
 	console.dir('hello..  is it me? @#$@#$@#%@#$#$');
-	console.dir(req.body);
+	console.dir(req.body.test);
 
 	// 1. inserts exam record in DB
 	// 2. sets start time
