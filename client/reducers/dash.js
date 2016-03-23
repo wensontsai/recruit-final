@@ -37,16 +37,6 @@ const getTimeRemaining = (endtime) => {
   };
 };
 
-const initializeClock = (id, endtime) => {
-  var timeinterval = setInterval(function(){
-    var t = getTimeRemaining(initialState.data.endTime);
-
-    if(t.total<=0){
-      clearInterval(timeinterval);
-    }
-  },1000);
-};
-
 const updateClock = () => {
   var t = getTimeRemaining(initialState.data.endTime);
   console.log(t);
