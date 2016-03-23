@@ -23,7 +23,7 @@ class Profile extends Component {
                   when you are ready to begin, click here:
                 </div>
                   <button className='btn btn-sm'
-                    onClick={() => startExam(dash.data)}
+                    onClick={() => startExam(dash)}
                     >Start!
                   </button>
                 <div className='countdown-timer'>

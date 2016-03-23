@@ -57,34 +57,3 @@ export function sendCommand(display, command) {
   }
 }
 
-
-
-
-// AJAX WAY //
-// export function sendCommand(display, command){
-//     var paramsObj = {
-//       display: display,
-//       command: command
-//     };
-
-//     Api.sendCommand(paramsObj, function(data){
-//       if(data !== 'fail'){
-
-//         console.log(data);
-//         return async dispatch => {
-//           dispatch({
-//             type: actionTypes.SEND_COMMAND_SUCCESS,
-//             result: data
-//           });
-//         }
-//       }
-//       if(data === 'fail'){
-//         return async dispatch => {
-//           dispatch({
-//             type: actionTypes.SEND_COMMAND_ERROR,
-//             result: data
-//           });
-//         }
-//       }
-//     }.bind(this) );
-// }

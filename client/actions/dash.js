@@ -11,12 +11,14 @@ export function startExam (params) {
 
     try {
       const data = {
-        user_id: params.user_id
+        userId: params.userId,
+        emailCode: params.emailCode
       };
-      const result = await get('/api/startExam');
+      const result = await post('/api/startExam', data);
 
       dispatch({
-        type: actionTypes.START_EXAM_SUCCESS
+        type: actionTypes.START_EXAM_SUCCESS,
+        result: data
       });
     } catch(e) {
       dispatch({
@@ -34,16 +36,16 @@ export function submitAnswer (params) {
 
     try {
       const data = {
-        user_id: params.user_id,
-        question_id: params.question_id,
+        userId: params.userId,
+        questionId: params.questionId,
         answer: params.answer,
-        submit_time: params.submit_time
+        submitTime: params.submitTime
       };
-      const result = await get('/api/submitAnswer');
+      const result = await post('/api/submitAnswer', data);
 
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
-        params: params
+        result: data
       });
     } catch(e) {
       dispatch({
