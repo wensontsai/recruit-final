@@ -41,6 +41,11 @@
   word-wrap: break-word;
   max-width: 400px;
 }
+.question-view .question-prompt{
+  font-style: italic;
+  font-size: 1.2em;
+  font-weight: 600;
+}
 .answer-view {
   height: 450px;
   border: gray solid 1px;

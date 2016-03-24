@@ -10,12 +10,12 @@ import './dash.scss';
 
 class Profile extends Component {
   constructor (props) {
-      super (props);
-      this.state = {
-        dash: props.dash,
-        startExam: props.startExam,
-        queryAllPrompts: props.queryAllPrompts,
-      };
+    super (props);
+    this.state = {
+      dash: props.dash,
+      startExam: props.startExam,
+      queryAllPrompts: props.queryAllPrompts,
+    };
   }
 
   componentDidMount() {
