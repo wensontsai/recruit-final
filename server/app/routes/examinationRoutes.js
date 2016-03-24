@@ -1,8 +1,5 @@
 exports.startExam = function(Examination){
   return function(req, res, next){
-
-    var result = {};
-
     Examination.findOne({ emailCode: req.body.data.emailCode }, function(err, exam){
       if(err) return console.error(err);
       if (!exam) {
@@ -24,8 +21,7 @@ exports.startExam = function(Examination){
       }
 
       res.json({
-        success: true,
-        result: result
+        success: true
       });
     });
   };

@@ -35,6 +35,7 @@ const queryAllPrompts = (state, action) => {
 };
 
 const submitAnswer = (state, action) => {
+  console.log("check");
   return merge({}, state, {
     data: {
       questionNum: 1

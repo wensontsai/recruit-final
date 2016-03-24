@@ -39,16 +39,15 @@ export function queryAllPrompts () {
   };
 }
 
-export function submitAnswer (answer) {
+export function submitAnswer (data) {
   return async dispatch => {
     try {
-      const result = await post('/api/submitAnswer', answer);
-
+      const result = await post('/api/submitAnswer', data);
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         result: result
       });
-      
+
     } catch(e) {
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_ERROR

@@ -12,7 +12,9 @@ class Answer extends Component {
     this.state = {
       dash: props.dash,
       submitAnswer: props.submitAnswer,
-      answer: this.props.answer || ''
+      data: {
+        answer: this.props.answer || ''
+      }
     };
   }
 
@@ -24,7 +26,7 @@ class Answer extends Component {
         </div>
         <textarea
           type="text"
-          value={this.state.answer}
+          value={this.state.data.answer}
           onChange={ this.handleChange.bind(this) }
         />
         <div className='submit-answer'>
@@ -37,11 +39,15 @@ class Answer extends Component {
     );
   }
   handleChange (event) {
-    this.setState({ answer: event.target.value });
+    this.setState({ 
+      data: {
+        answer: event.target.value 
+      }
+    });
   }
   submitAnswer () {
-    console.log(this.state.answer);
-    this.props.submitAnswer(this.state.answer);
+    console.log(this.state.data);
+    this.props.submitAnswer(this.state.data);
   }
 
 }
