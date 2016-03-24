@@ -60,4 +60,4 @@ app.post('/api/startExam', examinationRoutes.startExam(Examination));
 // HTTP server
 // ------------------------------------
 app.listen(port);
-console.log('Magic happens at http://localhost:' +port);
+console.log('==> 🌎  Magic is happening at http://localhost:' +port);
