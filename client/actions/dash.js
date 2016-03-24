@@ -3,17 +3,9 @@ import { get, post, del } from '../utils/api';
 
 var Api = require('../utils/api');
 
-export function startExam (params) {
+export function startExam (data) {
   return async dispatch => {
-    dispatch({
-      type: actionTypes.START_EXAM
-    });
-
     try {
-      const data = {
-        userId: params.userId,
-        emailCode: params.emailCode
-      };
       const result = await post('/api/startExam', data);
 
       dispatch({
@@ -28,21 +20,11 @@ export function startExam (params) {
   };
 }
 
-export function setTimer(time) {
-  return async dispatch => {
-    dispatch({
-      type: actionTypes.SET_TIMER,
-      timeRemaining: time
-    });
-  }
-}
-
 export function submitAnswer (params) {
   return async dispatch => {
-    dispatch({
-      type: actionTypes.SUBMIT_ANSWER
-    });
-
+    // dispatch({
+    //   type: actionTypes.SUBMIT_ANSWER
+    // });
     try {
       const data = {
         userId: params.userId,

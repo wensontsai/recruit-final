@@ -2,58 +2,56 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { startExam, setTimer } from '../../actions/dash';
+import { startExam } from '../../actions/dash';
 
 import Timer from './countdownTimer';
 
 import './dash.scss';
 
 class Profile extends Component {
-  constructor(props) {
-      super(props);
+  constructor (props) {
+      super (props);
       this.state = {
         dash: props.dash,
         startExam: props.startExam,
       };
-  }  
+  }
 
   componentDidMount() {
-    // if an exam has begun, 
+    // on load - query Users table, set data on candidate (userId) using emailCode
+
+    // if an exam has begun,
     // go get remaining time, and pass it to countdown timer
   }
 
-  render (){
-      // const {
-      //     dash,
-      //     startExam
-      // } = this.props;
-
-      return (
-          <div className='profile-view'>
-              <div>
-                User information goes here:
+  render () {
+    return (
+      <div className='profile-view'>
+        <div>
+          User information goes here:
+        </div>
+        {(this.props.dash.view.showPrompt
+          ? <div className='status'>
+              Time Remaining:
+              <div className='countdown-timer'>
+                <Timer initialTimeRemaining = {this.props.dash.data.timeAllowed}
+                />
               </div>
-              {(this.props.dash.view.showPrompt
-                ? <div className='status'>
-                    Remaining Time: 
-                    <div className='countdown-timer'>
-                      <Timer initialTimeRemaining = {7200000}
-                      />
-                    </div>  
-                  </div>
-                : <div className='status'>
-                    When you are ready to begin, click here  
-                    <button className='btn btn-sm'
-                      onClick={() => this.startExam ()}
-                      >Start!
-                    </button>
-                  </div>
-              )}        
-          </div>
-      );
+            </div>
+          : <div className='status'>
+              You have 2 hours to complete the exam.<br />
+              When you are ready to begin click below:<br />
+              <button className='btn btn-sm start-exam'
+                onClick={() => this.startExam ()}
+                >Start Exam
+              </button>
+            </div>
+        )}
+      </div>
+    );
   }
 
-  startExam (){
+  startExam () {
     this.props.startExam(this.props.dash);
   }
 
