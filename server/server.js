@@ -1,4 +1,5 @@
 var express = require('express');
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
@@ -11,21 +12,25 @@ var app = express();
 // ------------------------------------
 // Mongo DB Connect
 // ------------------------------------
-var db = require ('./db');
 var config = require ('./config');
 
-db.connect(config.database, function(err) {
-  if (err) {
-    console.log('Unable to connect to Mongo ! ! ! ! !')
-    process.exit(1)
+mongoose.connect(config.database, function(err){
+  if(err){
+    console.log('connection error', err);
   } else {
-    console.log("~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~");
+    console.log('~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~');
   }
 });
+app.set('secret', config.secret); // sets secret variable
 
-var User = require ('./app/models/user');
-var Examination = require ('./app/models/examination');
-var Prompt = require ('./app/models/prompt');
+
+// ------------------------------------
+// Mongoose - Models
+// ------------------------------------
+var User = require('./app/models/User'); 
+var Prompt = require('./app/models/Prompt');
+var Examination = require('./app/models/Examination');
+
 
 // ------------------------------------
 // Middleware
@@ -42,51 +47,13 @@ app.use(cookieParser());
 var apiRoutes = express.Router ();
 app.use('/api', apiRoutes);
 
-// start an Examination
-apiRoutes.post('/startExam', function(req, res) {
-	var result = {};
+// GET
+var promptRoutes = require('./app/routes/promptRoutes');
+app.get('/api/getAllPrompts', promptRoutes.getAllPrompts(Prompt));
 
-	console.log(req.body.data.emailCode);
-	// 1. update exam record in DB, set startTime
-
-	Examination.findOne({ 'emailCode': req.body.data.emailCode }, function (err, exam) {
-    console.log(exam);
-
-		if (err) throw err;
-		// if exists
-    if (exam) {
-      exam.startTime = new Date();
-      exam.endTime = new Date().addHours(2);
-
-	    exam.save(function(err) {
-	      if (err)
-	        console.log('error')
-	      else
-	        console.log('success')
-	    });
-    }
-    // if doesn't exist
-		if (!exam) {
-			return res.json({ success: false, message: 'Authentication failed.  Examination not found!'} );
-		}
-	});
-
-
-	// 4. selects a Prompt
-	// 5. returns Prompt
-	res.json({
-		result: result
-	});
-
-});
-
-
-// get all users
-apiRoutes.get('/users', function(req, res) {
-	User.find({}, function(err, users) {
-		res.json(users);
-	});
-});
+// POST
+var examinationRoutes = require('./app/routes/examinationRoutes');
+app.post('/api/startExam', examinationRoutes.startExam(Examination));
 
 
 // ------------------------------------

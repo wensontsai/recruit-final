@@ -1,4 +1,4 @@
 module.exports = {
     'secret': 'dresslerbestler',
-    'database': 'mongodb://localhost/jwtsohawt'
+    'database': 'mongodb://localhost/recruit'
 };
