@@ -14,4 +14,4 @@ In another terminal, run webpack to compile front-end in dev mode:
 ```npm start```
 
 In another terminal, run node/express back-end server for API routes:  
-```cd server && npm start```
+```cd server && nodemon server.js```
