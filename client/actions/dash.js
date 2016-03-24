@@ -28,7 +28,7 @@ export function queryAllPrompts () {
 
       dispatch({
         type: actionTypes.QUERY_ALL_PROMPTS_SUCCESS,
-        result: data
+        result: result
       });
 
     } catch(e) {
@@ -41,9 +41,6 @@ export function queryAllPrompts () {
 
 export function submitAnswer (params) {
   return async dispatch => {
-    // dispatch({
-    //   type: actionTypes.SUBMIT_ANSWER
-    // });
     try {
       const data = {
         userId: params.userId,

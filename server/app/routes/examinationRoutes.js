@@ -14,8 +14,6 @@ exports.startExam = function(Examination, data){
         return res.json( {success: false, message: 'No examination exists for that code!'} );
       }
       if (exam) {
-        console.log(exam);
-
         var now = new Date();
         exam.startTime = now;
         exam.endTime = new Date(now.getTime() + (2*1000*60*60));
@@ -25,7 +23,7 @@ exports.startExam = function(Examination, data){
             console.log('error saving :(');
             console.log(err);
           } else {
-            console.log('saving successful ;)');
+            console.log('model: Examination update - saving successful ;)');
           }
         });
       }

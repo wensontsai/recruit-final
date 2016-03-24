@@ -8,7 +8,7 @@ exports.queryAllPrompts = function(Prompt){
     Prompt.find({}, function(err, prompt){
       if(err) return console.error(err);
       console.log(prompt);
-      res.send(prompt);
+      res.json(prompt);
     });
   };
 };
