@@ -9,7 +9,7 @@ exports.startExam = function(Examination, data){
     var result = {};
 
     Examination.findOne({ emailCode: req.body.data.emailCode }, function(err, exam){
-      if (err) throw err;
+      if(err) return console.error(err);
       if (!exam) {
         return res.json( {success: false, message: 'No examination exists for that code!'} );
       }
@@ -22,10 +22,10 @@ exports.startExam = function(Examination, data){
 
         exam.save(function(err) {
           if (err) {
-            console.log('error saving');
+            console.log('error saving :(');
             console.log(err);
           } else {
-            console.log('saving successful');
+            console.log('saving successful ;)');
           }
         });
       }

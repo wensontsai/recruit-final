@@ -12,9 +12,28 @@ export function startExam (data) {
         type: actionTypes.START_EXAM_SUCCESS,
         result: data
       });
+
     } catch(e) {
       dispatch({
         type: actionTypes.START_EXAM_ERROR
+      });
+    }
+  };
+}
+
+export function queryAllPrompts () {
+  return async dispatch => {
+    try {
+      const result = await get('/api/queryAllPrompts');
+
+      dispatch({
+        type: actionTypes.QUERY_ALL_PROMPTS_SUCCESS,
+        result: data
+      });
+
+    } catch(e) {
+      dispatch({
+        type: actionTypes.QUERY_ALL_PROMPTS_ERROR
       });
     }
   };

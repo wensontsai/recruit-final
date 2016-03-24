@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { startExam } from '../../actions/dash';
+import { startExam, queryAllPrompts } from '../../actions/dash';
 
 import Timer from './countdownTimer';
 
@@ -14,6 +14,7 @@ class Profile extends Component {
       this.state = {
         dash: props.dash,
         startExam: props.startExam,
+        queryAllPrompts: props.queryAllPrompts,
       };
   }
 
@@ -53,6 +54,7 @@ class Profile extends Component {
 
   startExam () {
     this.props.startExam(this.props.dash);
+    this.props.queryAllPrompts();
   }
 
 
@@ -60,5 +62,5 @@ class Profile extends Component {
 
 export default connect(
   (state) => ({ dash: state.dash }),
-  { startExam }
+  { startExam, queryAllPrompts }
 )(Profile);
