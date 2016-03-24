@@ -47,11 +47,11 @@ app.use(cookieParser());
 var apiRoutes = express.Router ();
 app.use('/api', apiRoutes);
 
-// GET
+// ::::: GET :::::
 var promptRoutes = require('./app/routes/promptRoutes');
 app.get('/api/getAllPrompts', promptRoutes.getAllPrompts(Prompt));
 
-// POST
+// ::::: POST :::::
 var examinationRoutes = require('./app/routes/examinationRoutes');
 app.post('/api/startExam', examinationRoutes.startExam(Examination));
 
