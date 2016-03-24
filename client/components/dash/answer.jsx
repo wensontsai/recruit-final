@@ -2,32 +2,51 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-// import { selectDisplay } from '../../actions/displays';
+import { submitAnswer } from '../../actions/dash';
 
 import './dash.scss';
 
 class Answer extends Component {
-    render (){
-      const { 
-          displays,
-          selectDisplay 
-      } = this.props;
+  constructor (props) {
+    super (props);
+    this.state = {
+      dash: props.dash,
+      submitAnswer: props.submitAnswer,
+      answer: this.props.answer || ''
+    };
+  }
 
-      return (
-        <div className='answer-view'>
-          <div>
-            Answer area
-          </div>
-          <textarea className='' />
-          <div className='submit-answer'>
-            <button className='btn btn-sm'>Submit Answer</button>
-          </div>
+  render () {
+    return (
+      <div className='answer-view'>
+        <div>
+          Answer area
         </div>
-      );
-    }
+        <textarea
+          type="text"
+          value={this.state.answer}
+          onChange={ this.handleChange.bind(this) }
+        />
+        <div className='submit-answer'>
+          <button className='btn btn-sm start-exam'
+            onClick={() => this.submitAnswer(this.props.answer)}
+            >Submit Answer
+          </button>
+        </div>
+      </div>
+    );
+  }
+  handleChange (event) {
+    this.setState({ answer: event.target.value });
+  }
+  submitAnswer () {
+    console.log(this.state.answer);
+    this.props.submitAnswer(this.state.answer);
+  }
+
 }
 
 export default connect(
-  (state) => ({ displays: state.displays }),
-  // { selectDisplay }
+  (state) => ({ dash: state.dash }),
+  { submitAnswer }
 )(Answer);

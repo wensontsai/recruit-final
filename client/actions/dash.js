@@ -10,7 +10,7 @@ export function startExam (data) {
 
       dispatch({
         type: actionTypes.START_EXAM_SUCCESS,
-        result: data
+        result: result
       });
 
     } catch(e) {
@@ -39,21 +39,16 @@ export function queryAllPrompts () {
   };
 }
 
-export function submitAnswer (params) {
+export function submitAnswer (answer) {
   return async dispatch => {
     try {
-      const data = {
-        userId: params.userId,
-        questionId: params.questionId,
-        answer: params.answer,
-        submitTime: params.submitTime
-      };
-      const result = await post('/api/submitAnswer', data);
+      const result = await post('/api/submitAnswer', answer);
 
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
-        result: data
+        result: result
       });
+      
     } catch(e) {
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_ERROR

@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-// import { selectDisplay } from '../../actions/displays';
-
 import Nav from '../nav/nav';
 import Answer from '../dash/answer';
 import Question from '../dash/question';

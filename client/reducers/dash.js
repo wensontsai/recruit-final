@@ -5,9 +5,10 @@ const initialState = {
   data: {
     userId: 'test001',
     emailCode: 'xxxxx',
-    questionNum: null,
+    questionNum: 0,
     timeAllowed: 0, 
-    currentPrompt: ''
+    currentPrompt: '',
+    currentAnswer: ''
   },
   view: {
     showPrompt: null,
@@ -34,8 +35,11 @@ const queryAllPrompts = (state, action) => {
 };
 
 const submitAnswer = (state, action) => {
-
-
+  return merge({}, state, {
+    data: {
+      questionNum: 1
+    }
+  });
 };
 
 

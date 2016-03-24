@@ -1,10 +1,5 @@
-exports.startExam = function(Examination, data){
+exports.startExam = function(Examination){
   return function(req, res, next){
-    // Examination.find({ emailCode: req.body.data.emailCode}, function(error, exam){
-    //   if(error) return console.error(error);
-    //   console.log(exam);
-    //   res.send(exam);
-    // });
 
     var result = {};
 
@@ -23,7 +18,7 @@ exports.startExam = function(Examination, data){
             console.log('error saving :(');
             console.log(err);
           } else {
-            console.log('model: Examination update - saving successful ;)');
+            console.log('Model - Examination: Update - Save successful ;)');
           }
         });
       }
@@ -35,6 +30,14 @@ exports.startExam = function(Examination, data){
     });
   };
 };
+
+exports.submitAnswer = function(Examination){
+  return function(req, res, next){
+    console.log("wahts wrong?");
+    console.log(req.body);
+  };
+};
+
 
 
 

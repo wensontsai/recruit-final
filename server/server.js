@@ -44,17 +44,18 @@ app.use(cookieParser());
 // ------------------------------------
 // API Routes
 // ------------------------------------
-// var apiRoutes = express.Router ();
-// app.use('/api', apiRoutes);
+var apiRoutes = express.Router ();
+app.use('/api', apiRoutes);
 
 var promptRoutes = require('./app/routes/promptRoutes');
 var examinationRoutes = require('./app/routes/examinationRoutes');
 
 // ::::: GET :::::
-app.get('/api/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
+apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
 
 // ::::: POST :::::
-app.post('/api/startExam', examinationRoutes.startExam(Examination));
+apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
+apiRoutes.post('/submitAnswer', examinationRoutes.submitAnswer(Examination));
 
 
 // ------------------------------------
