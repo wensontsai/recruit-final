@@ -28,11 +28,10 @@ export function startExam (params) {
   };
 }
 
-export function setCountdownTimerDispatch(time) {
+export function setTimer(time) {
   return async dispatch => {
-    console.log('pineapples');
     dispatch({
-      type: actionTypes.SET_COUNTDOWN_TIMER,
+      type: actionTypes.SET_TIMER,
       timeRemaining: time
     });
   }

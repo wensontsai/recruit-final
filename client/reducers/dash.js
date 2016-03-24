@@ -1,7 +1,5 @@
 import * as actionTypes from '../actionTypes/dash';
 import merge from 'lodash.merge';
-import { setCountdownTimerDispatch } from '../actions/dash';
-
 
 const initialState = {
   data: {
@@ -16,47 +14,42 @@ const initialState = {
   }
 };
 
-// ------------------clock--------------------------- //
+// // ------------------clock--------------------------- //
 
-var t, clock, timeinterval;
+// var t, clock, timeinterval;
 
-const getTimeRemaining = (endtime) => {
-  var t = Date.parse(endtime) - Date.parse(new Date());
+// const getTimeRemaining = (endtime) => {
+//   var t = Date.parse(endtime) - Date.parse(new Date());
 
-  console.log(new Date());
-  var seconds = Math.floor( (t/1000) % 60 );
-  var minutes = Math.floor( (t/1000/60) % 60 );
-  var hours = Math.floor( (t/(1000*60*60)) % 24 );
-  var days = Math.floor( t/(1000*60*60*24) );
-  return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-};
+//   console.log(new Date());
+//   var seconds = Math.floor( (t/1000) % 60 );
+//   var minutes = Math.floor( (t/1000/60) % 60 );
+//   var hours = Math.floor( (t/(1000*60*60)) % 24 );
+//   var days = Math.floor( t/(1000*60*60*24) );
+//   return {
+//     'total': t,
+//     'days': days,
+//     'hours': hours,
+//     'minutes': minutes,
+//     'seconds': seconds
+//   };
+// };
 
-const updateClock = () => {
-  var t = getTimeRemaining(initialState.data.endTime);
-  console.log(t);
+// const updateClock = () => {
+//   var t = getTimeRemaining(initialState.data.endTime);
 
-  // Dispatch Action to trigger newState //
-  setCountdownTimerDispatch(t);
-  //                                     //
+//   if(t.total<=0){
+//     clearInterval(timeinterval);
+//   }
+// };
 
-  if(t.total<=0){
-    clearInterval(timeinterval);
-  }
-};
-
-// ------------------clock------------------------------- //
+// // ------------------clock------------------------------- //
 
 const startExam = (state, action) => {
-  // COUNTDOWN TIMER //
-  updateClock();
-  var timeinterval = setInterval(updateClock,1000);
-  //                //
+  // // COUNTDOWN TIMER //
+  // updateClock();
+  // var timeinterval = setInterval(updateClock,1000);
+  // //                //
 
 
   return merge({}, state, {
@@ -72,7 +65,7 @@ const startExam = (state, action) => {
   });
 };
 
-const setCountdownTimer = (state, action) => {
+const setTimer = (state, action) => {
   return merge({}, state, {
       view: {
         timeRemaining: action.timeRemaining
@@ -89,7 +82,7 @@ const submitAnswer = (state, action) => {
 export default function dash (state = initialState, action) {
   return ({
     [actionTypes.START_EXAM_SUCCESS]: startExam,
-    [actionTypes.SET_COUNTDOWN_TIMER]: setCountdownTimer,
+    [actionTypes.SET_TIMER]: setTimer,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer
   }[action.type] || ((s) => s))(state, action);
 }
