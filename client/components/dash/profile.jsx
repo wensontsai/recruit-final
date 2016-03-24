@@ -17,6 +17,11 @@ class Profile extends Component {
       };
   }  
 
+  componentDidMount() {
+    // if an exam has begun, 
+    // go get remaining time, and pass it to countdown timer
+  }
+
   render (){
       // const {
       //     dash,
