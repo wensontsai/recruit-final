@@ -9,15 +9,17 @@ import './candidates.scss';
 class AddCandidateView extends Component {
   constructor (props) {
     super (props);
+    // this.hideStatusView = this.hideStatusView.bind(this);
     this.state = {
-      dash: props.dash,
+      candidates: props.candidates,
       addCandidate: props.addCandidate,
       data: {
         firstName: this.props.firstName || '',
         lastName: this.props.lastName || '',
         email: this.props.email || '',
         admin: this.props.admin || ''
-      }
+      },
+      showStatus: this.props.showStatus || 'true'
     };
   }
 
@@ -58,10 +60,16 @@ class AddCandidateView extends Component {
         </div>
         <div className='add-candidate'>
           <button className='btn btn-sm add-candidate'
-            onClick={() => this.addCandidate(this.props.answer)}
+            onClick={() => this.addCandidate(this.hideStatusView.bind(this))}
             >Add Candidate
           </button>
         </div>
+        {(this.state.showStatus
+          ? <div className='action-status'>
+              {this.props.candidates.actionStatus}
+            </div>
+          : <div></div>
+        )}
       </div>
     );
   }
@@ -105,9 +113,19 @@ class AddCandidateView extends Component {
       }
     });
   }
-  addCandidate () {
+  addCandidate (hideFunc) {
     console.log(this.state.data);
     this.props.addCandidate(this.state.data);
+    this.setState({data:{}});
+
+    // setTimeout(function(){ {() => this.hideStatusView()} }, 5000);
+    setTimeout(function(){ hideFunc() }, 5000);
+  }
+  hideStatusView () {
+    this.setState({
+      showStatus: false
+    });
+    console.log(this);
   }
 
 }

@@ -51,6 +51,8 @@ class Answer extends Component {
   submitAnswer () {
     console.log(this.state.data);
     this.props.submitAnswer(this.state.data);
+    this.setState({data:{}});
+
     // if question count is < 3
     // then fire off action/dispatch for 
     // new question

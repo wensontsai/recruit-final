@@ -54,6 +54,7 @@ var userRoutes = require('./app/routes/userRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
+apiRoutes.get('/queryAllCandidates', userRoutes.queryAllUsers(User));
 
 // ::::: POST :::::
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
