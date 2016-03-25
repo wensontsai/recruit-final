@@ -50,6 +50,7 @@ app.use('/api', apiRoutes);
 var promptRoutes = require('./app/routes/promptRoutes');
 var examinationRoutes = require('./app/routes/examinationRoutes');
 var answerRoutes = require('./app/routes/answerRoutes');
+var userRoutes = require('./app/routes/userRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
@@ -57,6 +58,7 @@ apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
 // ::::: POST :::::
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
 apiRoutes.post('/submitAnswer', answerRoutes.submitAnswer(Answer));
+apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 
 
 // ------------------------------------

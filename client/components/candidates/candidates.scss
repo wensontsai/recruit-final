@@ -7,3 +7,14 @@
   flex: 3 auto;
   margin-top: 1rem;
 } 
+.candidate-add-view {
+	border: gray solid 1px;
+	border-radius: 10px;
+	padding: 1rem;
+	height: 175px;
+	flex: 1 auto;
+}
+.add-candidate {
+	float: right;
+	clear: both;
+}
