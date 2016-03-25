@@ -10,23 +10,7 @@ class List extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      candidates: {
-        candidatesAll: [ 
-          { __v: 0,
-            admin: 'Y',
-            email: 'tes@tes.com',
-            lastName: 'testyzer',
-            firstName: 'test',
-            _id: '56f54820c2825dd988bffe3d' },
-          { __v: 0,
-            admin: 'N',
-            email: 'le@le.com',
-            lastName: 'lee',
-            firstName: 'jason',
-            _id: '56f5482bc2825dd988bffe3e'
-          }
-        ],
-      },
+      candidates: props.candidates,
       queryAllCandidates: props.queryAllCandidates
     };
   }
@@ -46,7 +30,7 @@ class List extends Component {
           <div className='field' >INITIATE EXAM</div>
           <div className='field' >CHECK ANSWERS</div>
         </div>
-        {this.state.candidates.candidatesAll.map(function(record){
+        {this.props.candidates.candidatesAll.map(function(record){
           return (
             <div className='row' key={record._id}>
               <div className='field' >{record.firstName}</div>

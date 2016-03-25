@@ -10,7 +10,7 @@ import Profile from '../dash/profile';
 import './dash.scss';
 
 class DisplaysAll extends Component {
-	render (){
+	render () {
 		const {
 			dash
 		} = this.props;
@@ -35,5 +35,5 @@ class DisplaysAll extends Component {
 
 export default connect(
 		(state) => ({ dash: state.dash }),
-		// { selectDisplay }
+
 )(DisplaysAll);

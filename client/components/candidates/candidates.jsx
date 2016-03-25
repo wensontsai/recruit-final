@@ -9,9 +9,9 @@ import CandidatesList from './candidatesList';
 import './candidates.scss';
 
 class Candidates extends Component {
-  render (){
+  render () {
     const {
-        
+      candidates
     } = this.props;
 
     return (
@@ -27,5 +27,6 @@ class Candidates extends Component {
 }
 
 export default connect(
-  (state) => ({ displays: state.displays }),
+  (state) => ({ candidates: state.candidates }),
+
 )(Candidates);
