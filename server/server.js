@@ -30,7 +30,7 @@ app.set('secret', config.secret); // sets secret variable
 var User = require('./app/models/User'); 
 var Prompt = require('./app/models/Prompt');
 var Examination = require('./app/models/Examination');
-
+var Answer = require('./app/models/Answer');
 
 // ------------------------------------
 // Middleware
@@ -49,13 +49,14 @@ app.use('/api', apiRoutes);
 
 var promptRoutes = require('./app/routes/promptRoutes');
 var examinationRoutes = require('./app/routes/examinationRoutes');
+var answerRoutes = require('./app/routes/answerRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
 
 // ::::: POST :::::
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
-apiRoutes.post('/submitAnswer', examinationRoutes.submitAnswer(Examination));
+apiRoutes.post('/submitAnswer', answerRoutes.submitAnswer(Answer));
 
 
 // ------------------------------------

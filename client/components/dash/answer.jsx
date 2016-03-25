@@ -41,6 +41,9 @@ class Answer extends Component {
   handleChange (event) {
     this.setState({ 
       data: {
+        userId: this.props.dash.data.userId,
+        emailCode: this.props.dash.data.emailCode,
+        promptId: 'yyyy005',
         answer: event.target.value 
       }
     });
@@ -48,6 +51,10 @@ class Answer extends Component {
   submitAnswer () {
     console.log(this.state.data);
     this.props.submitAnswer(this.state.data);
+    // if question count is < 3
+    // then fire off action/dispatch for 
+    // new question
+    // increment questionsAsked
   }
 
 }

@@ -5,10 +5,10 @@ const initialState = {
   data: {
     userId: 'test001',
     emailCode: 'xxxxx',
-    questionNum: 0,
+    questionsAsked: 0,
+    questionCount: 0,
     timeAllowed: 0, 
     currentPrompt: '',
-    currentAnswer: ''
   },
   view: {
     showPrompt: null,
@@ -18,6 +18,8 @@ const initialState = {
 const startExam = (state, action) => {
   return merge({}, state, {
     data: {
+      questionsAsked: 1,
+      questionCount: 1,
       timeAllowed: 7200000
     },
     view: {

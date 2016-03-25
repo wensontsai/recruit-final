@@ -27,12 +27,7 @@ exports.startExam = function(Examination){
   };
 };
 
-exports.submitAnswer = function(Examination){
-  return function(req, res, next){
-    console.log("wahts wrong?");
-    console.log(req.body);
-  };
-};
+
 
 
 

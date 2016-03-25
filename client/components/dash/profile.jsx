@@ -38,6 +38,9 @@ class Profile extends Component {
                 <Timer initialTimeRemaining = {this.props.dash.data.timeAllowed}
                 />
               </div>
+              <div className='progress-area'>
+                You are on question # {this.props.dash.data.questionsAsked} out of 3
+              </div>
             </div>
           : <div className='status'>
               You have 2 hours to complete the exam.<br />
