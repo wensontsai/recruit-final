@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import dash from './dash';
+import candidates from './candidates';
 
 const reducers = combineReducers({
-  dash
+  dash,
+  candidates
 });
 
 export default reducers;

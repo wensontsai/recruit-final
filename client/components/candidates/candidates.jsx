@@ -5,22 +5,28 @@ import { connect } from 'react-redux';
 // import { selectDisplay } from '../../actions/displays';
 
 import Nav from '../nav/nav';
+import AddCandidate from './addCandidate';
+
+import './candidates.scss';
 
 class Candidates extends Component {
-    render (){
-        const {
-            
-        } = this.props;
+  render (){
+    const {
+        
+    } = this.props;
 
-        return (
-            <div className='candidates-all-container'>
-                <Nav />
-                <div className='page'>
-                  candidates view
-                </div>
+    return (
+        <div className='display-all-container'>
+            <Nav />
+            <div className='page'>
+              <AddCandidate />
+              <div className='candidates-list'>
+                candidates view
+              </div>
             </div>
-        );
-    }
+        </div>
+    );
+  }
 }
 
 export default connect(
