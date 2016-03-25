@@ -19,7 +19,7 @@ exports.submitAnswer = function(Answer){
         answer.save(function(err, answer){
           if(err) return console.error(err);
           console.log(answer);
-          res.send(answer);
+          res.json(answer);
         });
       }
     });

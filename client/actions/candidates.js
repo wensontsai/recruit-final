@@ -7,7 +7,6 @@ export function queryAllCandidates () {
   return async dispatch => {
     try {
       const result = await get('/api/queryAllCandidates');
-
       dispatch({
         type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
         result: result
@@ -15,7 +14,7 @@ export function queryAllCandidates () {
 
     } catch(e) {
       dispatch({
-        type: actionTypes.QUERY_ALL_CANDIDATES_ERROR
+        type: actionTypes.QUERY_ALL_CANDIDATES_ERROR,
       });
     }
   };
@@ -32,7 +31,7 @@ export function addCandidate (data) {
 
     } catch(e) {
       dispatch({
-        type: actionTypes.ADD_CANDIDATE_ERROR
+        type: actionTypes.ADD_CANDIDATE_ERROR,
       });
     }
   };

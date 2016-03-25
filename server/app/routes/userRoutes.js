@@ -15,8 +15,7 @@ exports.addUser = function(User){
 
         user.save(function(err, user){
           if(err) return console.error(err);
-          console.log(user);
-          res.send(user);
+          res.json(user);
         });
       }
     });
@@ -24,12 +23,11 @@ exports.addUser = function(User){
 };
 
 exports.queryAllUsers = function(User){
-      console.log('yoooo');
   return function(req, res, next){
     User.find({}, function(err, users){
       console.log(users);
       if(err) return console.error(err);
-      res.send(users);
+      res.json(users);
     });
   };
 };

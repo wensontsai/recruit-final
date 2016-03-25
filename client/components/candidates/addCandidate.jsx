@@ -73,7 +73,7 @@ class AddCandidateView extends Component {
           </div>
           {(this.state.showStatus
             ? <div className='action-status'>
-                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
+                <ReactCSSTransitionGroup transitionName='example' transitionEnterTimeout={500} transitionLeaveTimeout={300} >
                     {this.props.candidates.actionStatus}
                 </ReactCSSTransitionGroup>
               </div>

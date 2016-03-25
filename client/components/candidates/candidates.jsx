@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-// import { selectDisplay } from '../../actions/displays';
-
 import Nav from '../nav/nav';
 import AddCandidate from './addCandidate';
+import CandidatesList from './candidatesList';
 
 import './candidates.scss';
 
@@ -20,9 +19,7 @@ class Candidates extends Component {
             <Nav />
             <div className='page'>
               <AddCandidate />
-              <div className='candidates-list'>
-                candidates view
-              </div>
+              <CandidatesList />
             </div>
         </div>
     );
@@ -31,5 +28,4 @@ class Candidates extends Component {
 
 export default connect(
   (state) => ({ displays: state.displays }),
-  // { selectDisplay }
 )(Candidates);
