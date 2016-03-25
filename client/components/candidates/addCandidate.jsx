@@ -118,7 +118,6 @@ class AddCandidateView extends Component {
     this.props.addCandidate(this.state.data);
     this.setState({data:{}});
 
-    // setTimeout(function(){ {() => this.hideStatusView()} }, 5000);
     setTimeout(function(){ hideFunc() }, 5000);
   }
   hideStatusView () {
