@@ -43,6 +43,8 @@ class List extends Component {
           <div className='field' >LAST NAME</div>
           <div className='field' >EMAIL</div>
           <div className='field' >ADMIN</div>
+          <div className='field' >INITIATE EXAM</div>
+          <div className='field' >CHECK ANSWERS</div>
         </div>
         {this.state.candidates.candidatesAll.map(function(record){
           return (
@@ -51,6 +53,18 @@ class List extends Component {
               <div className='field' >{record.lastName}</div>
               <div className='field' >{record.email}</div>
               <div className='field' >{record.admin}</div>
+              <div className='field' >
+                <button className='btn btn-sm start-exam'
+                  onClick={() => this.startExam ()}
+                  >Send Email
+                </button>
+              </div>
+              <div className='field' >
+                <button className='btn btn-sm start-exam'
+                  onClick={() => this.startExam ()}
+                  >View Results
+                </button>
+              </div>
             </div>
           )
         }, this )}
