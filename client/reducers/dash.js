@@ -9,6 +9,7 @@ const initialState = {
     questionCount: 0,
     timeAllowed: 0, 
     currentPrompt: '',
+    currentPromptId: ''
   },
   view: {
     showPrompt: null,
@@ -31,16 +32,17 @@ const startExam = (state, action) => {
 const queryAllPrompts = (state, action) => {
   return merge({}, state, {
     data: {
-      currentPrompt: action.result[0].question
+      currentPrompt: action.result[0].question,
+      currentPromptId: action.result[0]._id
     }
   });
 };
 
 const submitAnswer = (state, action) => {
-  console.log("check");
   return merge({}, state, {
     data: {
-      questionNum: 1
+      questionNum: '*',
+      currentPrompt: action.result[0].question
     }
   });
 };
