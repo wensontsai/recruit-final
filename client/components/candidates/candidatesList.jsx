@@ -55,13 +55,13 @@ class List extends Component {
               <div className='field' >{record.admin}</div>
               <div className='field' >
                 <button className='btn btn-sm start-exam'
-                  onClick={() => this.startExam ()}
+                  onClick={() => this.sendEmail ()}
                   >Send Email
                 </button>
               </div>
               <div className='field' >
                 <button className='btn btn-sm start-exam'
-                  onClick={() => this.startExam ()}
+                  onClick={() => this.viewResults ()}
                   >View Results
                 </button>
               </div>
@@ -70,6 +70,14 @@ class List extends Component {
         }, this )}
       </div>
     );
+  }
+
+  sendEmail () {
+
+  }
+
+  viewResults () {
+    
   }
 
 }
