@@ -43,6 +43,7 @@ export function queryAllPrompts () {
 }
 
 export function submitAnswer (data) {
+  console.log(data);
   return async dispatch => {
     try {
       const submitResult = await post('/api/submitAnswer', data);
@@ -51,8 +52,11 @@ export function submitAnswer (data) {
         submitResult: submitResult
       });
 
-      if (data.questionsAsked >= data.questionsTotal ) {
-        finishExam();
+      if (data.questionsAsked === 2 ) {
+        console.log('test over');
+        dispatch({
+          type: actionTypes.FINISH_EXAM_SUCCESS,
+        });
       } else {
         dispatch({
           type: actionTypes.SELECT_NEXT_PROMPT,
@@ -68,14 +72,14 @@ export function submitAnswer (data) {
   };
 }
 
-
-export function finishExam () {
+export function finishExam (data) {
   return async dispatch => {
     try {
-      const result = await post('/api/finishExam');
+      const result = await post('/api/finishExam', data);
 
       dispatch({
         type: actionTypes.FINISH_EXAM_SUCCESS,
+        result: result
       });
 
     } catch(e) {

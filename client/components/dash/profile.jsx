@@ -31,7 +31,11 @@ class Profile extends Component {
         <div>
           User information goes here:
         </div>
-        {(this.props.dash.view.showPrompt
+        {(this.props.dash.view.examCompleted
+          ? <div className='row001'>
+              *** Thanks for taking the test !  We will reply to you shortly! ***
+            </div>
+          : this.props.dash.view.showPrompt
           ? <div className='status'>
               Time Remaining:
               <div className='countdown-timer'>

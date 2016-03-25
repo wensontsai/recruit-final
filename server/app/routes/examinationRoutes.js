@@ -28,6 +28,7 @@ exports.startExam = function(Examination){
 };
 
 exports.finishExam = function(Examination){
+  console.log('finish exam func firing');
   return function(req, res, next){
     Examination.findOne({ emailCode: req.body.data.emailCode }, function(err, exam){
       if(err) return console.error(err);

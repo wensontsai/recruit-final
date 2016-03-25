@@ -58,11 +58,14 @@ const finishExam = (state, action) => {
 };
 
 const selectNextPrompt = (state, action) => {
+  let questionsAsked = state.data.questionsAsked;
+  let newQuestionsAsked = state.data.questionsAsked + 1;
+
   let allPrompts = state.data.allPrompts;
-  console.log(allPrompts);
   let newAllPrompts = allPrompts.shift();
   return merge({}, state, {
     data: {
+      questionsAsked: newQuestionsAsked,
       currentPrompt: allPrompts[0].question,
       currentPromptId: allPrompts[0]._id,
       allPrompts: newAllPrompts
@@ -77,7 +80,7 @@ export default function dash (state = initialState, action) {
     [actionTypes.QUERY_ALL_PROMPTS_SUCCESS]: queryAllPrompts,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
     [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
-    
+
     [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt
 
   }[action.type] || ((s) => s))(state, action);

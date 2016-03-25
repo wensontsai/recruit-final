@@ -22,7 +22,6 @@ class DisplaysAll extends Component {
 					<Profile />
 					{(dash.view.examCompleted
 		        ? <div className='row001'>
-								Exam Completed !  Thank you for applying !
 							</div>
 		        : dash.view.showPrompt
 				        ? <div className='row001'>
