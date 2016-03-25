@@ -27,52 +27,59 @@ class AddCandidateView extends Component {
   render () {
     return (
       <div className='candidate-add-view'>
-        <div>
-          <div>First Name:</div>
-          <input
-            type="text"
-            value={this.state.data.firstName}
-            onChange={ this.handleChangeFirstName.bind(this) }
-          />
+        <div className='column'>
+          <div>
+            <div>First Name:</div>
+            <input
+              type="text"
+              value={this.state.data.firstName}
+              onChange={ this.handleChangeFirstName.bind(this) }
+            />
+          </div>
+          <div>
+            <div>Last Name:</div>
+            <input
+              type="text"
+              value={this.state.data.lastName}
+              onChange={ this.handleChangeLastName.bind(this) }
+            />
+          </div>
         </div>
-        <div>
-          <div>Last Name:</div>
-          <input
-            type="text"
-            value={this.state.data.lastName}
-            onChange={ this.handleChangeLastName.bind(this) }
-          />
+
+        <div className='column'>
+          <div>
+            <div>Email:</div>
+            <input
+              type="text"
+              value={this.state.data.email}
+              onChange={ this.handleChangeEmail.bind(this) }
+            />
+          </div>
+          <div>
+            <div>Admin:</div>
+            <input
+              type="text"
+              value={this.state.data.admin}
+              onChange={ this.handleChangeAdmin.bind(this) }
+            />
+          </div>
         </div>
-        <div>
-          <div>Email:</div>
-          <input
-            type="text"
-            value={this.state.data.email}
-            onChange={ this.handleChangeEmail.bind(this) }
-          />
+        <div className='column-submit'>
+          <div className='add-candidate'>
+            <button className='btn btn-sm add-candidate'
+              onClick={() => this.addCandidate(this.hideStatusView.bind(this))}
+              >Add Candidate
+            </button>
+          </div>
+          {(this.state.showStatus
+            ? <div className='action-status'>
+                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
+                    {this.props.candidates.actionStatus}
+                </ReactCSSTransitionGroup>
+              </div>
+            : ''
+          )}
         </div>
-        <div>
-          <div>Admin:</div>
-          <input
-            type="text"
-            value={this.state.data.admin}
-            onChange={ this.handleChangeAdmin.bind(this) }
-          />
-        </div>
-        <div className='add-candidate'>
-          <button className='btn btn-sm add-candidate'
-            onClick={() => this.addCandidate(this.hideStatusView.bind(this))}
-            >Add Candidate
-          </button>
-        </div>
-        {(this.state.showStatus
-          ? <div className='action-status'>
-              <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
-                  {this.props.candidates.actionStatus}
-              </ReactCSSTransitionGroup>
-            </div>
-          : <div></div>
-        )}
       </div>
     );
   }

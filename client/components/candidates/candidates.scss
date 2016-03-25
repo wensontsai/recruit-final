@@ -11,16 +11,35 @@
 	border: gray solid 1px;
 	border-radius: 10px;
 	padding: 1rem;
-	height: 175px;
+	height: 135px;
 	flex: 1 auto;
+  flex-direction: column;
+  margin-top: 1rem;
+  flex-direction: row;
+  display: inline-flex;
+}
+.candidate-add-view input {
+  width: 95%;
+  height: 85%;
+  background-color: gray;
 }
 .add-candidate {
-	float: right;
-	clear: both;
+  text-align: right;
+  margin: auto 0;
+  margin-top: 3.2rem;
 }
 .action-status {
 	float: right;
 }
+.column{
+  flex: 3 auto;
+}
+
+
+
+
+
+
 
 .example-enter {
   opacity: 0.01;
