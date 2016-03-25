@@ -1,3 +1,4 @@
+// API Action Types :
 export const START_EXAM_SUCCESS = 'START_EXAM_SUCCESS';
 export const START_EXAM_ERROR = 'START_EXAM_ERROR';
 
@@ -9,3 +10,6 @@ export const SUBMIT_ANSWER_ERROR = 'SUBMIT_ANSWER_ERROR';
 
 export const FINISH_EXAM_SUCCESS =  'FINISH_EXAM_SUCCESS';
 export const FINISH_EXAM_ERROR =  'FINISH_EXAM_ERROR';
+
+// ROUTELESS Action Types:
+export const SELECT_NEXT_PROMPT =  'SELECT_NEXT_PROMPT';

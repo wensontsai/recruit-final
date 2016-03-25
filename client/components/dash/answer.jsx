@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { submitAnswer, queryAllPrompts } from '../../actions/dash';
+import { submitAnswer } from '../../actions/dash';
 
 
 import './dash.scss';
@@ -60,7 +60,6 @@ class Answer extends Component {
   submitAnswer () {
     console.log(this.state.data);
     this.props.submitAnswer(this.state.data);
-    this.props.queryAllPrompts();
  
     this.setState({ 
       data:{
@@ -78,5 +77,5 @@ class Answer extends Component {
 
 export default connect(
   (state) => ({ dash: state.dash }),
-  { submitAnswer, queryAllPrompts }
+  { submitAnswer}
 )(Answer);

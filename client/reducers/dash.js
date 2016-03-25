@@ -7,13 +7,14 @@ const initialState = {
     emailCode: 'xxxxx',
     questionsAsked: 0,
     questionsTotal: 0,
-    timeAllowed: 0, 
+    timeAllowed: 0,
     currentPrompt: '',
     currentPromptId: false,
+    allPrompts: []
   },
   view: {
     showPrompt: null,
-    examCompleted: ''
+    examCompleted: false
   }
 };
 
@@ -34,7 +35,8 @@ const queryAllPrompts = (state, action) => {
   return merge({}, state, {
     data: {
       currentPrompt: action.queryPromptResult[0].question,
-      currentPromptId: action.queryPromptResult[0]._id
+      currentPromptId: action.queryPromptResult[0]._id,
+      allPrompts: action.queryPromptResult
     }
   });
 };
@@ -55,6 +57,19 @@ const finishExam = (state, action) => {
   });
 };
 
+const selectNextPrompt = (state, action) => {
+  let allPrompts = state.data.allPrompts;
+  console.log(allPrompts);
+  let newAllPrompts = allPrompts.shift();
+  return merge({}, state, {
+    data: {
+      currentPrompt: allPrompts[0].question,
+      currentPromptId: allPrompts[0]._id,
+      allPrompts: newAllPrompts
+    }
+  });
+};
+
 
 export default function dash (state = initialState, action) {
   return ({
@@ -62,5 +77,8 @@ export default function dash (state = initialState, action) {
     [actionTypes.QUERY_ALL_PROMPTS_SUCCESS]: queryAllPrompts,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
     [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
+    
+    [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt
+
   }[action.type] || ((s) => s))(state, action);
 }

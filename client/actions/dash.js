@@ -52,10 +52,11 @@ export function submitAnswer (data) {
       });
 
       if (data.questionsAsked >= data.questionsTotal ) {
-        console.log('wtfdudeee');
         finishExam();
       } else {
-        queryAllPrompts();
+        dispatch({
+          type: actionTypes.SELECT_NEXT_PROMPT,
+        });
       }
 
     } catch(e) {
@@ -66,6 +67,7 @@ export function submitAnswer (data) {
     }
   };
 }
+
 
 export function finishExam () {
   return async dispatch => {
