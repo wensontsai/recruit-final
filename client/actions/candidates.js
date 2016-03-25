@@ -6,15 +6,16 @@ var Api = require('../utils/api');
 export function queryAllCandidates () {
   return async dispatch => {
     try {
-      const result = await get('/api/queryAllCandidates');
+      const queryResult = await get('/api/queryAllCandidates');
       dispatch({
         type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
-        result: result
+        queryResult: queryResult
       });
 
     } catch(e) {
       dispatch({
         type: actionTypes.QUERY_ALL_CANDIDATES_ERROR,
+        ERROR: e
       });
     }
   };
@@ -28,15 +29,12 @@ export function addCandidate (data) {
         type: actionTypes.ADD_CANDIDATE_SUCCESS
       });
 
-      const queryResult = await get('/api/queryAllCandidates');
-      dispatch({
-        type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
-        result: queryResult
-      });
+      queryAllCandidates();
 
     } catch(e) {
       dispatch({
         type: actionTypes.ADD_CANDIDATE_ERROR,
+        ERROR: e
       });
     }
   };

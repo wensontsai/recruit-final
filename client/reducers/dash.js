@@ -6,13 +6,14 @@ const initialState = {
     userId: 'test001',
     emailCode: 'xxxxx',
     questionsAsked: 0,
-    questionCount: 0,
+    questionsTotal: 0,
     timeAllowed: 0, 
     currentPrompt: '',
-    currentPromptId: ''
+    currentPromptId: false,
   },
   view: {
     showPrompt: null,
+    examCompleted: ''
   }
 };
 
@@ -20,7 +21,7 @@ const startExam = (state, action) => {
   return merge({}, state, {
     data: {
       questionsAsked: 1,
-      questionCount: 1,
+      questionsTotal: 3,
       timeAllowed: 7200000
     },
     view: {
@@ -32,8 +33,8 @@ const startExam = (state, action) => {
 const queryAllPrompts = (state, action) => {
   return merge({}, state, {
     data: {
-      currentPrompt: action.result[0].question,
-      currentPromptId: action.result[0]._id
+      currentPrompt: action.queryPromptResult[0].question,
+      currentPromptId: action.queryPromptResult[0]._id
     }
   });
 };
@@ -41,8 +42,15 @@ const queryAllPrompts = (state, action) => {
 const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
-      questionNum: '*',
-      currentPrompt: action.result[0].question
+      questionsAsked: action.submitResult.questionsAsked
+    }
+  });
+};
+
+const finishExam = (state, action) => {
+  return merge({}, state, {
+    view: {
+      examCompleted: true
     }
   });
 };
@@ -52,6 +60,7 @@ export default function dash (state = initialState, action) {
   return ({
     [actionTypes.START_EXAM_SUCCESS]: startExam,
     [actionTypes.QUERY_ALL_PROMPTS_SUCCESS]: queryAllPrompts,
-    [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer
+    [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
+    [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
   }[action.type] || ((s) => s))(state, action);
 }

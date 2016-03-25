@@ -20,12 +20,16 @@ class DisplaysAll extends Component {
 				<Nav />
 				<div className='page'>
 					<Profile />
-					{(dash.view.showPrompt
+					{(dash.view.examCompleted
 		        ? <div className='row001'>
-								<Question />
-								<Answer />
-							</div>    
-		        : <div className='row001'>Click "Start!" to get prompt</div>
+								Exam Completed !  Thank you for applying !
+							</div>
+		        : dash.view.showPrompt
+				        ? <div className='row001'>
+										<Question />
+										<Answer />
+									</div>
+	        			: <div className='row001'>Click "Start!" to get prompt</div>	
 					)}
 				</div>
 			</div>

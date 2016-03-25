@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/dash.js';
 import { get, post, del } from '../utils/api';
+import merge from 'lodash.merge';
 
 var Api = require('../utils/api');
 
@@ -15,7 +16,8 @@ export function startExam (data) {
 
     } catch(e) {
       dispatch({
-        type: actionTypes.START_EXAM_ERROR
+        type: actionTypes.START_EXAM_ERROR,
+        ERROR: e
       });
     }
   };
@@ -24,16 +26,17 @@ export function startExam (data) {
 export function queryAllPrompts () {
   return async dispatch => {
     try {
-      const result = await get('/api/queryAllPrompts');
+      const queryPromptResult = await get('/api/queryAllPrompts');
 
       dispatch({
         type: actionTypes.QUERY_ALL_PROMPTS_SUCCESS,
-        result: result
+        queryPromptResult: queryPromptResult
       });
 
     } catch(e) {
       dispatch({
-        type: actionTypes.QUERY_ALL_PROMPTS_ERROR
+        type: actionTypes.QUERY_ALL_PROMPTS_ERROR,
+        ERROR: e
       });
     }
   };
@@ -42,15 +45,41 @@ export function queryAllPrompts () {
 export function submitAnswer (data) {
   return async dispatch => {
     try {
-      const result = await post('/api/submitAnswer', data);
+      const submitResult = await post('/api/submitAnswer', data);
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
-        result: result
+        submitResult: submitResult
+      });
+
+      if (data.questionsAsked >= data.questionsTotal ) {
+        console.log('wtfdudeee');
+        finishExam();
+      } else {
+        queryAllPrompts();
+      }
+
+    } catch(e) {
+      dispatch({
+        type: actionTypes.SUBMIT_ANSWER_ERROR,
+        ERROR: e
+      });
+    }
+  };
+}
+
+export function finishExam () {
+  return async dispatch => {
+    try {
+      const result = await post('/api/finishExam');
+
+      dispatch({
+        type: actionTypes.FINISH_EXAM_SUCCESS,
       });
 
     } catch(e) {
       dispatch({
-        type: actionTypes.SUBMIT_ANSWER_ERROR
+        type: actionTypes.FINISH_EXAM_ERROR,
+        ERROR: e
       });
     }
   };

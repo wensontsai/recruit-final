@@ -57,8 +57,9 @@ apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
 apiRoutes.get('/queryAllCandidates', userRoutes.queryAllUsers(User));
 
 // ::::: POST :::::
-apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
 apiRoutes.post('/submitAnswer', answerRoutes.submitAnswer(Answer));
+apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
+apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 
 

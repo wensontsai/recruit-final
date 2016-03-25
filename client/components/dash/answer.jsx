@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { submitAnswer } from '../../actions/dash';
+import { submitAnswer, queryAllPrompts } from '../../actions/dash';
+
 
 import './dash.scss';
 
@@ -12,8 +13,14 @@ class Answer extends Component {
     this.state = {
       dash: props.dash,
       submitAnswer: props.submitAnswer,
+      queryAllPrompts: props.queryAllPrompts,
       data: {
-        answer: this.props.answer || ''
+        userId: this.props.dash.data.userId || '',
+        emailCode: this.props.dash.data.emailCode || '',
+        promptId: this.props.dash.data.currentPromptId || '',
+        answer: this.props.answer || '',
+        questionsAsked: this.props.dash.data.questionsAsked || '',
+        questionsTotal: this.props.dash.data.questionsTotal || ''   
       }
     };
   }
@@ -25,7 +32,7 @@ class Answer extends Component {
           Answer area
         </div>
         <textarea
-          type="text"
+          type='text'
           value={this.state.data.answer}
           onChange={ this.handleChange.bind(this) }
         />
@@ -39,29 +46,37 @@ class Answer extends Component {
     );
   }
   handleChange (event) {
-    this.setState({ 
+    this.setState({
       data: {
         userId: this.props.dash.data.userId,
         emailCode: this.props.dash.data.emailCode,
-        promptId: 'yyyy005',
-        answer: event.target.value 
+        promptId: this.props.dash.data.currentPromptId,
+        answer: event.target.value,
+        questionsAsked: this.props.dash.data.questionsAsked,
+        questionsTotal: this.props.dash.data.questionsTotal
       }
     });
   }
   submitAnswer () {
     console.log(this.state.data);
     this.props.submitAnswer(this.state.data);
-    this.setState({data:{}});
-
-    // if question count is < 3
-    // then fire off action/dispatch for 
-    // new question
-    // increment questionsAsked
+    this.props.queryAllPrompts();
+ 
+    this.setState({ 
+      data:{
+        userId: this.props.dash.data.userId,
+        emailCode: this.props.dash.data.emailCode,
+        promptId: this.props.dash.data.currentPromptId,
+        answer: '',
+        questionsAsked: this.props.dash.data.questionsAsked,
+        questionsTotal: this.props.dash.data.questionsTotal
+      } 
+    });
   }
 
 }
 
 export default connect(
   (state) => ({ dash: state.dash }),
-  { submitAnswer }
+  { submitAnswer, queryAllPrompts }
 )(Answer);

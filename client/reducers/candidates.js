@@ -11,7 +11,7 @@ const initialState = {
 const queryAllCandidates = (state, action) => {
   return merge({}, state, {
     candidates: {
-      candidatesAll: action.result,
+      candidatesAll: action.queryResult,
       actionStatus: 'queryAllCandidates successful!'
     }
   });

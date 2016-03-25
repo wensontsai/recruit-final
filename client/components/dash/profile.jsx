@@ -39,7 +39,7 @@ class Profile extends Component {
                 />
               </div>
               <div className='progress-area'>
-                You are on question # {this.props.dash.data.questionsAsked} out of 3
+                You are on question # {this.props.dash.data.questionsAsked} out of {this.props.dash.data.questionsTotal}
               </div>
             </div>
           : <div className='status'>
