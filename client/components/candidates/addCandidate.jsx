@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -66,7 +67,9 @@ class AddCandidateView extends Component {
         </div>
         {(this.state.showStatus
           ? <div className='action-status'>
-              {this.props.candidates.actionStatus}
+              <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} >
+                  {this.props.candidates.actionStatus}
+              </ReactCSSTransitionGroup>
             </div>
           : <div></div>
         )}
