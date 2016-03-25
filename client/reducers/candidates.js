@@ -2,21 +2,28 @@ import * as actionTypes from '../actionTypes/candidates';
 import merge from 'lodash.merge';
 
 const initialState = {
-  candidatesAll: [],
-  actionStatus: ''
+  candidates: {
+    candidatesAll: [],
+    actionStatus: ''
+  }
 };
 
 const queryAllCandidates = (state, action) => {
   return merge({}, state, {
-    candidatesAll: action.result,
-    actionStatus: 'queryAllCandidates successful!'
+    candidates: {
+      candidatesAll: action.result,
+      actionStatus: 'queryAllCandidates successful!'
+    }
   });
 };
 
 
 const addCandidate = (state, action) => {
   return merge({}, state, {
-    actionStatus: 'Adding Candidate Successful!'
+    candidates: {
+      candidatesAll: action.result2,
+      actionStatus: 'Adding Candidate Successful!'
+    }
   });
 };
 

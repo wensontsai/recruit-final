@@ -25,8 +25,13 @@ export function addCandidate (data) {
     try {
       const result = await post('/api/addCandidate', data);
       dispatch({
-        type: actionTypes.ADD_CANDIDATE_SUCCESS,
-        result: result
+        type: actionTypes.ADD_CANDIDATE_SUCCESS
+      });
+
+      const result2 = await get('/api/queryAllCandidates');
+      dispatch({
+        type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
+        result: result2
       });
 
     } catch(e) {

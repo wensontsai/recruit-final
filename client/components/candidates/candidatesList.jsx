@@ -30,7 +30,7 @@ class List extends Component {
           <div className='field' >INITIATE EXAM</div>
           <div className='field' >CHECK ANSWERS</div>
         </div>
-        {this.props.candidates.candidatesAll.map(function(record){
+        {this.props.candidates.candidates.candidatesAll.map(function(record){
           return (
             <div className='row' key={record._id}>
               <div className='field' >{record.firstName}</div>
