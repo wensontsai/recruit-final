@@ -21,15 +21,21 @@ class Profile extends Component {
   render () {
     return (
       <div className='profile-view'>
-        <div>
-          User information goes here:
+        <div className='user-info'>
           <div>
             Exam ID:{this.props.dash.data.examId}
           </div>
           <div>
-            Username: {this.props.dash.data.userId}
+            First Name: {this.props.dash.data.firstName}
+          </div>
+          <div>
+            Last Name: {this.props.dash.data.lastName}
+          </div>
+          <div>
+            Email: {this.props.dash.data.email}
           </div>
         </div>
+        <div className='exam-status'>
         {(this.props.dash.view.examCompleted
           ? <div className='row001'>
               *** Thanks for taking the test !  We will reply to you shortly! ***
@@ -54,6 +60,7 @@ class Profile extends Component {
               </button>
             </div>
         )}
+        </div>
       </div>
     );
   }

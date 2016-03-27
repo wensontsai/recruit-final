@@ -23,10 +23,10 @@ export function startExam (data) {
   };
 }
 
-export function queryExam () {
+export function queryExam (data) {
   return async dispatch => {
     try {
-      const queryExamResult = await post('/api/queryExam');
+      const queryExamResult = await post('/api/queryExam', data);
 
       dispatch({
         type: actionTypes.QUERY_EXAM_SUCCESS,
@@ -71,7 +71,7 @@ export function submitAnswer (data) {
         submitResult: submitResult
       });
 
-      if (data.questionsAsked === 3 ) {
+      if (data.questionsAsked === data.questionsTotal ) {
         console.log('test over');
         dispatch({
           type: actionTypes.FINISH_EXAM_SUCCESS,

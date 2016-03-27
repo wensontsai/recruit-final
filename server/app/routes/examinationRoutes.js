@@ -27,22 +27,41 @@ exports.startExam = function(Examination) {
   };
 };
 
-exports.queryExam = function(Examination) {
+exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
-    console.log(req.body);
-    Examination.findOne({ examId: req.body.examId }, function(err, exam) {
+    var result = {};
+    console.log('what bro');
+    Examination.findOne({ _id: req.body.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
-        return res.json({ success: false, message: 'This exam ID does not exist!' });
+        return res.json({ success: false, message: 'This exam does not exist!' });
       } else {
-        res.send(exam);
+        console.log(exam);
+        User.findOne({ _id: exam.userId }, function(err, user) {
+          if(err) return console.error(err);
+          if (!user) {
+            return res.json({ success: false, message: 'This user does not exist!' });
+          } else {
+            result = {
+              success: true,
+              examId: exam._id,
+              userId: user._id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              endTime: exam.endTime
+            };
+            console.log(exam)
+            console.log(result);
+          }
+    res.json(result);
+        });
       }
     });
   };
 }
 
 exports.finishExam = function(Examination){
-  console.log('finish exam func firing');
   return function(req, res, next){
     Examination.findOne({ examId: req.body.data.examId }, function(err, exam){
       if(err) return console.error(err);

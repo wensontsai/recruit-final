@@ -3,11 +3,15 @@ import merge from 'lodash.merge';
 
 const initialState = {
   data: {
-    userId: 'test001',
-    examId: 'xxxxx5',
+    userId: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    examId: '',
     questionsAsked: 0,
     questionsTotal: 0,
     timeAllowed: 0,
+    endTime: '',
     currentPrompt: '',
     currentPromptId: false,
     allPrompts: []
@@ -35,7 +39,10 @@ const queryExam = (state, action) => {
   return merge({}, state, {
     data: {
       userId: action.queryExamResult.userId,
-      examId: action.queryExamResult._id,
+      firstName: action.queryExamResult.firstName,
+      lastName: action.queryExamResult.lastName,
+      examId: action.queryExamResult.examId,
+      email: action.queryExamResult.email,
       endTime: action.queryExamResult.endTime
     }
   });

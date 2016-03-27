@@ -58,7 +58,6 @@ class Answer extends Component {
     });
   }
   submitAnswer () {
-    console.log(this.state.data);
     this.props.submitAnswer(this.state.data);
  
     this.setState({ 
