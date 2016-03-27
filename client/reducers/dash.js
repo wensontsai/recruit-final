@@ -10,7 +10,7 @@ const initialState = {
     examId: '',
     questionsAsked: 0,
     questionsTotal: 0,
-    timeAllowed: 0,
+    timeRemaining: 0,
     endTime: '',
     currentPrompt: '',
     currentPromptId: false,
@@ -27,7 +27,7 @@ const startExam = (state, action) => {
     data: {
       questionsAsked: 1,
       questionsTotal: 3,
-      timeAllowed: 7200000
+      timeRemaining: 7200000
     },
     view: {
       showPrompt: true
@@ -61,7 +61,8 @@ const queryAllPrompts = (state, action) => {
 const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
-      questionsAsked: action.submitResult.questionsAsked
+      questionsAsked: action.submitResult.questionsAsked,
+      timeRemaining: action.submitResult.timeRemaining
     }
   });
 };
@@ -90,6 +91,29 @@ const selectNextPrompt = (state, action) => {
   });
 };
 
+const setTimeRemaining = (state, action) => {
+  function parseTime(s) {
+     var c = s.split(':');
+     return parseInt(c[0]) * 60 + parseInt(c[1]);
+  }
+
+  let endTime = state.data.endTime.split(' ')[4];
+  let now = new Date();
+  let nowHours = now.getHours();
+  let nowMinutes = now.getMinutes();
+  let nowSeconds = now.getSeconds();
+  let nowTime = nowHours+ ":" +nowMinutes+ ":" +nowSeconds;
+  let timeRemaining = Math.abs(parseTime(endTime) - parseTime(nowTime) ) * 10000;
+  console.log(state.data.endTime);
+  console.log(endTime);
+  console.log(nowTime);
+  return merge({}, state, {
+    data: {
+      timeRemaining: timeRemaining
+    }
+  });
+}
+
 
 export default function dash (state = initialState, action) {
   return ({
@@ -99,7 +123,8 @@ export default function dash (state = initialState, action) {
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
     [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
 
-    [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt
+    [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt,
+    [actionTypes.SET_TIME_REMAINING]: setTimeRemaining
 
   }[action.type] || ((s) => s))(state, action);
 }

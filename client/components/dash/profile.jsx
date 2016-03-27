@@ -34,6 +34,7 @@ class Profile extends Component {
           <div>
             Email: {this.props.dash.data.email}
           </div>
+          end time: {this.props.dash.data.endTime}
         </div>
         <div className='exam-status'>
         {(this.props.dash.view.examCompleted
@@ -44,7 +45,7 @@ class Profile extends Component {
           ? <div className='status'>
               Time Remaining:
               <div className='countdown-timer'>
-                <Timer initialTimeRemaining = {this.props.dash.data.timeAllowed}
+                <Timer initialTimeRemaining = {this.props.dash.data.timeRemaining}
                 />
               </div>
               <div className='progress-area'>

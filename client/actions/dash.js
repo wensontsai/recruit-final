@@ -72,13 +72,15 @@ export function submitAnswer (data) {
       });
 
       if (data.questionsAsked === data.questionsTotal ) {
-        console.log('test over');
         dispatch({
           type: actionTypes.FINISH_EXAM_SUCCESS,
         });
       } else {
         dispatch({
           type: actionTypes.SELECT_NEXT_PROMPT,
+        }),
+        dispatch({
+          type: actionTypes.SET_TIME_REMAINING,
         });
       }
 

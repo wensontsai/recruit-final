@@ -1,6 +1,8 @@
 exports.startExam = function(Examination) {
   return function(req, res, next) {
-    Examination.findOne({ examId: req.body.data.examId }, function(err, exam) {
+    Examination.findOne({ _id: req.body.data.examId }, function(err, exam) {
+      console.log("wtff ");
+      console.log(exam);
       if(err) return console.error(err);
       if (!exam) {
         return res.json({ success: false, message: 'No examination exists for that code!' });
@@ -30,13 +32,11 @@ exports.startExam = function(Examination) {
 exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
-    console.log('what bro');
     Examination.findOne({ _id: req.body.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
         return res.json({ success: false, message: 'This exam does not exist!' });
       } else {
-        console.log(exam);
         User.findOne({ _id: exam.userId }, function(err, user) {
           if(err) return console.error(err);
           if (!user) {
