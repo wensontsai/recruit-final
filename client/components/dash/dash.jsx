@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import { queryExam } from '../../actions/dash';
+
 import Nav from '../nav/nav';
 import Answer from '../dash/answer';
 import Question from '../dash/question';
@@ -13,21 +15,29 @@ class DisplaysAll extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			examId: props.params.examId
+			queryUser: props.queryUser,
+			queryExam: props.queryExam,
+			data: {
+			  examId: props.params.examId || ''   
+			}
 		}
+	}
+	componentDidMount() {
+	  // on load - query Users table, set data on candidate (userId) using examId
+		this.state.queryExam(this.state.data);
+	  // if an exam has begun,
+	  // go get remaining time, and pass it to countdown timer
 	}
 	render () {
 		const {
-			dash,
-			name
+			dash
 		} = this.props;
 
 		return (
 			<div className='display-all-container'>
 				<Nav />
 				<div className='page'>
-					<Profile />
-					{this.state.examId}
+					<Profile examId={this.state.examId}/>
 					{(dash.view.examCompleted
 		        ? <div className='row001'>
 							</div>
@@ -45,6 +55,6 @@ class DisplaysAll extends Component {
 }
 
 export default connect(
-		(state) => ({ dash: state.dash }),
-
+	(state) => ({ dash: state.dash }),
+	{ queryExam }
 )(DisplaysAll);

@@ -23,6 +23,25 @@ export function startExam (data) {
   };
 }
 
+export function queryExam () {
+  return async dispatch => {
+    try {
+      const queryExamResult = await post('/api/queryExam');
+
+      dispatch({
+        type: actionTypes.QUERY_EXAM_SUCCESS,
+        queryExamResult: queryExamResult
+      });
+
+    } catch(e) {
+      dispatch({
+        type: actionTypes.QUERY_EXAM_ERROR,
+        ERROR: e
+      });
+    }
+  };
+}
+
 export function queryAllPrompts () {
   return async dispatch => {
     try {

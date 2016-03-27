@@ -18,18 +18,17 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount() {
-    // on load - query Users table, set data on candidate (userId) using examId
-
-    // if an exam has begun,
-    // go get remaining time, and pass it to countdown timer
-  }
-
   render () {
     return (
       <div className='profile-view'>
         <div>
           User information goes here:
+          <div>
+            Exam ID:{this.props.dash.data.examId}
+          </div>
+          <div>
+            Username: {this.props.dash.data.userId}
+          </div>
         </div>
         {(this.props.dash.view.examCompleted
           ? <div className='row001'>

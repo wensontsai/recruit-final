@@ -1,9 +1,9 @@
-exports.startExam = function(Examination){
-  return function(req, res, next){
-    Examination.findOne({ examId: req.body.data.examId }, function(err, exam){
+exports.startExam = function(Examination) {
+  return function(req, res, next) {
+    Examination.findOne({ examId: req.body.data.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
-        return res.json( {success: false, message: 'No examination exists for that code!'} );
+        return res.json({ success: false, message: 'No examination exists for that code!' });
       }
       if (exam) {
         var now = new Date();
@@ -26,6 +26,20 @@ exports.startExam = function(Examination){
     });
   };
 };
+
+exports.queryExam = function(Examination) {
+  return function(req, res, next) {
+    console.log(req.body);
+    Examination.findOne({ examId: req.body.examId }, function(err, exam) {
+      if(err) return console.error(err);
+      if (!exam) {
+        return res.json({ success: false, message: 'This exam ID does not exist!' });
+      } else {
+        res.send(exam);
+      }
+    });
+  };
+}
 
 exports.finishExam = function(Examination){
   console.log('finish exam func firing');

@@ -31,6 +31,16 @@ const startExam = (state, action) => {
   });
 };
 
+const queryExam = (state, action) => {
+  return merge({}, state, {
+    data: {
+      userId: action.queryExamResult.userId,
+      examId: action.queryExamResult._id,
+      endTime: action.queryExamResult.endTime
+    }
+  });
+};
+
 const queryAllPrompts = (state, action) => {
   return merge({}, state, {
     data: {
@@ -77,6 +87,7 @@ const selectNextPrompt = (state, action) => {
 export default function dash (state = initialState, action) {
   return ({
     [actionTypes.START_EXAM_SUCCESS]: startExam,
+    [actionTypes.QUERY_EXAM_SUCCESS]: queryExam,
     [actionTypes.QUERY_ALL_PROMPTS_SUCCESS]: queryAllPrompts,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
     [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
