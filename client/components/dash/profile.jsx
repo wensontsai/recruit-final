@@ -19,7 +19,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    // on load - query Users table, set data on candidate (userId) using emailCode
+    // on load - query Users table, set data on candidate (userId) using examId
 
     // if an exam has begun,
     // go get remaining time, and pass it to countdown timer

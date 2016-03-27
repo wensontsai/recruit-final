@@ -51,6 +51,7 @@ ReactDOM.render(
   <Provider store={store} >
     <Router history={browserHistory} >
       <Route path='/' component={Main} />
+      <Route path='/exams/:examId' component={Dash} />
       <Route path='/login' component={Login} />
       <Route path='/dash' component={Dash} />
       <Route path='/candidates' component={Candidates} />

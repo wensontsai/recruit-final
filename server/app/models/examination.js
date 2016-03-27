@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 module.exports = mongoose.model('Examination', new Schema({
   userId : { type : String },
-  emailCode : { type : String },
   timeAllowed : { type : String },
   startTime : { type : String },
   endTime : { type : String },

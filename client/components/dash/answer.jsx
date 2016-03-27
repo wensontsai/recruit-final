@@ -16,7 +16,7 @@ class Answer extends Component {
       queryAllPrompts: props.queryAllPrompts,
       data: {
         userId: this.props.dash.data.userId || '',
-        emailCode: this.props.dash.data.emailCode || '',
+        examId: this.props.dash.data.examId || '',
         promptId: this.props.dash.data.currentPromptId || '',
         answer: this.props.answer || '',
         questionsAsked: this.props.dash.data.questionsAsked || '',
@@ -49,7 +49,7 @@ class Answer extends Component {
     this.setState({
       data: {
         userId: this.props.dash.data.userId,
-        emailCode: this.props.dash.data.emailCode,
+        examId: this.props.dash.data.examId,
         promptId: this.props.dash.data.currentPromptId,
         answer: event.target.value,
         questionsAsked: this.props.dash.data.questionsAsked,
@@ -64,7 +64,7 @@ class Answer extends Component {
     this.setState({ 
       data:{
         userId: this.props.dash.data.userId,
-        emailCode: this.props.dash.data.emailCode,
+        examId: this.props.dash.data.examId,
         promptId: this.props.dash.data.currentPromptId,
         answer: '',
         questionsAsked: this.props.dash.data.questionsAsked,

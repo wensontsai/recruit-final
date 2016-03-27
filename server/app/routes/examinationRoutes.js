@@ -1,6 +1,6 @@
 exports.startExam = function(Examination){
   return function(req, res, next){
-    Examination.findOne({ emailCode: req.body.data.emailCode }, function(err, exam){
+    Examination.findOne({ examId: req.body.data.examId }, function(err, exam){
       if(err) return console.error(err);
       if (!exam) {
         return res.json( {success: false, message: 'No examination exists for that code!'} );
@@ -30,7 +30,7 @@ exports.startExam = function(Examination){
 exports.finishExam = function(Examination){
   console.log('finish exam func firing');
   return function(req, res, next){
-    Examination.findOne({ emailCode: req.body.data.emailCode }, function(err, exam){
+    Examination.findOne({ examId: req.body.data.examId }, function(err, exam){
       if(err) return console.error(err);
       if (!exam) {
         return res.json( {success: false, message: 'No examination exists for that code!'} );

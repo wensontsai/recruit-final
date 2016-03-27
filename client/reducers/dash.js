@@ -4,7 +4,7 @@ import merge from 'lodash.merge';
 const initialState = {
   data: {
     userId: 'test001',
-    emailCode: 'xxxxx',
+    examId: 'xxxxx5',
     questionsAsked: 0,
     questionsTotal: 0,
     timeAllowed: 0,

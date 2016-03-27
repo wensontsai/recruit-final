@@ -10,9 +10,16 @@ import Profile from '../dash/profile';
 import './dash.scss';
 
 class DisplaysAll extends Component {
+	constructor (props) {
+		super(props);
+		this.state = {
+			examId: props.params.examId
+		}
+	}
 	render () {
 		const {
-			dash
+			dash,
+			name
 		} = this.props;
 
 		return (
@@ -20,6 +27,7 @@ class DisplaysAll extends Component {
 				<Nav />
 				<div className='page'>
 					<Profile />
+					{this.state.examId}
 					{(dash.view.examCompleted
 		        ? <div className='row001'>
 							</div>

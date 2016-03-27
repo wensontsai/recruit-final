@@ -29,11 +29,19 @@ export function addCandidate (data) {
         type: actionTypes.ADD_CANDIDATE_SUCCESS
       });
 
-      queryAllCandidates();
+      const queryResult = await get('/api/queryAllCandidates');
+      dispatch({
+        type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
+        queryResult: queryResult
+      });
 
     } catch(e) {
       dispatch({
         type: actionTypes.ADD_CANDIDATE_ERROR,
+        ERROR: e
+      }),
+      dispatch({
+        type: actionTypes.QUERY_ALL_CANDIDATES_ERROR,
         ERROR: e
       });
     }

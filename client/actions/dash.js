@@ -52,7 +52,7 @@ export function submitAnswer (data) {
         submitResult: submitResult
       });
 
-      if (data.questionsAsked === 2 ) {
+      if (data.questionsAsked === 3 ) {
         console.log('test over');
         dispatch({
           type: actionTypes.FINISH_EXAM_SUCCESS,
