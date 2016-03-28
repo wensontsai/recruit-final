@@ -12,6 +12,9 @@ export function startExam (data) {
       dispatch({
         type: actionTypes.START_EXAM_SUCCESS,
         result: result
+      }),
+      dispatch({
+        type: actionTypes.SET_TIME_REMAINING,
       });
 
     } catch(e) {
@@ -62,7 +65,6 @@ export function queryAllPrompts () {
 }
 
 export function submitAnswer (data) {
-  console.log(data);
   return async dispatch => {
     try {
       const submitResult = await post('/api/submitAnswer', data);
@@ -71,7 +73,7 @@ export function submitAnswer (data) {
         submitResult: submitResult
       });
 
-      if (data.questionsAsked === data.questionsTotal ) {
+      if (data.questionsAsked === (data.questionsTotal-1) ) {
         dispatch({
           type: actionTypes.FINISH_EXAM_SUCCESS,
         });

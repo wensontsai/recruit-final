@@ -27,7 +27,7 @@ const startExam = (state, action) => {
     data: {
       questionsAsked: 1,
       questionsTotal: 3,
-      timeRemaining: 7200000
+      endTime: action.result.endTime
     },
     view: {
       showPrompt: true
@@ -42,8 +42,7 @@ const queryExam = (state, action) => {
       firstName: action.queryExamResult.firstName,
       lastName: action.queryExamResult.lastName,
       examId: action.queryExamResult.examId,
-      email: action.queryExamResult.email,
-      endTime: action.queryExamResult.endTime
+      email: action.queryExamResult.email
     }
   });
 };
@@ -76,9 +75,7 @@ const finishExam = (state, action) => {
 };
 
 const selectNextPrompt = (state, action) => {
-  let questionsAsked = state.data.questionsAsked;
   let newQuestionsAsked = state.data.questionsAsked + 1;
-
   let allPrompts = state.data.allPrompts;
   let newAllPrompts = allPrompts.shift();
   return merge({}, state, {
@@ -92,21 +89,10 @@ const selectNextPrompt = (state, action) => {
 };
 
 const setTimeRemaining = (state, action) => {
-  function parseTime(s) {
-     var c = s.split(':');
-     return parseInt(c[0]) * 60 + parseInt(c[1]);
-  }
-
-  let endTime = state.data.endTime.split(' ')[4];
   let now = new Date();
-  let nowHours = now.getHours();
-  let nowMinutes = now.getMinutes();
-  let nowSeconds = now.getSeconds();
-  let nowTime = nowHours+ ":" +nowMinutes+ ":" +nowSeconds;
-  let timeRemaining = Math.abs(parseTime(endTime) - parseTime(nowTime) ) * 10000;
-  console.log(state.data.endTime);
-  console.log(endTime);
-  console.log(nowTime);
+  let endTime = new Date(state.data.endTime);
+  let nowTime = new Date(now);
+  let timeRemaining = Math.abs(endTime - nowTime);
   return merge({}, state, {
     data: {
       timeRemaining: timeRemaining

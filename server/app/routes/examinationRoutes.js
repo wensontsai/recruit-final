@@ -11,6 +11,8 @@ exports.startExam = function(Examination) {
         var now = new Date();
         exam.startTime = now;
         exam.endTime = new Date(now.getTime() + (2*1000*60*60));
+        // exam.endTime = now.setHours(now.getHours() + 2);
+        console.log(exam.endTime);
 
         exam.save(function(err) {
           if (err) {
@@ -22,9 +24,7 @@ exports.startExam = function(Examination) {
         });
       }
 
-      res.json({
-        success: true
-      });
+      res.json(exam);
     });
   };
 };
@@ -48,8 +48,7 @@ exports.queryExam = function(Examination, User) {
               userId: user._id,
               firstName: user.firstName,
               lastName: user.lastName,
-              email: user.email,
-              endTime: exam.endTime
+              email: user.email
             };
             console.log(exam)
             console.log(result);
@@ -63,10 +62,10 @@ exports.queryExam = function(Examination, User) {
 
 exports.finishExam = function(Examination){
   return function(req, res, next){
-    Examination.findOne({ examId: req.body.data.examId }, function(err, exam){
+    Examination.findOne({ examId: req.body.data.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
-        return res.json( {success: false, message: 'No examination exists for that code!'} );
+        return res.json( { success: false, message: 'No examination exists for that code!' } );
       }
       if (exam) {
         exam.completed = 'Y';
