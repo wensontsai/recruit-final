@@ -75,7 +75,7 @@ const finishExam = (state, action) => {
 };
 
 const selectNextPrompt = (state, action) => {
-  let newQuestionsAsked = state.data.questionsAsked + 1;
+  let newQuestionsAsked = state.data.questionsAsked +1;
   let allPrompts = state.data.allPrompts;
   let newAllPrompts = allPrompts.shift();
   return merge({}, state, {

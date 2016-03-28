@@ -66,7 +66,7 @@ class Answer extends Component {
         examId: this.props.dash.data.examId,
         promptId: this.props.dash.data.currentPromptId,
         answer: '',
-        questionsAsked: this.props.dash.data.questionsAsked,
+        questionsAsked: this.props.dash.data.questionsAsked +1,
         questionsTotal: this.props.dash.data.questionsTotal
       } 
     });

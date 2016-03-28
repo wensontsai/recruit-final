@@ -73,7 +73,7 @@ export function submitAnswer (data) {
         submitResult: submitResult
       });
 
-      if (data.questionsAsked === (data.questionsTotal-1) ) {
+      if (data.questionsAsked === data.questionsTotal) {
         dispatch({
           type: actionTypes.FINISH_EXAM_SUCCESS,
         });
