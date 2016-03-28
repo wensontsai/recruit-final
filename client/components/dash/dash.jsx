@@ -46,7 +46,7 @@ class DisplaysAll extends Component {
 										<Question />
 										<Answer />
 									</div>
-	        			: <div className='row001'>Click "Start!" to get prompt</div>	
+	        			: <div className='row001'></div>	
 					)}
 				</div>
 			</div>
