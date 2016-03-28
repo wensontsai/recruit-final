@@ -29,6 +29,48 @@ exports.startExam = function(Examination) {
   };
 };
 
+
+exports.initializeExam = function(Examination, User) {
+  return function(req, res, next) {
+    console.log(req.body.data.userId);
+    var result = {};
+    var exam = new Examination({
+      userId: req.body.data.userId,
+      timeAllowed: 7200000,
+      startTime: '',
+      endTime: '',
+      completed: null
+    });
+    exam.save(function(error, exam){
+      if(error) return console.error(error);
+      
+      User.findOne({ _id: req.body.data.userId }, function(err, user) {
+        if(err) return console.error(err);
+        if (!user) {
+          return res.json({ success: false, message: 'This user does not exist!' });
+        } else {
+
+          user.currentExam = true;
+          user.save(function(err) {
+            if (err) {
+              console.log('error saving :(');
+              console.error(err);
+            } else {
+              console.log('Model - Users: initializeExam - Save successful ;)');
+            }
+          });
+
+          result = {
+            examId: exam._id
+          };
+          console.log(result);
+        }
+        res.json(result);
+      });
+    });
+  };
+}
+
 exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
@@ -53,7 +95,7 @@ exports.queryExam = function(Examination, User) {
             console.log(exam)
             console.log(result);
           }
-    res.json(result);
+          res.json(result);
         });
       }
     });

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { queryAllCandidates } from '../../actions/candidates';
+import { queryAllCandidates, sendEmail } from '../../actions/candidates';
 
 import './candidates.scss';
 
@@ -11,7 +11,8 @@ class List extends Component {
     super (props);
     this.state = {
       candidates: props.candidates,
-      queryAllCandidates: props.queryAllCandidates
+      sendEmail: props.sendEmail,
+      queryAllCandidates: props.queryAllCandidates,
     };
   }
 
@@ -30,7 +31,7 @@ class List extends Component {
           <div className='field' >INITIATE EXAM</div>
           <div className='field' >CHECK ANSWERS</div>
         </div>
-        {this.props.candidates.candidates.candidatesAll.map(function(record){
+        {this.props.candidates.candidates.candidatesAll.map(function(record) {
           return (
             <div className='row' key={record._id}>
               <div className='field' >{record.firstName}</div>
@@ -38,10 +39,15 @@ class List extends Component {
               <div className='field' >{record.email}</div>
               <div className='field' >{record.admin}</div>
               <div className='field' >
-                <button className='btn btn-sm start-exam'
-                  onClick={() => this.sendEmail ()}
-                  >Send Email
-                </button>
+                {(record.currentExam
+                  ? <div>
+                      Exam Currently Initiated
+                    </div>
+                  : <button className='btn btn-sm start-exam'
+                      onClick={() => this.sendEmail (record._id)}
+                      >Send Email
+                    </button>
+                )}
               </div>
               <div className='field' >
                 <button className='btn btn-sm start-exam'
@@ -56,17 +62,17 @@ class List extends Component {
     );
   }
 
-  sendEmail () {
-
+  sendEmail (userId) {
+    this.props.sendEmail(userId);
   }
 
   viewResults () {
-    
+ 
   }
 
 }
 
 export default connect(
   (state) => ({ candidates: state.candidates }),
-  { queryAllCandidates }
+  { queryAllCandidates, sendEmail }
 )(List);

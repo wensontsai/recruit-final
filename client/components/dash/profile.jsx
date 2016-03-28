@@ -34,7 +34,6 @@ class Profile extends Component {
           <div>
             Email: {this.props.dash.data.email}
           </div>
-          end time: {this.props.dash.data.endTime}
         </div>
         <div className='exam-status'>
         {(this.props.dash.view.examCompleted

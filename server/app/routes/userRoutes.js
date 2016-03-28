@@ -10,7 +10,8 @@ exports.addUser = function(User){
           firstName : req.body.firstName,
           lastName : req.body.lastName,
           email : req.body.email,
-          admin: req.body.admin
+          admin: req.body.admin,
+          currentExam: null
         });
 
         user.save(function(err, user){

@@ -17,7 +17,6 @@ const queryAllCandidates = (state, action) => {
   });
 };
 
-
 const addCandidate = (state, action) => {
   return merge({}, state, {
     candidates: {
@@ -31,6 +30,6 @@ const addCandidate = (state, action) => {
 export default function candidates (state = initialState, action) {
   return ({
     [actionTypes.QUERY_ALL_CANDIDATES_SUCCESS]: queryAllCandidates,
-    [actionTypes.ADD_CANDIDATE_SUCCESS]: addCandidate
+    [actionTypes.ADD_CANDIDATE_SUCCESS]: addCandidate,
   }[action.type] || ((s) => s))(state, action);
 }
