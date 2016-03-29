@@ -70,3 +70,5 @@ apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 // ------------------------------------
 app.listen(port);
 console.log('==> 🌎  Magic is happening at http://localhost:' +port);
+
+module.exports = app;

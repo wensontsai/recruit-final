@@ -1,4 +1,7 @@
 import chai from 'chai';
-import chaiImmutable from 'chai-immutable';
+import chaiHttp from 'chai-http';
+// import should from chai.should();
 
-chai.use(chaiImmutable);
+// import chaiImmutable from 'chai-immutable';
+
+chai.use(chaiHttp);
