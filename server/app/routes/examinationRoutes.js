@@ -1,8 +1,6 @@
 exports.startExam = function(Examination) {
   return function(req, res, next) {
     Examination.findOne({ _id: req.body.data.examId }, function(err, exam) {
-      console.log("wtff ");
-      console.log(exam);
       if(err) return console.error(err);
       if (!exam) {
         return res.json({ success: false, message: 'No examination exists for that code!' });
@@ -32,7 +30,6 @@ exports.startExam = function(Examination) {
 
 exports.initializeExam = function(Examination, User) {
   return function(req, res, next) {
-    console.log(req.body.data.userId);
     var result = {};
     var exam = new Examination({
       userId: req.body.data.userId,
@@ -63,7 +60,6 @@ exports.initializeExam = function(Examination, User) {
           result = {
             examId: exam._id
           };
-          console.log(result);
         }
         res.json(result);
       });
@@ -92,8 +88,6 @@ exports.queryExam = function(Examination, User) {
               lastName: user.lastName,
               email: user.email
             };
-            console.log(exam)
-            console.log(result);
           }
           res.json(result);
         });

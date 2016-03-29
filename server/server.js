@@ -18,7 +18,7 @@ mongoose.connect(config.database, function(err){
   if(err){
     console.log('connection error', err);
   } else {
-    console.log('~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~');
+    // console.log('~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~');
   }
 });
 app.set('secret', config.secret); // sets secret variable
@@ -27,17 +27,17 @@ app.set('secret', config.secret); // sets secret variable
 // ------------------------------------
 // Mongoose - Models
 // ------------------------------------
-var User = require('./app/models/User'); 
-var Prompt = require('./app/models/Prompt');
-var Examination = require('./app/models/Examination');
-var Answer = require('./app/models/Answer');
+var User = require('./app/models/user'); 
+var Prompt = require('./app/models/prompt');
+var Examination = require('./app/models/examination');
+var Answer = require('./app/models/answer');
 
 // ------------------------------------
 // Middleware
 // ------------------------------------
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( { extended: false } ));
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(cookieParser());
 
 
@@ -69,6 +69,6 @@ apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 // HTTP server
 // ------------------------------------
 app.listen(port);
-console.log('==> 🌎  Magic is happening at http://localhost:' +port);
+// console.log('==> 🌎  Magic is happening at http://localhost:' +port);
 
 module.exports = app;

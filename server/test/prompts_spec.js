@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 describe('Prompt routes', function() {  
 
-  it('should get All Prompts on /queryAllPrompts GET', function(done) {
+  it('should get ALL prompts on /queryAllPrompts GET', function(done) {
     chai.request(server)
       .get('/api/queryAllPrompts')
       .end(function(err, res){
