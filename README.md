@@ -7,11 +7,16 @@
 ```npm i -g mocha```
 
 ## Run 
-In one terminal, run tests:  
+### Front-End
+run tests:  
 ```npm run test:watch```
 
-In another terminal, run webpack to compile front-end in dev mode:  
+run webpack to compile front-end in dev mode:  
 ```npm start```
 
-In another terminal, run node/express back-end server for API routes:  
+### Back-End
+run tests:  
+```cd server && npm run test:watch```
+
+run node/express back-end server for API routes:  
 ```cd server && nodemon server.js```
