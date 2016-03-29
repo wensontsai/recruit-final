@@ -1,7 +1,7 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
-// import should from chai.should();
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var should = chai.should();
 
-// import chaiImmutable from 'chai-immutable';
+var server = require('../server');
 
 chai.use(chaiHttp);
