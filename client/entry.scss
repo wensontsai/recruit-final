@@ -1,6 +1,7 @@
-$body-color: black;
-$link-color: #8F8FBC;
-$link-hover-color: #5959AB;
+$body-color: lighten(#FFFAF0, 2%);
+$link-color: #DBDBDB;
+$link-hover-color: white;
+$font-color: #272727;
 
 html, body {
   width: 100%;
@@ -15,6 +16,7 @@ body {
 
 a {
   color: $link-color;
+  font-family: 'Montserrat';
 }
 a:hover {
   color: $link-hover-color;
@@ -26,8 +28,10 @@ a:hover {
   height: 100%;
 }
 .page {
+  color: $font-color;
   background: $body-color;
   margin: 0 auto;
+  font-family: 'Montserrat';
 }
 .pageTitle {
   font-size: 2rem;

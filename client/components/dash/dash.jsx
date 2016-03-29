@@ -23,10 +23,7 @@ class DisplaysAll extends Component {
 		}
 	}
 	componentDidMount() {
-	  // on load - query Users table, set data on candidate (userId) using examId
 		this.queryExam(this.state.data);
-	  // if an exam has begun,
-	  // go get remaining time, and pass it to countdown timer
 	}
 	render () {
 		const {

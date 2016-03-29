@@ -1,6 +1,12 @@
+$border-color: #626262;
+$base-color: #DBDBDB;
+$body-color: #FFFAF0;
+$div-color: lighten( $base-color, 10% );
+$field-color: lighten( $div-color, 3% );
+
 .candidates-list {
   height: 450px;
-  border: gray solid 1px;
+  border: $border-color solid 2px;
   border-radius: 10px;
   padding: 1rem;
   -webkit-flex: 1;
@@ -8,7 +14,8 @@
   margin-top: 1rem;
 } 
 .candidate-add-view {
-	border: gray solid 1px;
+  background-color: $div-color;
+	border: $border-color solid 2px;
 	border-radius: 10px;
 	padding: 1rem;
 	height: 135px;
@@ -20,7 +27,7 @@
 .candidate-add-view input {
   width: 95%;
   height: 85%;
-  background-color: gray;
+  background-color: $field-color;
 }
 .add-candidate {
   text-align: right;
@@ -34,9 +41,10 @@
   flex: 3 auto;
 }
 .candidates-list-view {
+  background-color: $div-color;
   margin-top: 1rem;
   height: 450px;
-  border: gray solid 1px;
+  border: $border-color solid 2px;
   border-radius: 10px;
   padding: 1rem;
   -webkit-flex: 1;
