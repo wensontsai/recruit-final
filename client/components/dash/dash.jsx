@@ -15,14 +15,13 @@ class DisplaysAll extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			queryUser: props.queryUser,
 			queryExam: props.queryExam,
 			data: {
 			  examId: props.params.examId || ''   
 			}
 		}
 	}
-	componentDidMount() {
+	componentDidMount () {
 		this.queryExam(this.state.data);
 	}
 	render () {

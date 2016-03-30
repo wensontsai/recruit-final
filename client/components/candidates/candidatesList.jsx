@@ -50,10 +50,13 @@ class List extends Component {
                 )}
               </div>
               <div className='field' >
+              <Link to={`/results/${record._id}`}
+                key={`${record._id}`}
+              >
                 <button className='btn btn-sm start-exam'
-                  onClick={() => this.viewResults ()}
                   >View Results
                 </button>
+              </Link>
               </div>
             </div>
           )
@@ -64,10 +67,6 @@ class List extends Component {
 
   sendEmail (userId) {
     this.props.sendEmail(userId);
-  }
-
-  viewResults () {
- 
   }
 
 }

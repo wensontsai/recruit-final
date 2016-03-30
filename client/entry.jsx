@@ -22,6 +22,7 @@ import Login from './components/auth/login';
 import Dash from './components/dash/dash';
 import Candidates from './components/candidates/candidates';
 import Prompts from './components/prompts/prompts';
+import Results from './components/results/results';
 
 
 // Middleware
@@ -56,6 +57,7 @@ ReactDOM.render(
       <Route path='/dash' component={Dash} />
       <Route path='/candidates' component={Candidates} />
       <Route path='/prompts' component={Prompts} />
+      <Route path='/results/:userId' component={Results} />
     </Router>
   </Provider>,
   document.getElementById('root')

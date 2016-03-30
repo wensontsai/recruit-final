@@ -11,9 +11,8 @@ class Nav extends Component {
 						<Link className='link' to='/' >Recruit</Link>
 					</div>
 					<div className='nav-links'>
-						<Link className='link' to='/dash' >Main</Link>
-						<Link className='link' to='/prompts' >Prompts</Link>
 						<Link className='link' to='/candidates' >Candidates</Link>
+						<Link className='link' to='/prompts' >Prompts</Link>
 						<Link className='link' to='/login' >Login</Link>
 					</div>
 				</div>
