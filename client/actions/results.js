@@ -11,7 +11,6 @@ export function queryCandidateAnswers (data) {
         type: actionTypes.QUERY_CANDIDATE_ANSWERS_SUCCESS,
         queryResult: queryResult
       });
-      console.log(queryResult);
 
     } catch(e) {
       dispatch({

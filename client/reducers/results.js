@@ -2,7 +2,13 @@ import * as actionTypes from '../actionTypes/results.js';
 import merge from 'lodash.merge';
 
 const initialState = {
-  currentResult: {}
+  currentResult: {
+    userId: '',
+    firstName: '-------------------------',
+    lastName: '',
+    email: '',
+    allAnswers: []
+  }
 };
 
 const queryCandidateAnswers = (state, action) => {

@@ -20,7 +20,7 @@ class Results extends Component {
       }
     }
   }
-  componentDidMount () {
+  componentWillMount () {
     this.queryCandidateAnswers(this.state.data);
   }
   render () {

@@ -31,8 +31,6 @@ exports.queryCandidateAnswers = function(Answer, User) {
     Answer.find({ userId: req.body.userId }, function(err, answers) {
       if(err) return console.error(err);
         User.findOne({ _id: req.body.userId }, function(err, user) {
-
-
           results = {
             userId: req.body.userId,
             firstName: user.firstName,
