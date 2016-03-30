@@ -32,16 +32,13 @@ class Results extends Component {
         <div className='displays-all-container'>
             <Nav />
             <div className='page'>
-              <div className='row001'>
-                <ProfileResults />
-                <AnswerResults />
-              </div>
+              <ProfileResults />
+              <AnswerResults />
             </div>
         </div>
     );
   }
   queryCandidateAnswers (data) {
-    console.log(this.state.data);
     this.state.queryCandidateAnswers(this.state.data);
   }
 }

@@ -17,10 +17,7 @@ class ProfileResults extends Component {
       <div className='profile-view'>
         <div className='user-info'>
           <div>
-            Exam ID:{this.props.results.currentResult.examId}
-          </div>
-          <div>
-            First Name: {this.props.results.currentResult.userId}
+            First Name: {this.props.results.currentResult.firstName}
           </div>
           <div>
             Last Name: {this.props.results.currentResult.lastName}

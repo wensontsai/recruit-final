@@ -16,18 +16,11 @@ class AnswerResults extends Component {
   render () {
     return (
       <div className='answers-view'>
-        <div className='row header'>
-          <div className='field' >PROMPT</div>
-          <div className='field' >ANSWER</div>
+        <div className='ques-ans-block'>
+          <div className='field prompt' >PROMPT</div>
+          <div className='field answer' >ANSWER</div>
         </div>
-        {this.props.results.currentResult.allAnswers.map(function(record) {
-          return (
-            <div className='row' key={record._id}>
-              <div className='field' >{record.promptId}</div>
-              <div className='field' >{record.answer}</div>  
-            </div>
-          )
-        }, this )}
+        
       </div>
     );
   }

@@ -28,20 +28,21 @@ exports.submitAnswer = function(Answer) {
 exports.queryCandidateAnswers = function(Answer, User) {
   var results = {};
   return function(req, res, next){
-    Answer.find({ userId: req.body.userId}, function(err, answers) {
+    Answer.find({ userId: req.body.userId }, function(err, answers) {
       if(err) return console.error(err);
+        User.findOne({ _id: req.body.userId }, function(err, user) {
 
-      results = {
-        userId: req.body.userId,
-        firstName: '',
-        lastName: '',
-        email: '',
-        examId: '',
-        allAnswers: answers
-      };
+
+          results = {
+            userId: req.body.userId,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            allAnswers: answers
+          };
 console.log(results);
       res.json(results);
-      
+        });
     });
   };
 };

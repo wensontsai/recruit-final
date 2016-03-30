@@ -4,69 +4,41 @@ $body-color: #FFFAF0;
 $div-color: lighten( $base-color, 10% );
 $field-color: lighten( $div-color, 3% );
 
-.display-all-container .page {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.display-all-container .page .row001 {
-  margin-top: 1rem;
-  flex-direction: row;
-  display: inline-flex;
-}
-.display-link {
-  height: 325px;
-  width: 100%;
-  border: $border-color solid 2px;
-  margin: 0.5rem;
-  display: inline-block
-}
-
 .profile-view {
   background-color: $div-color;
   border: $border-color solid 2px;
   border-radius: 10px;
   padding: 1rem;
-  height: 175px;
+  height: 135px;
   flex: 1 auto;
+  margin-top: 1rem;
+  flex-direction: row;
   display: inline-flex;
+  width: 100%;
 }
 .profile-view .user-info{
   flex-direction: column;
   flex: 2;
 }
-.profile-view .exam-status{
-  flex-direction: column;
-  flex: 2;
-}
-.profile-view .status {
-  margin: 1rem auto;
-}
-.profile-view .countdown-timer {
-  font-size: 2em;
-  font-weight: 800;
-}
-
-.answer-view {
+.answers-view {
   background-color: $div-color;
+  margin-top: 1rem;
   height: 450px;
   border: $border-color solid 2px;
   border-radius: 10px;
   padding: 1rem;
   -webkit-flex: 1;
-  flex: 3 auto;
-} 
-.answer-view textarea {
+  flex: 6 auto;
+  flex-direction: column;
+  display: inline-flex;
   width: 100%;
-  height: 85%;
-  background-color: $field-color;
-  padding: 1rem;
+} 
+
+.answers-view .ques-ans-block {
+  flex-direction: row;
+  display: inline-flex;
 }
-.status .start-exam.btn{
-  margin: 1rem;
-}
-.submit-answer button {
-  margin-top: 1rem;
-  float: right;
+.answers-view .ques-ans-block .field{
+  flex-direction: column;
+  flex: 1;
 }
