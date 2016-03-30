@@ -1,20 +1,26 @@
-exports.submitAnswer = function(Answer) {
+exports.submitAnswer = function(Answer, Prompt) {
+  var promptText = '';
+  var now = new Date();
+
   return function(req, res, next){
-    console.log(req.body);
+    Prompt.findOne({ _id: req.body.promptId }, function(err, prompt){
+      promptText = prompt.question;
+    });
     Answer.findOne({ examId: req.body.examId, promptId: req.body.promptId }, function(err, answer) {
       if(err) return console.error(err);
       // if (answer) {
       //   return res.json( {success: false, message: 'This question has already been answered for this exam session!'} );
       // } else {
-        var now = new Date();
 
-        var answer = new Answer({
+         var answer = new Answer({
           userId : req.body.userId,
           examId : req.body.examId,
           promptId : req.body.promptId,
+          prompt: promptText,
           answer : req.body.answer,
           endTime : now
         });
+        console.log(answer);
 
         answer.save(function(err, answer) {
           if(err) return console.error(err);
@@ -25,15 +31,11 @@ exports.submitAnswer = function(Answer) {
   };
 };
 
-exports.queryCandidateAnswers = function(Answer, User, Examination) {
+exports.queryCandidateAnswers = function(Answer, User) {
   var results = {};
   return function(req, res, next){
     Answer.find({ userId: req.body.userId }, function(err, answers) {
       if(err) return console.error(err);
-        Exam.findOne({ _id: answers.examId }, function(err, answers) {
-
-        });
-
         User.findOne({ _id: req.body.userId }, function(err, user) {
           results = {
             userId: req.body.userId,

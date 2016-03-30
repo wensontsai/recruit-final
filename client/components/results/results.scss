@@ -32,11 +32,12 @@ $field-color: lighten( $div-color, 3% );
   flex-direction: column;
   display: inline-flex;
   width: 100%;
+  overflow: scroll;
 } 
 .answers-view .ques-ans-block {
   flex-direction: row;
-  display: inline-flex;
-  margin: 3rem 0;
+  display: flex;
+  margin: 5rem 0;
 }
 .answers-view .ques-ans-block.header {
   margin: 0 0 3rem 0;
@@ -44,4 +45,10 @@ $field-color: lighten( $div-color, 3% );
 .answers-view .ques-ans-block .field{
   flex-direction: column;
   flex: 1;
+}
+.answers-view .ques-ans-block .prompt{
+  font-style: italic;
+}
+.answers-view .ques-ans-block .answer{
+
 }

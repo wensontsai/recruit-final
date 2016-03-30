@@ -51,10 +51,12 @@ $field-color: lighten( $div-color, 3% );
   flex: 6 auto;
   flex-direction: column;
   display: inline-flex;
+  overflow: scroll;
 }
 .candidates-list-view .row{
   margin: 0.25rem;
   display: inline-flex;
+  min-height: 55px;
 }
 .candidates-list-view .header{
   font-weight: 800;

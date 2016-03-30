@@ -23,7 +23,7 @@ class AnswerResults extends Component {
         {this.props.results.currentResult.allAnswers.map(function(record) {
           return (
             <div className='ques-ans-block' key={record._id}>
-              <div className='field prompt' >{record.promptId}</div>
+              <div className='field prompt' >"{record.prompt}"</div>
               <div className='field answer' >{record.answer}</div>
             </div>
           )
