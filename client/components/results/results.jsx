@@ -2,50 +2,51 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { queryExam } from '../../actions/dash';
+import { queryCandidateAnswers } from '../../actions/results';
 
 import Nav from '../nav/nav';
+import ProfileResults from '../results/profileResults';
+import AnswerResults from '../results/answerResults';
 
-class Prompts extends Component {
+import './results.scss';
+
+class Results extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      queryAllAnswers: props.queryExam,
+      queryCandidateAnswers: props.queryCandidateAnswers,
       data: {
-        userId: props.params.userId || ''   
+        userId: props.params.userId || ''
       }
     }
   }
   componentDidMount () {
-    this.queryAllAnswers(this.state.data);
+    this.queryCandidateAnswers(this.state.data);
   }
-  render (){
+  render () {
     const {
-        
+      results
     } = this.props;
 
     return (
-        <div className='results-all-container'>
+        <div className='displays-all-container'>
             <Nav />
             <div className='page'>
-            time to get this cats report card!
-            <br />
-            ::::::::::::::::::
-            <br />
-              {this.state.data.userId}
-            <br />
-            <br />
-            ^^^^^^^^^^^^^^^^^^
+              <div className='row001'>
+                <ProfileResults />
+                <AnswerResults />
+              </div>
             </div>
         </div>
     );
   }
-  queryAllAnswers (data){
-    this.state.queryAllAnswers(this.state.data);
+  queryCandidateAnswers (data) {
+    console.log(this.state.data);
+    this.state.queryCandidateAnswers(this.state.data);
   }
 }
 
 export default connect(
-  (state) => ({ displays: state.displays }),
-  // { selectDisplay }
-)(Prompts);
+  (state) => ({ results: state.results }),
+  { queryCandidateAnswers }
+)(Results);

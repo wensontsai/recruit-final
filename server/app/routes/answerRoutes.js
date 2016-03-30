@@ -24,3 +24,24 @@ exports.submitAnswer = function(Answer) {
     });
   };
 };
+
+exports.queryCandidateAnswers = function(Answer, User) {
+  var results = {};
+  return function(req, res, next){
+    Answer.find({ userId: req.body.userId}, function(err, answers) {
+      if(err) return console.error(err);
+
+      results = {
+        userId: req.body.userId,
+        firstName: '',
+        lastName: '',
+        email: '',
+        examId: '',
+        allAnswers: answers
+      };
+console.log(results);
+      res.json(results);
+      
+    });
+  };
+};

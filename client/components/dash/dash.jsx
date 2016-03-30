@@ -42,7 +42,7 @@ class DisplaysAll extends Component {
 										<Question />
 										<Answer />
 									</div>
-	        			: <div className='row001'></div>	
+	        			: <div className='row001'></div>
 					)}
 				</div>
 			</div>

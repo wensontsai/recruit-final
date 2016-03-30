@@ -18,7 +18,7 @@ mongoose.connect(config.database, function(err){
   if(err){
     console.log('connection error', err);
   } else {
-    // console.log('~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~');
+    console.log('~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~');
   }
 });
 app.set('secret', config.secret); // sets secret variable
@@ -58,6 +58,7 @@ apiRoutes.get('/queryAllCandidates', userRoutes.queryAllUsers(User));
 
 // ::::: POST :::::
 apiRoutes.post('/submitAnswer', answerRoutes.submitAnswer(Answer));
+apiRoutes.post('/queryCandidateAnswers', answerRoutes.queryCandidateAnswers(Answer, User));
 apiRoutes.post('/queryExam', examinationRoutes.queryExam(Examination, User));
 apiRoutes.post('/initializeExam', examinationRoutes.initializeExam(Examination, User));
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
@@ -69,6 +70,6 @@ apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 // HTTP server
 // ------------------------------------
 app.listen(port);
-// console.log('==> 🌎  Magic is happening at http://localhost:' +port);
+console.log('==> 🌎  Magic is happening at http://localhost:' +port);
 
 module.exports = app;

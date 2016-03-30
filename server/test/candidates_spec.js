@@ -14,7 +14,7 @@ var User = require('../app/models/user');
 var UserModel = mongoose.model('User');
 var server = require('../server');
 
-var myStub = sinon.stub(UserModel, 'addUser');
+// var myStub = sinon.stub(UserModel, 'addUser');
 
 
 describe('User routes', function() {  
@@ -24,7 +24,7 @@ describe('User routes', function() {
     //   .yields(null, null, JSON.stringify({login: "bulkan"}));
     // done();
 
-    console.log(mongoose.Model);
+    // console.log(mongoose.Model);
   });
 
   it('should get ALL candidates (non-admin user) on /queryAllCandidates GET', function(done) {
