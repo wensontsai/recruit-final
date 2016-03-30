@@ -58,18 +58,22 @@ class Answer extends Component {
     });
   }
   submitAnswer () {
-    this.props.submitAnswer(this.state.data);
+    if(this.state.data.answer !== ''){
+      this.props.submitAnswer(this.state.data);
+      this.setState({ 
+        data:{
+          userId: this.props.dash.data.userId,
+          examId: this.props.dash.data.examId,
+          promptId: this.props.dash.data.currentPromptId,
+          answer: '',
+          questionsAsked: this.props.dash.data.questionsAsked +1,
+          questionsTotal: this.props.dash.data.questionsTotal
+        } 
+      });
+    } else {
+      
+    }
  
-    this.setState({ 
-      data:{
-        userId: this.props.dash.data.userId,
-        examId: this.props.dash.data.examId,
-        promptId: this.props.dash.data.currentPromptId,
-        answer: '',
-        questionsAsked: this.props.dash.data.questionsAsked +1,
-        questionsTotal: this.props.dash.data.questionsTotal
-      } 
-    });
   }
 
 }

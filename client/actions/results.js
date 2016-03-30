@@ -9,7 +9,7 @@ export function queryCandidateAnswers (data) {
       const queryResult = await post('/api/queryCandidateAnswers', data);
       dispatch({
         type: actionTypes.QUERY_CANDIDATE_ANSWERS_SUCCESS,
-        queryResult: queryResult
+        queryResult: queryResult 
       });
 
     } catch(e) {

@@ -25,6 +25,7 @@ class ProfileResults extends Component {
           <div>
             Email: {this.props.results.currentResult.email}
           </div>
+          <div className='action-status'>{this.props.results.currentResult.actionStatus}</div>
         </div>
       </div>
     );

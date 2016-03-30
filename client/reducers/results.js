@@ -3,6 +3,7 @@ import merge from 'lodash.merge';
 
 const initialState = {
   currentResult: {
+    actionStatus: '',
     userId: '',
     firstName: '',
     lastName: '',
