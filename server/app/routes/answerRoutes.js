@@ -31,13 +31,15 @@ exports.submitAnswer = function(Answer, Prompt) {
   };
 };
 
-exports.queryCandidateAnswers = function(Answer, User) {
+exports.queryCandidateAnswers = function(Answer, User, Examination) {
   var results = {};
   return function(req, res, next){
+    console.log(req.body.userId);
     Answer.find({ userId: req.body.userId }, function(err, answers) {
       if(err) return console.error(err);
-      console.log(answers);
+      Examination.find({}, function(err, exam) {
 
+      });
         User.findOne({ _id: req.body.userId }, function(err, user) {
           results = {
             userId: req.body.userId,
@@ -46,9 +48,9 @@ exports.queryCandidateAnswers = function(Answer, User) {
             email: user.email,
             allAnswers: answers
           };
+          console.log(results);
+          res.json(results);
         });
-      console.log(results);
-      res.json(results);
     });
   };
 };
