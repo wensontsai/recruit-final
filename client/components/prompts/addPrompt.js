@@ -28,6 +28,7 @@ class AddPromptView extends Component {
           <div>
             <div>Question:</div>
             <textarea
+              ref='myTextArea'
               type='text'
               value={this.state.data.question}
               onChange={ this.handleChangeQuestion.bind(this) }
@@ -59,13 +60,13 @@ class AddPromptView extends Component {
         question: event.target.value,
       }
     });
-    console.log(this.state.data.question);
   }
 
   addPrompt (hideFunc) {
     console.log(this.state.data);
     this.props.addPrompt(this.state.data);
     this.setState({ data:{} });
+    React.findDOMNode(this.refs.myTextArea).value = ""
 
     setTimeout(function() { hideFunc() }, 5000);
   }

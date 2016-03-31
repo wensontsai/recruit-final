@@ -124,7 +124,6 @@ class AddCandidateView extends Component {
     });
   }
   addCandidate (hideFunc) {
-    console.log(this.state.data);
     this.props.addCandidate(this.state.data);
     this.setState({ data:{} });
 
