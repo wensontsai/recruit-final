@@ -1,4 +1,6 @@
 # Recruit
+Platform for tech-testing potential hires.  Built with Node, React, Redux, Express, with MongoDB as data store.
+
 ## Setup
 1. Install Node Modules:  
 ```npm i```
