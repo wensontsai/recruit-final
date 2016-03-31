@@ -74,9 +74,24 @@ export function submitAnswer (data) {
       });
 
       if (data.questionsAsked === data.questionsTotal) {
-        dispatch({
-          type: actionTypes.FINISH_EXAM_SUCCESS,
-        });
+
+        const result = await post('/api/finishExam', data);
+
+        try {
+          const result = await post('/api/finishExam', data);
+
+          dispatch({
+            type: actionTypes.FINISH_EXAM_SUCCESS,
+            result: result
+          });
+
+        } catch(e) {
+          dispatch({
+            type: actionTypes.FINISH_EXAM_ERROR,
+            ERROR: e
+          });
+        }
+
       } else {
         dispatch({
           type: actionTypes.SELECT_NEXT_PROMPT,
@@ -89,25 +104,6 @@ export function submitAnswer (data) {
     } catch(e) {
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_ERROR,
-        ERROR: e
-      });
-    }
-  };
-}
-
-export function finishExam (data) {
-  return async dispatch => {
-    try {
-      const result = await post('/api/finishExam', data);
-
-      dispatch({
-        type: actionTypes.FINISH_EXAM_SUCCESS,
-        result: result
-      });
-
-    } catch(e) {
-      dispatch({
-        type: actionTypes.FINISH_EXAM_ERROR,
         ERROR: e
       });
     }

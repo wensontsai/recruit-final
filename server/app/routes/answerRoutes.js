@@ -31,26 +31,24 @@ exports.submitAnswer = function(Answer, Prompt) {
   };
 };
 
-exports.queryCandidateAnswers = function(Answer, User, Examination) {
+exports.queryCandidateAnswers = function(Answer, User) {
   var results = {};
   return function(req, res, next){
     console.log(req.body.userId);
     Answer.find({ userId: req.body.userId }, function(err, answers) {
       if(err) return console.error(err);
-      Examination.find({}, function(err, exam) {
-
+      User.findOne({ _id: req.body.userId }, function(err, user) {
+        if(err) return console.error(err);
+        results = {
+          userId: req.body.userId,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          allAnswers: answers,
+        };
+        console.log(results);
+        res.json(results);
       });
-        User.findOne({ _id: req.body.userId }, function(err, user) {
-          results = {
-            userId: req.body.userId,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            allAnswers: answers
-          };
-          console.log(results);
-          res.json(results);
-        });
     });
   };
 };

@@ -50,13 +50,19 @@ class List extends Component {
                 )}
               </div>
               <div className='field results-btn' >
-              <Link to={`/results/${record._id}`}
-                key={`${record._id}`}
-              >
-                <button className='btn btn-sm view-results'
-                  >View Results
-                </button>
-              </Link>
+                {(record.completed === 'Y'
+                  ? <Link to={`/results/${record._id}`}
+                      key={`${record._id}`}
+                    >
+                      <button className='btn btn-sm view-results'
+                        >View Results
+                      </button>
+                    </Link>
+                  : <div>
+                      Not Completed Yet
+                    </div>
+                )}
+                
               </div>
             </div>
           )

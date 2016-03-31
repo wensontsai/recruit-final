@@ -6,5 +6,6 @@ module.exports = mongoose.model('User', new Schema({
   lastName : { type : String },
   email : { type : String },
   currentExam : { type : String },
+  completed : { type : String },
   admin : { type : String }
 }));

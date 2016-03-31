@@ -62,7 +62,7 @@ apiRoutes.post('/queryCandidateAnswers', answerRoutes.queryCandidateAnswers(Answ
 apiRoutes.post('/queryExam', examinationRoutes.queryExam(Examination, User));
 apiRoutes.post('/initializeExam', examinationRoutes.initializeExam(Examination, User));
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
-apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination));
+apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination, User));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 
 

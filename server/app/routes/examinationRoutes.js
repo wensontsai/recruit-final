@@ -96,9 +96,10 @@ exports.queryExam = function(Examination, User) {
   };
 }
 
-exports.finishExam = function(Examination){
+exports.finishExam = function(Examination, User){
+  console.log('exam finito');
   return function(req, res, next){
-    Examination.findOne({ examId: req.body.data.examId }, function(err, exam) {
+    Examination.findOne({ _id: req.body.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
         return res.json( { success: false, message: 'No examination exists for that code!' } );
@@ -114,10 +115,36 @@ exports.finishExam = function(Examination){
           }
         });
       }
+      User.findOne({ _id: exam.userId}, function(err, user) {
+        user.completed = 'Y';
+        user.save(function(err) {
+          if (err) {
+            console.log('error saving :(');
+            console.error(err);
+          } else {
+            console.log('Model - User: finishExam - Save successful ;)');
+          }
+        });
 
-      res.json({
-        success: true
+        res.json({
+          success: true
+        });
+      
       });
     });
   };
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
