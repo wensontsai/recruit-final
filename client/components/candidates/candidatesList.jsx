@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import { queryAllCandidates, sendEmail } from '../../actions/candidates';
@@ -41,7 +41,7 @@ class List extends Component {
               <div className='field initiate-btn' >
                 {(record.currentExam
                   ? <div>
-                      Exam Currently Initiated
+                      Exam Initiated
                     </div>
                   : <button className='btn btn-sm send-email'
                       onClick={() => this.sendEmail (record._id)}
@@ -51,13 +51,10 @@ class List extends Component {
               </div>
               <div className='field results-btn' >
                 {(record.completed === 'Y'
-                  ? <Link to={`/results/${record._id}`}
-                      key={`${record._id}`}
-                    >
-                      <button className='btn btn-sm view-results'
-                        >View Results
-                      </button>
-                    </Link>
+                  ? <button className='btn btn-sm view-results'
+                      onClick={() => this.navigateToResultsPage (record._id)}
+                      >View Results
+                    </button>
                   : <div>
                       Not Completed Yet
                     </div>
@@ -73,6 +70,10 @@ class List extends Component {
 
   sendEmail (userId) {
     this.props.sendEmail(userId);
+  }
+  navigateToResultsPage (userId) {
+    browserHistory.push('/results/' + userId);
+
   }
 
 }
