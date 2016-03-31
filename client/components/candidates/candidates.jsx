@@ -28,5 +28,5 @@ class Candidates extends Component {
 
 export default connect(
   (state) => ({ candidates: state.candidates }),
-
+  {}
 )(Candidates);

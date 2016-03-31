@@ -1,0 +1,97 @@
+$border-color: #626262;
+$base-color: #DBDBDB;
+$body-color: #FFFAF0;
+$div-color: lighten( $base-color, 10% );
+$field-color: lighten( $div-color, 3% );
+
+.prompts-list {
+  height: 450px;
+  border: $border-color solid 2px;
+  border-radius: 10px;
+  padding: 1rem;
+  -webkit-flex: 1;
+  flex: 3 auto;
+  margin-top: 1rem;
+} 
+.prompt-add-view {
+  background-color: $div-color;
+  border: $border-color solid 2px;
+  border-radius: 10px;
+  padding: 1rem;
+  height: 135px;
+  flex: 1 auto;
+  margin-top: 1rem;
+  flex-direction: row;
+  display: inline-flex;
+}
+.prompt-add-view textarea {
+  width: 95%;
+  height: 100%;
+  background-color: $field-color;
+}
+.add-prompt {
+  text-align: right;
+  margin: auto 0;
+  margin-top: 3.2rem;
+}
+.action-status {
+  float: right;
+}
+.column{
+  flex: 3 auto;
+}
+.prompts-list-view {
+  background-color: $div-color;
+  margin-top: 1rem;
+  height: 450px;
+  border: $border-color solid 2px;
+  border-radius: 10px;
+  padding: 1rem;
+  -webkit-flex: 1;
+  flex: 6 auto;
+  flex-direction: column;
+  display: inline-flex;
+  overflow: scroll;
+}
+.prompts-list-view .row {
+  margin: 0.25rem;
+  display: inline-flex;
+  min-height: 55px;
+}
+.prompts-list-view .header {
+  font-weight: 800;
+  font-size: 1em;
+}
+.prompts-list-view .field {
+  text-align: left;
+  margin: 0.25rem;
+  flex: 3;
+}
+.prompts-list-view .field.admin {
+  flex: 1;
+}
+.prompts-list-view .field.results-btn {
+  flex: 2;
+}
+
+
+
+
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

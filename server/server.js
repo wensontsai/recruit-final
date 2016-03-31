@@ -54,6 +54,7 @@ var userRoutes = require('./app/routes/userRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
+apiRoutes.get('/queryAllPromptsList', promptRoutes.queryAllPromptsList(Prompt));
 apiRoutes.get('/queryAllCandidates', userRoutes.queryAllUsers(User));
 
 // ::::: POST :::::
@@ -63,6 +64,7 @@ apiRoutes.post('/queryExam', examinationRoutes.queryExam(Examination, User));
 apiRoutes.post('/initializeExam', examinationRoutes.initializeExam(Examination, User));
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
 apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination, User));
+apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 
 

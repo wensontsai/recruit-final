@@ -3,18 +3,21 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import Nav from '../nav/nav';
+import AddPrompt from './addPrompt';
+import PromptsList from './promptsList';
 
 class Prompts extends Component {
     render (){
         const {
-            
+          prompts
         } = this.props;
 
         return (
-            <div className='prompts-all-container'>
+            <div className='display-all-container'>
                 <Nav />
                 <div className='page'>
-                  prompts views
+                  <AddPrompt />
+                  <PromptsList />
                 </div>
             </div>
         );
@@ -22,6 +25,6 @@ class Prompts extends Component {
 }
 
 export default connect(
-  (state) => ({ displays: state.displays }),
-  // { selectDisplay }
+  (state) => ({ prompts: state.prompts }),
+  {}
 )(Prompts);

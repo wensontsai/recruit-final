@@ -26,3 +26,30 @@ exports.queryAllPrompts = function(Prompt) {
     });
   };
 };
+exports.queryAllPromptsList = function(Prompt) {
+  return function(req, res, next){
+    Prompt.find({}, function(err, prompts) {
+      if(err) return console.error(err);
+      res.json( prompts );
+    });
+  };
+};
+
+exports.addPrompt = function(Prompt){
+  return function(req, res, next){
+    Prompt.findOne({ question: req.body.question }, function(err, prompt){
+      if(err) return console.error(err);
+      if (prompt) {
+        return res.json( {success: false, message: 'This prompt already exists!'} );
+      } else {
+        var prompt = new Prompt({
+          question : req.body.question
+        });
+        prompt.save(function(err, prompt){
+          if(err) return console.error(err);
+          res.json(prompt);
+        });
+      }
+    });
+  };
+};
