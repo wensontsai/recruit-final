@@ -27,9 +27,9 @@ class List extends Component {
           <div className='field' >FIRST NAME</div>
           <div className='field' >LAST NAME</div>
           <div className='field' >EMAIL</div>
-          <div className='field' >ADMIN</div>
-          <div className='field' >INITIATE EXAM</div>
-          <div className='field' >CHECK ANSWERS</div>
+          <div className='field admin' >ADMIN</div>
+          <div className='field initiate-btn' >INITIATE EXAM</div>
+          <div className='field results-btn' >CHECK ANSWERS</div>
         </div>
         {this.props.candidates.candidates.candidatesAll.map(function(record) {
           return (
@@ -37,23 +37,23 @@ class List extends Component {
               <div className='field' >{record.firstName}</div>
               <div className='field' >{record.lastName}</div>
               <div className='field' >{record.email}</div>
-              <div className='field' >{record.admin}</div>
-              <div className='field' >
+              <div className='field admin' >{record.admin}</div>
+              <div className='field initiate-btn' >
                 {(record.currentExam
                   ? <div>
                       Exam Currently Initiated
                     </div>
-                  : <button className='btn btn-sm start-exam'
+                  : <button className='btn btn-sm send-email'
                       onClick={() => this.sendEmail (record._id)}
                       >Send Email
                     </button>
                 )}
               </div>
-              <div className='field' >
+              <div className='field results-btn' >
               <Link to={`/results/${record._id}`}
                 key={`${record._id}`}
               >
-                <button className='btn btn-sm start-exam'
+                <button className='btn btn-sm view-results'
                   >View Results
                 </button>
               </Link>

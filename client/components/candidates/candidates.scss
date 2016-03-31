@@ -53,21 +53,26 @@ $field-color: lighten( $div-color, 3% );
   display: inline-flex;
   overflow: scroll;
 }
-.candidates-list-view .row{
+.candidates-list-view .row {
   margin: 0.25rem;
   display: inline-flex;
   min-height: 55px;
 }
-.candidates-list-view .header{
+.candidates-list-view .header {
   font-weight: 800;
   font-size: 1em;
 }
-.candidates-list-view .field{
+.candidates-list-view .field {
   text-align: left;
   margin: 0.25rem;
+  flex: 3;
+}
+.candidates-list-view .field.admin {
   flex: 1;
 }
-
+.candidates-list-view .field.results-btn {
+  flex: 2;
+}
 
 
 
