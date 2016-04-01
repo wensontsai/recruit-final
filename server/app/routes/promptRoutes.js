@@ -73,6 +73,7 @@ exports.deletePrompt = function(Prompt){
         return console.error(err)
       } else {
         Prompt.find({}, function(err, prompts) {
+          console.log(prompts);
           if(err) return console.error(err);
           res.json( prompts );
         });

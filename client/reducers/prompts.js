@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/prompts';
 import merge from 'lodash.merge';
+import assign from 'lodash.assign';
 
 const initialState = {
   prompts: {
@@ -35,7 +36,7 @@ const editPrompt = (state, action) => {
 };
 
 const deletePrompt = (state, action) => {
-  return merge({}, state, {
+  return assign({}, state, {
     prompts: {
       promptsAll: action.deleteResult,
       actionStatus: 'Deleting Prompt Successful!'
