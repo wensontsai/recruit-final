@@ -54,28 +54,34 @@ $field-color: lighten( $div-color, 3% );
   display: inline-flex;
   overflow: scroll;
 }
-.prompts-list-view .row {
+.prompts-list-view .react-wrapper .row {
   margin: 0.25rem;
   display: inline-flex;
   min-height: 55px;
 }
-.prompts-list-view .header {
+.prompts-list-view .react-wrapper .header {
   font-weight: 800;
   font-size: 1em;
 }
-.prompts-list-view .field {
+.prompts-list-view .react-wrapper .field {
   text-align: left;
   margin: 0.25rem;
   flex: 14;
 }
-.prompts-list-view .question {
+.prompts-list-view .react-wrapper .question {
   font-style: italic;
 }
-.prompts-list-view .field.delete-prompt,
-.prompts-list-view .field.edit-prompt {
+.prompts-list-view .react-wrapper .field.delete-prompt,
+.prompts-list-view .react-wrapper .field.edit-prompt {
   flex: 1;
 }
 
+.prompts-list-view input {
+  width: 95%;
+  height: 100%;
+  background-color: $field-color;
+  padding: 5px 5px 50px 5px;
+}
 
 
 

@@ -72,21 +72,11 @@ export function editPrompt (data) {
         deleteResult: editResult
       });
 
-      const queryResult = await get('/api/queryAllPromptsList');
-      dispatch({
-        type: actionTypes.QUERY_ALL_PROMPTS_LIST_SUCCESS,
-        queryResult: queryResult
-      });
-
     } catch(e) {
       dispatch({
         type: actionTypes.EDIT_PROMPT_ERROR,
         ERROR: e
-      }),
-      dispatch({
-        type: actionTypes.QUERY_ALL_PROMPTS_LIST_ERROR,
-        ERROR: e
-      });
+      })
     }
   };
 }
