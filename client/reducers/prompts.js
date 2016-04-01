@@ -37,6 +37,7 @@ const editPrompt = (state, action) => {
 const deletePrompt = (state, action) => {
   return merge({}, state, {
     prompts: {
+      promptsAll: action.deleteResult,
       actionStatus: 'Deleting Prompt Successful!'
     }
   });

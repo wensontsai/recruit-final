@@ -28,9 +28,9 @@ class promptsList extends Component {
           <div className='field edit-prompt' >EDIT:</div>
           <div className='field delete-prompt' >DELETE:</div>
         </div>
-        {this.props.prompts.prompts.promptsAll.map(function(record) {
+        {this.props.prompts.prompts.promptsAll.map(function(record, i) {
           return (
-            <div className='row' key={record._id}>
+            <div className='row' key={i}>
               <div className='field question' >"{record.question}"</div>
               <div className='field edit-prompt' >
                 <button className='btn btn-sm'

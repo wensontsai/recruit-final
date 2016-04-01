@@ -69,10 +69,14 @@ exports.deletePrompt = function(Prompt){
   return function(req, res, next){
   console.log(req.body.promptId);
     Prompt.remove({ _id: req.body.promptId }, function(err) {
-      if (err)return console.error(err);
-      res.json({
-        success: true
-      })
+      if (err) {
+        return console.error(err)
+      } else {
+        Prompt.find({}, function(err, prompts) {
+          if(err) return console.error(err);
+          res.json( prompts );
+        });
+      }
     });
   };
 };
