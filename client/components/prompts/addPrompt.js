@@ -66,7 +66,6 @@ class AddPromptView extends Component {
     console.log(this.state.data);
     this.props.addPrompt(this.state.data);
     this.setState({ data:{} });
-    React.findDOMNode(this.refs.myTextArea).value = ""
 
     setTimeout(function() { hideFunc() }, 5000);
   }

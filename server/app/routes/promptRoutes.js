@@ -14,11 +14,10 @@ function shuffle(array) {
         array[counter] = array[index];
         array[index] = temp;
     }
-
     return array;
 }
 exports.queryAllPrompts = function(Prompt) {
-  return function(req, res, next){
+  return function(req, res, next) {
     Prompt.find({}, function(err, prompts) {
       if(err) return console.error(err);
       var promptsShuffled = shuffle(prompts);
@@ -27,7 +26,7 @@ exports.queryAllPrompts = function(Prompt) {
   };
 };
 exports.queryAllPromptsList = function(Prompt) {
-  return function(req, res, next){
+  return function(req, res, next) {
     Prompt.find({}, function(err, prompts) {
       if(err) return console.error(err);
       res.json( prompts );
@@ -37,7 +36,7 @@ exports.queryAllPromptsList = function(Prompt) {
 
 exports.addPrompt = function(Prompt){
   return function(req, res, next){
-    Prompt.findOne({ question: req.body.question }, function(err, prompt){
+    Prompt.findOne({ question: req.body.question }, function(err, prompt) {
       if(err) return console.error(err);
       if (prompt) {
         return res.json( {success: false, message: 'This prompt already exists!'} );
@@ -53,3 +52,16 @@ exports.addPrompt = function(Prompt){
     });
   };
 };
+
+exports.deletePrompt = function(Prompt){
+  return function(req, res, next){
+  console.log(req.body.promptId);
+    Prompt.remove({ _id: req.body.promptId }, function(err) {
+      if (err)return console.error(err);
+      res.json({
+        success: true
+      })
+    });
+  };
+};
+
