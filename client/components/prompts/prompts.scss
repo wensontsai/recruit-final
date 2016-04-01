@@ -65,7 +65,14 @@ $field-color: lighten( $div-color, 3% );
 .prompts-list-view .field {
   text-align: left;
   margin: 0.25rem;
-  flex: 3;
+  flex: 14;
+}
+.prompts-list-view .question {
+  font-style: italic;
+}
+.prompts-list-view .field.delete-prompt,
+.prompts-list-view .field.edit-prompt {
+  flex: 1;
 }
 
 

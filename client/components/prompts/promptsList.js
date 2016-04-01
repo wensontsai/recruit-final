@@ -24,23 +24,23 @@ class promptsList extends Component {
     return (
       <div className='prompts-list-view'>
         <div className='row header'>
-          <div className='field' >QUESTIONS:</div>
-          <div className='field' >EDIT:</div>
-          <div className='field' >DELETE:</div>
+          <div className='field ' >QUESTIONS:</div>
+          <div className='field edit-prompt' >EDIT:</div>
+          <div className='field delete-prompt' >DELETE:</div>
         </div>
         {this.props.prompts.prompts.promptsAll.map(function(record) {
           return (
             <div className='row' key={record._id}>
-              <div className='field' >{record.question}</div>
-              <div className='field' >
-                <button className='btn btn-sm edit-prompt'
+              <div className='field question' >"{record.question}"</div>
+              <div className='field edit-prompt' >
+                <button className='btn btn-sm'
                   onClick={() => this.editPrompt (record._id)}
                 >
                   Edit
                 </button>
               </div>
-              <div className='field' >
-                <button className='btn btn-sm delete-prompt'
+              <div className='field delete-prompt'>
+                <button className='btn btn-sm'
                   onClick={() => this.deletePrompt (record._id)}
                 >
                   Delete
