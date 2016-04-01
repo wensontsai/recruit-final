@@ -32,7 +32,7 @@ class promptsList extends Component {
             <div className='row' key={record._id}>
               <div className='field' >{record.question}</div>
               <div className='field' >
-                <button classNmame='btn btn-sm '
+                <button className='btn btn-sm'
                   onClick={() => this.deletePrompt (record._id)}
                 >
                   Delete
