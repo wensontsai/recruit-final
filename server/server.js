@@ -65,7 +65,9 @@ apiRoutes.post('/initializeExam', examinationRoutes.initializeExam(Examination, 
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
 apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination, User));
 apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
-apiRoutes.post('/deletePrompt', promptRoutes.deletePrompt(User));
+apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
+// apiRoutes.post('/editPrompt', promptRoutes.editPrompt(Prompt));
+apiRoutes.post('/deletePrompt', promptRoutes.deletePrompt(Prompt));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 
 

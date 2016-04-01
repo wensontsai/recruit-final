@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 // import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import { queryAllPromptsList, deletePrompt } from '../../actions/prompts';
+import { queryAllPromptsList, editPrompt, deletePrompt } from '../../actions/prompts';
 
 import './prompts.scss';
 
@@ -25,6 +25,7 @@ class promptsList extends Component {
       <div className='prompts-list-view'>
         <div className='row header'>
           <div className='field' >QUESTIONS:</div>
+          <div className='field' >EDIT:</div>
           <div className='field' >DELETE:</div>
         </div>
         {this.props.prompts.prompts.promptsAll.map(function(record) {
@@ -32,7 +33,14 @@ class promptsList extends Component {
             <div className='row' key={record._id}>
               <div className='field' >{record.question}</div>
               <div className='field' >
-                <button className='btn btn-sm'
+                <button className='btn btn-sm edit-prompt'
+                  onClick={() => this.editPrompt (record._id)}
+                >
+                  Edit
+                </button>
+              </div>
+              <div className='field' >
+                <button className='btn btn-sm delete-prompt'
                   onClick={() => this.deletePrompt (record._id)}
                 >
                   Delete
@@ -43,6 +51,12 @@ class promptsList extends Component {
         }, this )}
       </div>
     );
+  }
+  editPrompt (promptId) {
+    let data = {
+      promptId: promptId
+    }
+    this.props.editPrompt (data);
   }
   deletePrompt (promptId) {
     let data = {
@@ -55,5 +69,5 @@ class promptsList extends Component {
 
 export default connect(
   (state) => ({ prompts: state.prompts }),
-  { queryAllPromptsList, deletePrompt }
+  { queryAllPromptsList, editPrompt, deletePrompt }
 )(promptsList);

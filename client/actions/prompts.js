@@ -47,6 +47,33 @@ export function addPrompt (data) {
     }
   };
 }
+export function editPrompt (data) {
+  return async dispatch => {
+    try {
+      const editResult = await post('/api/editPrompt', data);
+      dispatch({
+        type: actionTypes.EDIT_PROMPT_SUCCESS,
+        deleteResult: editResult
+      });
+
+      const queryResult = await get('/api/queryAllPromptsList');
+      dispatch({
+        type: actionTypes.QUERY_ALL_PROMPTS_LIST_SUCCESS,
+        queryResult: queryResult
+      });
+
+    } catch(e) {
+      dispatch({
+        type: actionTypes.EDIT_PROMPT_ERROR,
+        ERROR: e
+      }),
+      dispatch({
+        type: actionTypes.QUERY_ALL_PROMPTS_LIST_ERROR,
+        ERROR: e
+      });
+    }
+  };
+}
 
 export function deletePrompt (data) {
   return async dispatch => {

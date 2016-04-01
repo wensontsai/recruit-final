@@ -26,6 +26,14 @@ const addPrompt = (state, action) => {
   });
 };
 
+const editPrompt = (state, action) => {
+  return merge({}, state, {
+    prompts: {    
+      actionStatus: 'Editing Prompt Successful!'
+    }
+  });
+};
+
 const deletePrompt = (state, action) => {
   return merge({}, state, {
     prompts: {
@@ -39,6 +47,7 @@ export default function prompts (state = initialState, action) {
   return ({
     [actionTypes.QUERY_ALL_PROMPTS_LIST_SUCCESS]: queryAllPromptsList,
     [actionTypes.ADD_PROMPT_SUCCESS]: addPrompt,
+    [actionTypes.EDIT_PROMPT_SUCCESS]: editPrompt,
     [actionTypes.DELETE_PROMPT_SUCCESS]: deletePrompt,
   }[action.type] || ((s) => s))(state, action);
 }

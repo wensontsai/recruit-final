@@ -53,6 +53,18 @@ exports.addPrompt = function(Prompt){
   };
 };
 
+// exports.editPrompt = function(Prompt){
+//   return function(req, res, next){
+//   console.log(req.body.promptId);
+//     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt) {
+//       if (err)return console.error(err);
+//       res.json({
+//         success: true
+//       })
+//     });
+//   };
+// };
+
 exports.deletePrompt = function(Prompt){
   return function(req, res, next){
   console.log(req.body.promptId);
