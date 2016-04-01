@@ -24,10 +24,11 @@ $field-color: lighten( $div-color, 3% );
   flex-direction: row;
   display: inline-flex;
 }
-.prompt-add-view textarea {
+.prompt-add-view input {
   width: 95%;
   height: 100%;
   background-color: $field-color;
+  padding: 5px 5px 50px 5px;
 }
 .add-prompt {
   text-align: right;

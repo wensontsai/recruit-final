@@ -27,8 +27,7 @@ class AddPromptView extends Component {
         <div className='column'>
           <div>
             <div>Question:</div>
-            <textarea
-              ref='myTextArea'
+            <input
               type='text'
               value={this.state.data.question}
               onChange={ this.handleChangeQuestion.bind(this) }
