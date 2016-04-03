@@ -5,15 +5,17 @@ import assign from 'lodash.assign';
 const initialState = {
   prompts: {
     promptsAll: [],
-    actionStatus: ''
+    actionStatus: '',
+    editObj: {}
   }
 };
 
 const queryAllPromptsList = (state, action) => {
   return merge({}, state, {
     prompts: {
-      promptsAll: action.queryResult,
-      actionStatus: 'queryAllPrompts successful!'
+      promptsAll: action.queryResult.prompts,
+      actionStatus: 'queryAllPrompts successful!',
+      editObj: action.queryResult.editObj
     }
   });
 };
@@ -28,18 +30,22 @@ const addPrompt = (state, action) => {
 };
 
 const editPrompt = (state, action) => {
+  console.log(action.data.id);
+  const currentPrompts = state;
+  console.log(currentPrompts);
+  currentPrompts.prompts.editObj[action.data.id] = true;
+
   return merge({}, state, {
-    prompts: {    
-      actionStatus: 'Editing Prompt Successful!'
-    }
+    currentPrompts
   });
 };
 
 const deletePrompt = (state, action) => {
   return assign({}, state, {
     prompts: {
-      promptsAll: action.deleteResult,
-      actionStatus: 'Deleting Prompt Successful!'
+      promptsAll: action.queryResult.prompts,
+      actionStatus: 'deletePrompt successful!',
+      editObj: action.queryResult.editObj
     }
   });
 };
@@ -49,7 +55,8 @@ export default function prompts (state = initialState, action) {
   return ({
     [actionTypes.QUERY_ALL_PROMPTS_LIST_SUCCESS]: queryAllPromptsList,
     [actionTypes.ADD_PROMPT_SUCCESS]: addPrompt,
-    [actionTypes.EDIT_PROMPT_SUCCESS]: editPrompt,
     [actionTypes.DELETE_PROMPT_SUCCESS]: deletePrompt,
+
+    [actionTypes.EDIT_PROMPT]: editPrompt,
   }[action.type] || ((s) => s))(state, action);
 }

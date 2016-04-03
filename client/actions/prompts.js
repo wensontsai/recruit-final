@@ -64,20 +64,12 @@ export function deletePrompt (data) {
   };
 }
 export function editPrompt (data) {
+  console.log(data);
   return async dispatch => {
-    try {
-      const editResult = await post('/api/editPrompt', data);
-      dispatch({
-        type: actionTypes.EDIT_PROMPT_SUCCESS,
-        deleteResult: editResult
-      });
-
-    } catch(e) {
-      dispatch({
-        type: actionTypes.EDIT_PROMPT_ERROR,
-        ERROR: e
-      })
-    }
+    dispatch({
+      type: actionTypes.EDIT_PROMPT,
+      data: data
+    });
   };
 }
 

@@ -12,12 +12,9 @@ class promptsList extends Component {
     super (props);
     this.state = {
       prompts: props.prompts,
+      editPrompt: props.editPrompt,
       deletePrompt: props.deletePrompt,
       queryAllPromptsList: props.queryAlPromptsList,
-      editPrompt: true,
-      data: {
-        editPrompt: ''
-      }
     };
   }
 
@@ -38,13 +35,22 @@ class promptsList extends Component {
         {this.props.prompts.prompts.promptsAll.map(function(record) {
           return (
             <div className='row' key={record._id}>
-            {(this.state.editPrompt
-              ? <div>
-                  <input
-                    type='text'
-                    value={record.question[record._id]}
-                    onChange={ this.handleEditPrompt.bind(this, record_id ) }
-                  />
+            {(this.props.prompts.prompts.editObj[record._id]
+              ? <div className='react-wrapper'>
+                  <div className='field question'>
+                    <input
+                      type='text'
+                      value={record.question}
+                      onChange={ this.handleEditPrompt.bind(this, record._id ) }
+                    />
+                  </div>
+                  <div className='field edit-prompt' >
+                    <button className='btn btn-sm'
+                      onClick={() => this.editPrompt (record._id)}
+                    >
+                      Save Changes
+                    </button>
+                  </div>
                 </div>
               : <div className='react-wrapper'>
                   <div className='field question' >"{record.question}"</div>
@@ -57,8 +63,7 @@ class promptsList extends Component {
                   </div>
                 </div>
             )}
-
-              
+             
               <div className='field delete-prompt'>
                 <button className='btn btn-sm'
                   onClick={() => this.deletePrompt (record._id)}
@@ -74,29 +79,24 @@ class promptsList extends Component {
   }
   queryAllPromptsList () {
     this.props.queryAllPromptsList();
-    // console.log(this.state.prompts);
-    // this.state.prompts.prompts.promptsAll.map(function(record) {
-    //   console.log('fuck');
-    //   return merge({}, this.state, {
-    //     editPrompt: {
-    //       [record._id]: null
-    //     }
-    //   });
-    // });
-    // console.log(this.state.editPrompt);
+
   }
-  handleEditPrompt () {
-    this.setState({ 
+  handleEditPrompt (id) {
+    this.setState({
       data: {
-        editPrompt: event.target.value,
+        editPrompt: {
+          [id]: event.target.value,
+        }
       }
     });
   }
   editPrompt (promptId) {
-    let data = {
-      promptId: promptId
-    }
-    this.props.editPrompt (data);
+    const data = {
+      id: promptId
+    };
+
+    this.props.editPrompt(data);
+
   }
   deletePrompt (promptId) {
     let data = {

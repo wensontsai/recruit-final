@@ -26,10 +26,23 @@ exports.queryAllPrompts = function(Prompt) {
   };
 };
 exports.queryAllPromptsList = function(Prompt) {
+  var results = {};
   return function(req, res, next) {
     Prompt.find({}, function(err, prompts) {
       if(err) return console.error(err);
-      res.json( prompts );
+      var editObj = {};
+
+      for(var key in prompts) {
+          if(prompts.hasOwnProperty(key)) {
+              editObj[prompts[key]._id] = null;
+          }
+      }
+  console.log(editObj);
+      results = {
+        prompts,
+        editObj
+      }
+      res.json( results );
     });
   };
 };
