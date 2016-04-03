@@ -36,7 +36,7 @@ class promptsList extends Component {
         {this.props.prompts.prompts.promptsAll.map(function(record) {
           return (
             <div className='row' key={record._id}>
-            {(this.props.prompts.prompts.editObj[record._id]
+            {(this.props.prompts.prompts.editObj[record._id].mode
               ? <div className='react-wrapper'>
                   <div className='field question'>
                     <input

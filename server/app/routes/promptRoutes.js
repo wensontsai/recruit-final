@@ -34,7 +34,10 @@ exports.queryAllPromptsList = function(Prompt) {
 
       for(var key in prompts) {
           if(prompts.hasOwnProperty(key)) {
-            editObj[prompts[key]._id] = null;
+            editObj[prompts[key]._id] = {
+              mode: null,
+              data: ''
+            };
           }
       }
   console.log(editObj);
