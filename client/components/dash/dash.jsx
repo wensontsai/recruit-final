@@ -50,7 +50,7 @@ class DisplaysAll extends Component {
 
 	queryExam (data){
 		console.log(this.state.data);
-		this.state.queryExam(this.state.data);
+		this.props.queryExam(this.state.data);
 	}
 }
 
