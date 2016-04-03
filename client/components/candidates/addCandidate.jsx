@@ -12,8 +12,6 @@ class AddCandidateView extends Component {
     super (props);
     // this.hideStatusView = this.hideStatusView.bind(this);
     this.state = {
-      candidates: props.candidates,
-      addCandidate: props.addCandidate,
       data: {
         firstName: this.props.firstName || '',
         lastName: this.props.lastName || '',

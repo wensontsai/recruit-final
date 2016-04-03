@@ -9,11 +9,6 @@ import './candidates.scss';
 class List extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      candidates: props.candidates,
-      sendEmail: props.sendEmail,
-      queryAllCandidates: props.queryAllCandidates,
-    };
   }
 
   componentDidMount () {

@@ -14,7 +14,6 @@ class Results extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      queryCandidateAnswers: props.queryCandidateAnswers,
       data: {
         userId: props.params.userId || ''
       }
@@ -39,7 +38,7 @@ class Results extends Component {
     );
   }
   queryCandidateAnswers (data) {
-    this.state.queryCandidateAnswers(this.state.data);
+    this.props.queryCandidateAnswers(this.state.data);
   }
 }
 

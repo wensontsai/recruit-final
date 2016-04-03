@@ -12,8 +12,6 @@ class AddPromptView extends Component {
     super (props);
     // this.hideStatusView = this.hideStatusView.bind(this);
     this.state = {
-      prompts: props.prompts,
-      addPrompt: props.addPrompt,
       data: {
         question: this.props.question || ''
       },
@@ -54,7 +52,7 @@ class AddPromptView extends Component {
     );
   }
   handleChangeQuestion (event) {
-    this.setState({ 
+    this.setState({
       data: {
         question: event.target.value,
       }

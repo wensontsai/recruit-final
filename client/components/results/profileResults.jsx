@@ -7,9 +7,6 @@ import './results.scss';
 class ProfileResults extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      results: props.results
-    };
   }
 
   render () {

@@ -10,13 +10,6 @@ import './prompts.scss';
 class promptsList extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      prompts: props.prompts,
-      editPrompt: props.editPrompt,
-      saveEditPrompt: props.saveEditPrompt,
-      deletePrompt: props.deletePrompt,
-      queryAllPromptsList: props.queryAlPromptsList,
-    };
   }
 
   componentDidMount () {

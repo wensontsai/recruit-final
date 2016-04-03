@@ -8,9 +8,6 @@ import './results.scss';
 class AnswerResults extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      results: props.results
-    };
   }
 
   render () {
