@@ -11,9 +11,6 @@ class Answer extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      dash: props.dash,
-      submitAnswer: props.submitAnswer,
-      queryAllPrompts: props.queryAllPrompts,
       data: {
         userId: this.props.dash.data.userId || '',
         examId: this.props.dash.data.examId || '',

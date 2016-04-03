@@ -7,9 +7,6 @@ import './dash.scss';
 class Question extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      dash: props.dash
-    };
   }
 
   render (){

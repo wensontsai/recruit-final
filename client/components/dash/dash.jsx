@@ -15,7 +15,6 @@ class DisplaysAll extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			queryExam: props.queryExam,
 			data: {
 			  examId: props.params.examId || ''   
 			}
