@@ -80,18 +80,15 @@ class promptsList extends Component {
   }
   queryAllPromptsList () {
     this.props.queryAllPromptsList();
+  }
+  handleEditPrompt (event, id) {
+    console.log(event.target.value);
+
 
   }
-  handleEditPrompt (id) {
-    this.setState({
-      data: {
-        editPrompt: {
-          [id]: event.target.value,
-        }
-      }
-    });
-  }
   editPrompt (promptId) {
+    console.log(this.state);
+    console.log('^^^^^^^^^^^^^^^^^^^');
     const data = {
       id: promptId
     };
