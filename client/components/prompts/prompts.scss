@@ -48,11 +48,14 @@ $field-color: lighten( $div-color, 3% );
   border: $border-color solid 2px;
   border-radius: 10px;
   padding: 1rem;
-  -webkit-flex: 1;
-  flex: 6 auto;
-  flex-direction: column;
-  display: inline-flex;
   overflow: scroll;
+}
+.prompts-list-view .react-wrapper {
+  width: 100%;
+  padding: 1rem;
+  flex: 6 auto;
+  flex-direction: row;
+  display: inline-flex;
 }
 .prompts-list-view .react-wrapper .row {
   margin: 0.25rem;

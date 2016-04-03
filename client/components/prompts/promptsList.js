@@ -45,7 +45,7 @@ class promptsList extends Component {
                       onChange={ this.handleEditPrompt.bind(this, record._id ) }
                     />
                   </div>
-                  <div className='field save-edit-prompt' >
+                  <div className='field edit-prompt' >
                     <button className='btn btn-sm'
                       onClick={() => this.saveEditPrompt (record._id)}
                     >

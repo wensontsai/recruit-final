@@ -34,7 +34,7 @@ exports.queryAllPromptsList = function(Prompt) {
 
       for(var key in prompts) {
           if(prompts.hasOwnProperty(key)) {
-              editObj[prompts[key]._id] = null;
+            editObj[prompts[key]._id] = null;
           }
       }
   console.log(editObj);
@@ -79,6 +79,7 @@ exports.addPrompt = function(Prompt){
 // };
 
 exports.deletePrompt = function(Prompt){
+  var results = {};
   return function(req, res, next){
   console.log(req.body.promptId);
     Prompt.remove({ _id: req.body.promptId }, function(err) {
@@ -86,9 +87,20 @@ exports.deletePrompt = function(Prompt){
         return console.error(err)
       } else {
         Prompt.find({}, function(err, prompts) {
-          console.log(prompts);
           if(err) return console.error(err);
-          res.json( prompts );
+          var editObj = {};
+
+          for(var key in prompts) {
+              if(prompts.hasOwnProperty(key)) {
+                editObj[prompts[key]._id] = null;
+              }
+          }
+      console.log(results);
+          results = {
+            prompts,
+            editObj
+          }
+          res.json( results );
         });
       }
     });

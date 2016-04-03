@@ -51,6 +51,8 @@ export function deletePrompt (data) {
   return async dispatch => {
     try {
       const deleteResult = await post('/api/deletePrompt', data);
+
+      console.log(deleteResult);
       dispatch({
         type: actionTypes.DELETE_PROMPT_SUCCESS,
         deleteResult: deleteResult

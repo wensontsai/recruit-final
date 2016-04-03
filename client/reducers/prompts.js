@@ -30,32 +30,37 @@ const addPrompt = (state, action) => {
 };
 
 const editPrompt = (state, action) => {
-  console.log(action.data.id);
   const currentPrompts = state;
-  console.log(currentPrompts);
   currentPrompts.prompts.editObj[action.data.id] = true;
-
   return merge({}, state, {
-    currentPrompts
+    prompts: {
+      promptsAll: currentPrompts.prompts.promptsAll,
+      actionStatus: 'editPrompt successful!',
+      editObj: currentPrompts.prompts.editObj
+    }
   });
 };
 const saveEditPrompt = (state, action) => {
-  console.log(action.data.id);
   const currentPrompts = state;
-  console.log(currentPrompts);
   currentPrompts.prompts.editObj[action.data.id] = null;
 
   return merge({}, state, {
-    currentPrompts
+    prompts: {
+      promptsAll: currentPrompts.prompts.promptsAll,
+      actionStatus: 'saveEditPrompt successful!',
+      editObj: currentPrompts.prompts.editObj
+    }
   });
 };
 
 const deletePrompt = (state, action) => {
+  console.log('^^^ reducer action');
+  console.log(action);
   return assign({}, state, {
     prompts: {
-      promptsAll: action.queryResult.prompts,
+      promptsAll: action.deleteResult.prompts,
       actionStatus: 'deletePrompt successful!',
-      editObj: action.queryResult.editObj
+      editObj: action.deleteResult.editObj
     }
   });
 };
