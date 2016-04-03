@@ -33,7 +33,7 @@ const editPrompt = (state, action) => {
   const currentPrompts = state;
   currentPrompts.prompts.editObj[action.data.id] = {
     mode: true,
-    data: ''
+    data: currentPrompts.prompts.editObj[action.data.id].data
   };
   return merge({}, state, {
     prompts: {
@@ -47,7 +47,7 @@ const saveEditPrompt = (state, action) => {
   const currentPrompts = state;
   currentPrompts.prompts.editObj[action.data.id] = {
     mode: null,
-    data: ''
+    data: currentPrompts.prompts.editObj[action.data.id].data
   };
 
   return merge({}, state, {

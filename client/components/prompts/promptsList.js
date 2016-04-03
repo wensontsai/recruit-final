@@ -41,7 +41,7 @@ class promptsList extends Component {
                   <div className='field question'>
                     <input
                       type='text'
-                      value={record.question}
+                      value={this.props.prompts.prompts.editObj[record._id].data}
                       onChange={ this.handleEditPrompt.bind(this, record._id ) }
                     />
                   </div>

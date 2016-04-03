@@ -36,7 +36,7 @@ exports.queryAllPromptsList = function(Prompt) {
           if(prompts.hasOwnProperty(key)) {
             editObj[prompts[key]._id] = {
               mode: null,
-              data: ''
+              data: prompts[key].question
             };
           }
       }
@@ -95,7 +95,10 @@ exports.deletePrompt = function(Prompt){
 
           for(var key in prompts) {
               if(prompts.hasOwnProperty(key)) {
-                editObj[prompts[key]._id] = null;
+                editObj[prompts[key]._id] = {
+                  mode: null,
+                  data: prompts[key].question
+                };
               }
           }
       console.log(results);
