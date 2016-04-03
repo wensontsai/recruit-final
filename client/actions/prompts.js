@@ -72,4 +72,13 @@ export function editPrompt (data) {
     });
   };
 }
+export function saveEditPrompt (data) {
+  console.log(data);
+  return async dispatch => {
+    dispatch({
+      type: actionTypes.SAVE_EDIT_PROMPT,
+      data: data
+    });
+  };
+}
 

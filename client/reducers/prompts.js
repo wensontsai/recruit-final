@@ -39,6 +39,16 @@ const editPrompt = (state, action) => {
     currentPrompts
   });
 };
+const saveEditPrompt = (state, action) => {
+  console.log(action.data.id);
+  const currentPrompts = state;
+  console.log(currentPrompts);
+  currentPrompts.prompts.editObj[action.data.id] = null;
+
+  return merge({}, state, {
+    currentPrompts
+  });
+};
 
 const deletePrompt = (state, action) => {
   return assign({}, state, {
@@ -58,5 +68,6 @@ export default function prompts (state = initialState, action) {
     [actionTypes.DELETE_PROMPT_SUCCESS]: deletePrompt,
 
     [actionTypes.EDIT_PROMPT]: editPrompt,
+    [actionTypes.SAVE_EDIT_PROMPT]: saveEditPrompt,
   }[action.type] || ((s) => s))(state, action);
 }

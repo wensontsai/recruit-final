@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import merge from 'lodash.merge';
 
-import { queryAllPromptsList, editPrompt, deletePrompt } from '../../actions/prompts';
+import { queryAllPromptsList, editPrompt, saveEditPrompt, deletePrompt } from '../../actions/prompts';
 
 import './prompts.scss';
 
@@ -13,6 +13,7 @@ class promptsList extends Component {
     this.state = {
       prompts: props.prompts,
       editPrompt: props.editPrompt,
+      saveEditPrompt: props.saveEditPrompt,
       deletePrompt: props.deletePrompt,
       queryAllPromptsList: props.queryAlPromptsList,
     };
@@ -44,9 +45,9 @@ class promptsList extends Component {
                       onChange={ this.handleEditPrompt.bind(this, record._id ) }
                     />
                   </div>
-                  <div className='field edit-prompt' >
+                  <div className='field save-edit-prompt' >
                     <button className='btn btn-sm'
-                      onClick={() => this.editPrompt (record._id)}
+                      onClick={() => this.saveEditPrompt (record._id)}
                     >
                       Save Changes
                     </button>
@@ -94,10 +95,15 @@ class promptsList extends Component {
     const data = {
       id: promptId
     };
-
     this.props.editPrompt(data);
-
   }
+  saveEditPrompt (promptId) {
+    const data = {
+      id: promptId
+    };
+    this.props.saveEditPrompt(data);
+  }
+
   deletePrompt (promptId) {
     let data = {
       promptId: promptId
@@ -109,5 +115,5 @@ class promptsList extends Component {
 
 export default connect(
   (state) => ({ prompts: state.prompts }),
-  { queryAllPromptsList, editPrompt, deletePrompt }
+  { queryAllPromptsList, editPrompt, saveEditPrompt, deletePrompt }
 )(promptsList);

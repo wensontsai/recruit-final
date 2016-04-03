@@ -15,3 +15,4 @@ export const DELETE_PROMPT_ERROR = 'DELETE_PROMPT_ERROR';
 
 
 export const EDIT_PROMPT = 'EDIT_PROMPT';
+export const SAVE_EDIT_PROMPT = 'SAVE_EDIT_PROMPT';
