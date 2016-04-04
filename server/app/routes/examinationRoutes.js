@@ -96,7 +96,6 @@ exports.queryExam = function(Examination, User) {
 }
 
 exports.finishExam = function(Examination, User){
-  console.log('exam finito');
   return function(req, res, next){
     Examination.findOne({ _id: req.body.examId }, function(err, exam) {
       if(err) return console.error(err);

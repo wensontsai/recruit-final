@@ -4,21 +4,31 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var jwt = require('jsonwebtoken');
-var port = process.env.PORT || 3001;
+
+// ~> IF: TESTING <~
+if (process.env.NODE_ENV === 'test') {
+  var port = 3121;
+  var config = require ('./config_test');
+  var db_success_msg = '';
+  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <==';
+} else {
+  var port = process.env.PORT || 3001;
+  var config = require ('./config');
+  var db_success_msg = '~~~ > > > DEV ENV: Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~';
+  var server_success_msg = '==> 🌎  DEV ENV: Magic is happening at http://localhost:' +port;
+}
 
 var app = express();
-
 
 // ------------------------------------
 // Mongo DB Connect
 // ------------------------------------
-var config = require ('./config');
 
 mongoose.connect(config.database, function(err){
   if(err){
     console.log('connection error', err);
   } else {
-    console.log('~~~ > > > Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~');
+    console.log(db_success_msg);
   }
 });
 app.set('secret', config.secret); // sets secret variable
@@ -27,7 +37,7 @@ app.set('secret', config.secret); // sets secret variable
 // ------------------------------------
 // Mongoose - Models
 // ------------------------------------
-var User = require('./app/models/user'); 
+var User = require('./app/models/user');
 var Prompt = require('./app/models/prompt');
 var Examination = require('./app/models/examination');
 var Answer = require('./app/models/answer');
@@ -75,6 +85,6 @@ apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 // HTTP server
 // ------------------------------------
 app.listen(port);
-console.log('==> 🌎  Magic is happening at http://localhost:' +port);
+console.log(server_success_msg);
 
 module.exports = app;

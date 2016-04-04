@@ -2,15 +2,15 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var expect = chai.expect;
 
-// var server = require('../../server');
+var server = require('../../server');
 
 chai.use(chaiHttp);
 
 var sinon = require('sinon');
 
-describe('Prompt routes', function() {  
+describe ('Prompt routes', function() {  
 
-  it('should get ALL prompts on /queryAllPrompts GET', function(done) {
+  it ('should get ALL prompts on /queryAllPrompts GET', function(done) {
     chai.request(server)
       .get('/api/queryAllPrompts')
       .end(function(err, res){

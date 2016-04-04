@@ -10,22 +10,22 @@ var request = require('request');
 var mongoose = require('mongoose');
 var sinon = require('sinon');
 
-var User = require('../app/models/user');
-var UserModel = mongoose.model('User');
+// var User = require('../app/models/user');
+// var UserModel = mongoose.model('User');
 var server = require('../server');
 
 // var myStub = sinon.stub(UserModel, 'addUser');
 
 
 describe('User routes', function() {  
-  before(function(done){
+  // before(function(done){
     // sinon
     //   .stub(request, 'get')
     //   .yields(null, null, JSON.stringify({login: "bulkan"}));
     // done();
 
     // console.log(mongoose.Model);
-  });
+  // });
 
   it('should get ALL candidates (non-admin user) on /queryAllCandidates GET', function(done) {
     chai.request(server)
@@ -85,10 +85,10 @@ describe('User routes', function() {
       });
   });
   
-  after(function(done){
-    request.get.restore();
-    done();
-  });
+  // after(function(done){
+  //   request.get.restore();
+  //   done();
+  // });
 
 
 
