@@ -43,6 +43,20 @@ const editPrompt = (state, action) => {
     }
   });
 };
+const handleEditPrompt = (state, action) => {
+  const currentPrompts = state;
+  currentPrompts.prompts.editObj[action.data.id] = {
+    mode: true,
+    data: currentPrompts.prompts.editObj[action.data.id].data
+  };
+  return merge({}, state, {
+    prompts: {
+      promptsAll: currentPrompts.prompts.promptsAll,
+      actionStatus: 'handleEditPrompt successful!',
+      editObj: currentPrompts.prompts.editObj
+    }
+  });
+};
 const saveEditPrompt = (state, action) => {
   const currentPrompts = state;
   currentPrompts.prompts.editObj[action.data.id] = {
@@ -79,6 +93,7 @@ export default function prompts (state = initialState, action) {
     [actionTypes.DELETE_PROMPT_SUCCESS]: deletePrompt,
 
     [actionTypes.EDIT_PROMPT]: editPrompt,
+    [actionTypes.HANDLE_EDIT_PROMPT]: handleEditPrompt,
     [actionTypes.SAVE_EDIT_PROMPT]: saveEditPrompt,
   }[action.type] || ((s) => s))(state, action);
 }

@@ -6,25 +6,31 @@ import Nav from '../nav/nav';
 import AddPrompt from './addPrompt';
 import PromptsList from './promptsList';
 
-class Prompts extends Component {
-    render (){
-        const {
-          prompts
-        } = this.props;
+import { queryAllPromptsList } from '../../actions/prompts';
 
-        return (
-            <div className='display-all-container'>
-                <Nav />
-                <div className='page'>
-                  <AddPrompt />
-                  <PromptsList />
-                </div>
+class Prompts extends Component {
+  componentDidMount () {
+    this.props.queryAllPromptsList();
+  }
+
+  render (){
+    const {
+      prompts
+    } = this.props;
+
+    return (
+        <div className='display-all-container'>
+            <Nav />
+            <div className='page'>
+              <AddPrompt />
+              <PromptsList />
             </div>
-        );
-    }
+        </div>
+    );
+  }
 }
 
 export default connect(
   (state) => ({ prompts: state.prompts }),
-  {}
+  { queryAllPromptsList }
 )(Prompts);

@@ -3,17 +3,23 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import merge from 'lodash.merge';
 
-import { queryAllPromptsList, editPrompt, saveEditPrompt, deletePrompt } from '../../actions/prompts';
+import { queryAllPromptsList, editPrompt, handleEditPrompt, saveEditPrompt, deletePrompt } from '../../actions/prompts';
 
 import './prompts.scss';
 
 class promptsList extends Component {
   constructor (props) {
     super (props);
+    this.state = {
+      data: {
+        editObj: {}
+      }
+    }
   }
 
   componentDidMount () {
     this.queryAllPromptsList();
+    this.populateEditObj();
   }
 
   render () {
@@ -35,7 +41,7 @@ class promptsList extends Component {
                     <input
                       type='text'
                       value={this.props.prompts.prompts.editObj[record._id].data}
-                      onChange={ this.handleEditPrompt.bind(this, record._id ) }
+                      onChange={ this.handleEditPrompt.bind(this, record._id) }
                     />
                   </div>
                   <div className='field edit-prompt' >
@@ -74,14 +80,35 @@ class promptsList extends Component {
   queryAllPromptsList () {
     this.props.queryAllPromptsList();
   }
+  populateEditObj () {
+    console.log(this.props.prompts);
+    const prompts = this.props.prompts;
+    var keys = Object.keys(this.props.prompts.prompts.editObj);
+    // console.log(keys)
+    // for(var key in this.props.prompts.editObj) {
+    //   console.log(key);
+    //   //   if(this.props.prompts.editObj.hasOwnProperty(key)) {
+    //       editObj[key] = {
+    //         mode: null,
+    //         data: this.props.prompts.editObj[key].question
+    //       };
+    //     // }
+    // }
+    console.log(keys);
+    this.setState({
+      data:prompts
+    });
+    console.log(this.state.data);
+  }
   handleEditPrompt (event, id) {
-    console.log(event.target.value);
+    console.log(id);
+    // console.log(event);
+    // this.props.handleEditPrompt(event.target.value, id);
 
 
   }
   editPrompt (promptId) {
-    console.log(this.state);
-    console.log('^^^^^^^^^^^^^^^^^^^');
+    this.populateEditObj();
     const data = {
       id: promptId
     };
@@ -105,5 +132,5 @@ class promptsList extends Component {
 
 export default connect(
   (state) => ({ prompts: state.prompts }),
-  { queryAllPromptsList, editPrompt, saveEditPrompt, deletePrompt }
+  { queryAllPromptsList, editPrompt, handleEditPrompt, saveEditPrompt, deletePrompt }
 )(promptsList);
