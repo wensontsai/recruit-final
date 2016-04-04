@@ -40,7 +40,8 @@ class promptsList extends Component {
                   <div className='field question'>
                     <input
                       type='text'
-                      value={this.props.prompts.prompts.editObj[record._id].data}
+                      defaultValue={this.props.prompts.prompts.editObj[record._id].data}
+                      value={this.state.data.editObj[record._id]}
                       onChange={ this.handleEditPrompt.bind(this, record._id) }
                     />
                   </div>
@@ -81,40 +82,44 @@ class promptsList extends Component {
     this.props.queryAllPromptsList();
   }
   populateEditObj () {
+    console.log(this.state.data);
     console.log(this.props.prompts);
     const prompts = this.props.prompts;
     var keys = Object.keys(this.props.prompts.prompts.editObj);
-    // console.log(keys)
-    // for(var key in this.props.prompts.editObj) {
-    //   console.log(key);
-    //   //   if(this.props.prompts.editObj.hasOwnProperty(key)) {
-    //       editObj[key] = {
-    //         mode: null,
-    //         data: this.props.prompts.editObj[key].question
-    //       };
-    //     // }
-    // }
-    console.log(keys);
+    const data = {};
+
+    for(let i=0; i<keys.length; i++) {
+      data[keys[i]] =  this.props.prompts.prompts.editObj[keys[i]].data;
+    }
     this.setState({
-      data:prompts
+      data: {
+        editObj: {
+          data
+        }
+      }
     });
-    console.log(this.state.data);
+
   }
   handleEditPrompt (event, id) {
     console.log(id);
-    // console.log(event);
-    // this.props.handleEditPrompt(event.target.value, id);
+    console.log(event);
+    console.log(this.state.data.editObj[id]);
+    this.props.handleEditPrompt(event.target.value, id);
 
 
   }
   editPrompt (promptId) {
+    console.log(this.state.data);
     this.populateEditObj();
     const data = {
-      id: promptId
-    };
+      id: promptId,
+      data: this.state.data.editObj.data[promptId]
+    }
     this.props.editPrompt(data);
+    console.log(this.state.data.editObj[promptId]);
   }
   saveEditPrompt (promptId) {
+    console.log(this.state.data);
     const data = {
       id: promptId
     };
