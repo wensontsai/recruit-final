@@ -1,14 +1,11 @@
 function shuffle(array) {
     var counter = array.length;
-
     // While there are elements in the array
     while (counter > 0) {
         // Pick a random index
         var index = Math.floor(Math.random() * counter);
-
         // Decrease counter by 1
         counter--;
-
         // And swap the last element with it
         var temp = array[counter];
         array[counter] = array[index];
@@ -40,7 +37,6 @@ exports.queryAllPromptsList = function(Prompt) {
             };
           }
       }
-  console.log(editObj);
       results = {
         prompts,
         editObj
@@ -49,7 +45,6 @@ exports.queryAllPromptsList = function(Prompt) {
     });
   };
 };
-
 exports.addPrompt = function(Prompt){
   return function(req, res, next){
     Prompt.findOne({ question: req.body.question }, function(err, prompt) {
@@ -68,18 +63,42 @@ exports.addPrompt = function(Prompt){
     });
   };
 };
+exports.editPrompt = function(Prompt){
+  var results = {};
+  return function(req, res, next){
+  console.log(req.body);
+    Prompt.findOne({ _id: req.body.id }, function(err, prompt) {
+      console.log(prompt);
+      prompt.question = req.body.question;
+      prompt.save(function(err, prompt){
+        if(err) {
+          return console.error(err)
+        } else {
+          Prompt.find({}, function(err, prompts) {
+            if(err) return console.error(err);
+            var editObj = {};
 
-// exports.editPrompt = function(Prompt){
-//   return function(req, res, next){
-//   console.log(req.body.promptId);
-//     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt) {
-//       if (err)return console.error(err);
-//       res.json({
-//         success: true
-//       })
-//     });
-//   };
-// };
+            for(var key in prompts) {
+                if(prompts.hasOwnProperty(key)) {
+                  editObj[prompts[key]._id] = {
+                    mode: null,
+                    data: prompts[key].question
+                  };
+                }
+            }
+        console.log(results);
+            results = {
+              prompts,
+              editObj
+            }
+            res.json( results );
+          });         
+        }
+
+      });
+    });
+  };
+};
 
 exports.deletePrompt = function(Prompt){
   var results = {};
@@ -101,7 +120,6 @@ exports.deletePrompt = function(Prompt){
                 };
               }
           }
-      console.log(results);
           results = {
             prompts,
             editObj

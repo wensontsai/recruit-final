@@ -47,12 +47,29 @@ export function addPrompt (data) {
     }
   };
 }
+
+export function saveEditPrompt (data) {
+  return async dispatch => {
+    try {
+
+      const editResult = await post('/api/editPrompt', data);
+      console.log(editResult);
+      dispatch({
+        type: actionTypes.EDIT_PROMPT_SUCCESS,
+        editResult: editResult
+      });
+    } catch(e) {
+      dispatch({
+        type: actionTypes.EDIT_PROMPT_ERROR,
+        ERROR: e
+      });
+    }
+  };
+}
 export function deletePrompt (data) {
   return async dispatch => {
     try {
       const deleteResult = await post('/api/deletePrompt', data);
-
-      console.log(deleteResult);
       dispatch({
         type: actionTypes.DELETE_PROMPT_SUCCESS,
         deleteResult: deleteResult
@@ -65,20 +82,13 @@ export function deletePrompt (data) {
     }
   };
 }
+
+
 export function toggleEditMode (data) {
   console.log(data);
   return async dispatch => {
     dispatch({
       type: actionTypes.TOGGLE_EDIT_MODE,
-      data: data
-    });
-  };
-}
-export function saveEditPrompt (data) {
-  console.log(data);
-  return async dispatch => {
-    dispatch({
-      type: actionTypes.SAVE_EDIT_PROMPT,
       data: data
     });
   };

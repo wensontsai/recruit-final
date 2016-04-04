@@ -12,15 +12,13 @@ class promptsList extends Component {
     super (props);
     this.state = {
       data: {
-        editObj: {}
+        editObj: {} 
       }
     }
   }
-
   componentDidMount () {
     this.queryAllPromptsList();
   }
-
   render () {
     return (
       <div className='prompts-list-view'>
@@ -62,8 +60,7 @@ class promptsList extends Component {
                     </button>
                   </div>
                 </div>
-            )}
-             
+            )}           
               <div className='field delete-prompt'>
                 <button className='btn btn-sm'
                   onClick={() => this.deletePrompt (record._id)}
@@ -80,7 +77,6 @@ class promptsList extends Component {
   queryAllPromptsList () {
     this.props.queryAllPromptsList();
   }
-
   handleEditPrompt (id, event) {
     const state = this.state.data;
     const newState = merge({}, state, {
@@ -93,10 +89,7 @@ class promptsList extends Component {
     this.setState({
       data: newState.data
     });
-    console.log(this.state.data);
   }
-
-
   toggleEditMode (id) {
     const data = {
       id: id
@@ -104,14 +97,15 @@ class promptsList extends Component {
     this.props.toggleEditMode(data);
   }
   saveEditPrompt (id) {
-    console.log(this.state.data);
     const data = {
       id: id,
       question: this.state.data.editObj[id]
     };
     this.props.saveEditPrompt(data);
+    console.log(this.state.data);
+    console.log(this.props.prompts);
+    this.queryAllPromptsList();
   }
-
   deletePrompt (promptId) {
     let data = {
       promptId: promptId
