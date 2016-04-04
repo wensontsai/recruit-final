@@ -45,11 +45,11 @@ const toggleEditMode = (state, action) => {
 };
 
 const saveEditPrompt = (state, action) => {
-  console.log(state);
+  console.log(action.editResult);
  return merge({}, state, {
    prompts: {
      promptsAll: action.editResult.prompts,
-     actionStatus: 'editPrompt successful!',
+     actionStatus: 'saveEditPrompt successful!',
      editObj: action.editResult.editObj
    }
  });
@@ -71,7 +71,7 @@ export default function prompts (state = initialState, action) {
     [actionTypes.QUERY_ALL_PROMPTS_LIST_SUCCESS]: queryAllPromptsList,
     [actionTypes.ADD_PROMPT_SUCCESS]: addPrompt,
     [actionTypes.DELETE_PROMPT_SUCCESS]: deletePrompt,
-    [actionTypes.SAVE_EDIT_PROMPT]: saveEditPrompt,
+    [actionTypes.EDIT_PROMPT_SUCCESS]: saveEditPrompt,
 
     [actionTypes.TOGGLE_EDIT_MODE]: toggleEditMode,
   }[action.type] || ((s) => s))(state, action);

@@ -12,7 +12,7 @@ class promptsList extends Component {
     super (props);
     this.state = {
       data: {
-        editObj: {} 
+        editObj: {}
       }
     }
   }
@@ -102,9 +102,6 @@ class promptsList extends Component {
       question: this.state.data.editObj[id]
     };
     this.props.saveEditPrompt(data);
-    console.log(this.state.data);
-    console.log(this.props.prompts);
-    this.queryAllPromptsList();
   }
   deletePrompt (promptId) {
     let data = {

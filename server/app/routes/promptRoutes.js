@@ -66,9 +66,9 @@ exports.addPrompt = function(Prompt){
 exports.editPrompt = function(Prompt){
   var results = {};
   return function(req, res, next){
-  console.log(req.body);
+  console.log("1)", req.body);
     Prompt.findOne({ _id: req.body.id }, function(err, prompt) {
-      console.log(prompt);
+      console.log("2)", prompt);
       prompt.question = req.body.question;
       prompt.save(function(err, prompt){
         if(err) {
@@ -86,11 +86,11 @@ exports.editPrompt = function(Prompt){
                   };
                 }
             }
-        console.log(results);
             results = {
               prompts,
               editObj
             }
+        console.log("3)",results);
             res.json( results );
           });         
         }

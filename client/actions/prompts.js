@@ -54,6 +54,7 @@ export function saveEditPrompt (data) {
 
       const editResult = await post('/api/editPrompt', data);
       console.log(editResult);
+      
       dispatch({
         type: actionTypes.EDIT_PROMPT_SUCCESS,
         editResult: editResult
