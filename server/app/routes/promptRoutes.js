@@ -66,9 +66,7 @@ exports.addPrompt = function(Prompt){
 exports.editPrompt = function(Prompt){
   var results = {};
   return function(req, res, next){
-  console.log("1)", req.body);
     Prompt.findOne({ _id: req.body.id }, function(err, prompt) {
-      console.log("2)", prompt);
       prompt.question = req.body.question;
       prompt.save(function(err, prompt){
         if(err) {
@@ -90,7 +88,6 @@ exports.editPrompt = function(Prompt){
               prompts,
               editObj
             }
-        console.log("3)",results);
             res.json( results );
           });         
         }
@@ -103,7 +100,6 @@ exports.editPrompt = function(Prompt){
 exports.deletePrompt = function(Prompt){
   var results = {};
   return function(req, res, next){
-  console.log(req.body.promptId);
     Prompt.remove({ _id: req.body.promptId }, function(err) {
       if (err) {
         return console.error(err)
