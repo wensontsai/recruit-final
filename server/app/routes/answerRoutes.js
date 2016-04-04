@@ -20,7 +20,6 @@ exports.submitAnswer = function(Answer, Prompt) {
           answer : req.body.answer,
           endTime : now
         });
-        console.log(answer);
 
         answer.save(function(err, answer) {
           if(err) return console.error(err);
@@ -46,7 +45,6 @@ exports.queryCandidateAnswers = function(Answer, User) {
           email: user.email,
           allAnswers: answers,
         };
-        console.log(results);
         res.json(results);
       });
     });

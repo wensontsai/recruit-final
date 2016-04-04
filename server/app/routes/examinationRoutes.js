@@ -10,7 +10,6 @@ exports.startExam = function(Examination) {
         exam.startTime = now;
         exam.endTime = new Date(now.getTime() + (2*1000*60*60));
         // exam.endTime = now.setHours(now.getHours() + 2);
-        console.log(exam.endTime);
 
         exam.save(function(err) {
           if (err) {

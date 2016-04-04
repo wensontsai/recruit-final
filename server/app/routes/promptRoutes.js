@@ -89,7 +89,7 @@ exports.editPrompt = function(Prompt){
               editObj
             }
             res.json( results );
-          });         
+          });       
         }
 
       });
