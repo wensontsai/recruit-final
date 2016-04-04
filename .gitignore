@@ -2,6 +2,7 @@
 *.log
 
 server/config.js
+server/config_test.js
 
 node_modules
 
