@@ -49,6 +49,13 @@ class promptsList extends Component {
                       Save Changes
                     </button>
                   </div>
+                  <div className='field delete-prompt'>
+                    <button className='btn btn-sm'
+                      onClick={() => this.deletePrompt (record._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               : <div className='react-wrapper'>
                   <div className='field question' >"{record.question}"</div>
@@ -59,15 +66,16 @@ class promptsList extends Component {
                       Edit
                     </button>
                   </div>
+                  <div className='field delete-prompt'>
+                    <button className='btn btn-sm'
+                      onClick={() => this.deletePrompt (record._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
             )}           
-              <div className='field delete-prompt'>
-                <button className='btn btn-sm'
-                  onClick={() => this.deletePrompt (record._id)}
-                >
-                  Delete
-                </button>
-              </div>
+
             </div>
           )
         }, this )}
