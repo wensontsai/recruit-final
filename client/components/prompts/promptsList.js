@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import merge from 'lodash.merge';
 
-import { queryAllPromptsList, editPrompt, handleEditPrompt, saveEditPrompt, deletePrompt } from '../../actions/prompts';
+import { queryAllPromptsList, toggleEditMode, saveEditPrompt, deletePrompt } from '../../actions/prompts';
 
 import './prompts.scss';
 
@@ -19,7 +19,6 @@ class promptsList extends Component {
 
   componentDidMount () {
     this.queryAllPromptsList();
-    this.populateEditObj();
   }
 
   render () {
@@ -47,7 +46,7 @@ class promptsList extends Component {
                   </div>
                   <div className='field edit-prompt' >
                     <button className='btn btn-sm'
-                      onClick={() => this.saveEditPrompt (record._id)}
+                      onClick={() => this.saveEditPrompt(record._id)}
                     >
                       Save Changes
                     </button>
@@ -57,7 +56,7 @@ class promptsList extends Component {
                   <div className='field question' >"{record.question}"</div>
                   <div className='field edit-prompt' >
                     <button className='btn btn-sm'
-                      onClick={() => this.editPrompt (record._id)}
+                      onClick={() => this.toggleEditMode (record._id)}
                     >
                       Edit
                     </button>
@@ -81,47 +80,34 @@ class promptsList extends Component {
   queryAllPromptsList () {
     this.props.queryAllPromptsList();
   }
-  populateEditObj () {
-    console.log(this.state.data);
-    console.log(this.props.prompts);
-    const prompts = this.props.prompts;
-    var keys = Object.keys(this.props.prompts.prompts.editObj);
-    const data = {};
 
-    for(let i=0; i<keys.length; i++) {
-      data[keys[i]] =  this.props.prompts.prompts.editObj[keys[i]].data;
-    }
-    this.setState({
+  handleEditPrompt (id, event) {
+    const state = this.state.data;
+    const newState = merge({}, state, {
       data: {
         editObj: {
-          data
+          [id]: event.target.value
         }
       }
     });
-
-  }
-  handleEditPrompt (event, id) {
-    console.log(id);
-    console.log(event);
-    console.log(this.state.data.editObj[id]);
-    this.props.handleEditPrompt(event.target.value, id);
-
-
-  }
-  editPrompt (promptId) {
+    this.setState({
+      data: newState.data
+    });
     console.log(this.state.data);
-    this.populateEditObj();
+  }
+
+
+  toggleEditMode (id) {
     const data = {
-      id: promptId,
-      data: this.state.data.editObj.data[promptId]
+      id: id
     }
-    this.props.editPrompt(data);
-    console.log(this.state.data.editObj[promptId]);
+    this.props.toggleEditMode(data);
   }
-  saveEditPrompt (promptId) {
+  saveEditPrompt (id) {
     console.log(this.state.data);
     const data = {
-      id: promptId
+      id: id,
+      question: this.state.data.editObj[id]
     };
     this.props.saveEditPrompt(data);
   }
@@ -137,5 +123,5 @@ class promptsList extends Component {
 
 export default connect(
   (state) => ({ prompts: state.prompts }),
-  { queryAllPromptsList, editPrompt, handleEditPrompt, saveEditPrompt, deletePrompt }
+  { queryAllPromptsList, toggleEditMode, saveEditPrompt, deletePrompt }
 )(promptsList);

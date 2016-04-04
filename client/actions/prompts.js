@@ -65,20 +65,11 @@ export function deletePrompt (data) {
     }
   };
 }
-export function editPrompt (data) {
+export function toggleEditMode (data) {
   console.log(data);
   return async dispatch => {
     dispatch({
-      type: actionTypes.EDIT_PROMPT,
-      data: data
-    });
-  };
-}
-export function handleEditPrompt (data) {
-  console.log(data);
-  return async dispatch => {
-    dispatch({
-      type: actionTypes.HANDLE_EDIT_PROMPT,
+      type: actionTypes.TOGGLE_EDIT_MODE,
       data: data
     });
   };

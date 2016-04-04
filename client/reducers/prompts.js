@@ -29,7 +29,7 @@ const addPrompt = (state, action) => {
   });
 };
 
-const editPrompt = (state, action) => {
+const toggleEditMode = (state, action) => {
   const currentPrompts = state;
   currentPrompts.prompts.editObj[action.data.id] = {
     mode: true,
@@ -38,7 +38,7 @@ const editPrompt = (state, action) => {
   return merge({}, state, {
     prompts: {
       promptsAll: currentPrompts.prompts.promptsAll,
-      actionStatus: 'editPrompt successful!',
+      actionStatus: 'toggleEditMode successful!',
       editObj: currentPrompts.prompts.editObj
     }
   });
@@ -61,7 +61,7 @@ const saveEditPrompt = (state, action) => {
   const currentPrompts = state;
   currentPrompts.prompts.editObj[action.data.id] = {
     mode: null,
-    data: currentPrompts.prompts.editObj[action.data.id].data
+    data: action.data.data
   };
 
   return merge({}, state, {
@@ -92,8 +92,7 @@ export default function prompts (state = initialState, action) {
     [actionTypes.ADD_PROMPT_SUCCESS]: addPrompt,
     [actionTypes.DELETE_PROMPT_SUCCESS]: deletePrompt,
 
-    [actionTypes.EDIT_PROMPT]: editPrompt,
-    [actionTypes.HANDLE_EDIT_PROMPT]: handleEditPrompt,
+    [actionTypes.TOGGLE_EDIT_MODE]: toggleEditMode,
     [actionTypes.SAVE_EDIT_PROMPT]: saveEditPrompt,
   }[action.type] || ((s) => s))(state, action);
 }
