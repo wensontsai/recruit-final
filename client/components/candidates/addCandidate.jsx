@@ -26,18 +26,18 @@ class AddCandidateView extends Component {
     return (
       <div className='candidate-add-view'>
         <div className='column'>
-          <div>
+          <div className='field'>
             <div>First Name:</div>
             <input
-              type="text"
+              type='text'
               value={this.state.data.firstName}
               onChange={ this.handleChangeFirstName.bind(this) }
             />
           </div>
-          <div>
+          <div className='field'>
             <div>Last Name:</div>
             <input
-              type="text"
+              type='text'
               value={this.state.data.lastName}
               onChange={ this.handleChangeLastName.bind(this) }
             />
@@ -45,21 +45,36 @@ class AddCandidateView extends Component {
         </div>
 
         <div className='column'>
-          <div>
+          <div className='field'>
             <div>Email:</div>
             <input
-              type="text"
+              type='text'
               value={this.state.data.email}
               onChange={ this.handleChangeEmail.bind(this) }
             />
           </div>
-          <div>
+          <div className='field admin-panel'>
             <div>Admin:</div>
-            <input
-              type="text"
-              value={this.state.data.admin}
-              onChange={ this.handleChangeAdmin.bind(this) }
-            />
+              <div className='selection-section'>
+                <div className='selection'>
+                  <input
+                    name='radio-admin-yes'
+                    type='radio'
+                    name='radio-admin-group'
+                    onClick={ this.handleChangeAdmin.bind(this, 'Y') }
+                  />
+                  <label htmlFor='radio-admin-yes'>Yes</label>
+                </div>
+                <div className='selection'>
+                  <input
+                    name='radio-admin-no'
+                    type='radio'
+                    name='radio-admin-group'
+                    onClick={ this.handleChangeAdmin.bind(this, 'N') }
+                  />
+                  <label htmlFor='radio-admin-no'>No</label>
+                </div>
+              </div>
           </div>
         </div>
         <div className='column-submit'>
@@ -82,7 +97,7 @@ class AddCandidateView extends Component {
     );
   }
   handleChangeFirstName (event) {
-    this.setState({ 
+    this.setState({
       data: {
         firstName: event.target.value,
         lastName: this.state.data.lastName,
@@ -92,7 +107,7 @@ class AddCandidateView extends Component {
     });
   }
   handleChangeLastName (event) {
-    this.setState({ 
+    this.setState({
       data: {
         firstName: this.state.data.firstName,
         lastName: event.target.value,
@@ -102,7 +117,7 @@ class AddCandidateView extends Component {
     });
   }
   handleChangeEmail (event) {
-    this.setState({ 
+    this.setState({
       data: {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
@@ -111,13 +126,13 @@ class AddCandidateView extends Component {
       }
     });
   }
-  handleChangeAdmin (event) {
-    this.setState({ 
+  handleChangeAdmin (status, event) {
+    this.setState({
       data: {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
         email: this.state.data.email,
-        admin: event.target.value
+        admin: status
       }
     });
   }
@@ -125,6 +140,17 @@ class AddCandidateView extends Component {
     this.props.addCandidate(this.state.data);
     this.setState({ data:{} });
 
+    // Reset radio button selections
+    const allRadioButtons = document.getElementsByTagName('input');
+    for (let i = 0; i < allRadioButtons.length; i++)
+    {
+      if (allRadioButtons[i].type == 'radio')
+      {
+        allRadioButtons[i].checked = false;
+      }
+    }
+
+    // notifications
     setTimeout(function() { hideFunc() }, 5000);
   }
   hideStatusView () {

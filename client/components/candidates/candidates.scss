@@ -32,13 +32,31 @@ $field-color: lighten( $div-color, 3% );
 .add-candidate {
   text-align: right;
   margin: auto 0;
-  margin-top: 3.2rem;
+  margin-top: 4rem;
 }
 .action-status {
 	float: right;
 }
 .column{
   flex: 3 auto;
+}
+.candidate-add-view .field {
+  margin: 0.5rem 0;
+}
+.candidate-add-view .admin-panel {
+  margin: 1rem 0;
+}
+.candidate-add-view .admin-panel .selection-section {
+  display: flex;
+  flex-direction: row;
+}
+.candidate-add-view .admin-panel .selection {
+  margin-right: 2rem;
+}
+.candidate-add-view .admin-panel .selection > input{
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.5rem;
 }
 .candidates-list-view {
   background-color: $div-color;
