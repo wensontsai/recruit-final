@@ -41,6 +41,31 @@ app.use(bodyParser.urlencoded( { extended: false } ));
 // app.use(morgan('dev'));
 app.use(cookieParser());
 
+
+// // JWT Token Verification for Admin Routes
+// app.use(function(req, res, next) {
+//   // check header, or url parameters, or post parameters for token
+//   var token = req.body.token || req.query.token || req.headers['x-access-token'];
+//   // decode token
+//   if (token) {
+//     // verify secret and check expiration
+//     jwt.verify(token, app.get('secret'), function(err, decoded) {
+//       if (err) {
+//         return res.json( { success: false, message: 'Failed to authenticate token!' } );
+//       }
+//       req.decoded = decoded;
+//       res.cookie(token, 'cookie_value').send('Token is set as cookie');
+//       // next();
+//     });
+//   } else {
+//     return res.status(403).send({
+//       success: false,
+//       message: 'No token provided!'
+//     });
+//   }
+// });
+
+
 // ------------------------------------
 // Mongoose - Models
 // ------------------------------------
@@ -48,6 +73,7 @@ var User = require('./app/models/user');
 var Prompt = require('./app/models/prompt');
 var Examination = require('./app/models/examination');
 var Answer = require('./app/models/answer');
+var Session = require('./app/models/session');
 
 // ------------------------------------
 // API Routes
@@ -59,6 +85,7 @@ var promptRoutes = require('./app/routes/promptRoutes');
 var examinationRoutes = require('./app/routes/examinationRoutes');
 var answerRoutes = require('./app/routes/answerRoutes');
 var userRoutes = require('./app/routes/userRoutes');
+var sessionRoutes = require('./app/routes/sessionRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
@@ -77,6 +104,7 @@ apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
 apiRoutes.post('/editPrompt', promptRoutes.editPrompt(Prompt));
 apiRoutes.post('/deletePrompt', promptRoutes.deletePrompt(Prompt));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
+apiRoutes.post('/loginUser', sessionRoutes.loginUser(User, Session, app));
 
 
 // ------------------------------------
