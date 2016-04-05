@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { login } from '../../actions/results';
+import { loginUser } from '../../actions/sessions';
 
 import './auth.scss';
 
@@ -11,11 +11,10 @@ import Nav from '../nav/nav';
 class Login extends Component {
 	constructor (props) {
 	  super (props);
-	  // this.hideStatusView = this.hideStatusView.bind(this);
 	  this.state = {
 	    data: {
-	      email: this.props.email || '',
-	      password: this.props.password || ''
+	      email: '',
+	      password: ''
 	    }
 	  };
 	}
@@ -48,8 +47,8 @@ class Login extends Component {
 			    				/>
 			    			</div>
 			    			<div>
-			    				<button className='btn btn-sm add-candidate'
-			    				  onClick={() => this.login()}
+			    				<button className='btn btn-sm login-user'
+			    				  onClick={() => this.loginUser()}
 			    				  >Login
 			    				</button>
 			    			</div>
@@ -77,13 +76,13 @@ class Login extends Component {
 	  });
 	  console.log(this.state);
 	}
-	login () {
-		this.props.login;
+	loginUser () {
+		this.props.loginUser(this.state.data);
 	}
 
 }
 
 export default connect(
   (state) => ({ session: state.session }),
-  { }
+  { loginUser }
 )(Login);

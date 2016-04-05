@@ -104,7 +104,9 @@ apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
 apiRoutes.post('/editPrompt', promptRoutes.editPrompt(Prompt));
 apiRoutes.post('/deletePrompt', promptRoutes.deletePrompt(Prompt));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
-apiRoutes.post('/loginUser', sessionRoutes.loginUser(User, Session, app));
+apiRoutes.post('/loginUser', sessionRoutes.loginUser(User, Session));
+apiRoutes.post('/logoutUser', sessionRoutes.logoutUser(User, Session));
+apiRoutes.post('/authenticateUser', sessionRoutes.authenticateUser(User, Session));
 
 
 // ------------------------------------

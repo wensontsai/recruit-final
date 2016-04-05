@@ -3,27 +3,43 @@ import merge from 'lodash.merge';
 
 const initialState = {
   sessions: {
-    loggedInUserId: null
+    loggedInUserId: null,
+    loggedInUserEmail: ''
   }
 };
 
-const login = (state, action) => {
+const loginUser = (state, action) => {
   return merge({}, state, {
-
-
+    sessions: {
+      loggedInUserId: action.loginResult.userId,
+      loggedInUserEmail: action.loginResult.userEmail
+    }
   });
 };
 
-const logout = (state, action) => {
+const logoutUser = (state, action) => {
   return merge({}, state, {
+    sessions: {
+      loggedInUserId: null,
+      loggedInUserEmail: ''
+    }
+  });
+};
 
+const authenticateUser = (state, action) => {
+  return merge({}, state, {
+    sessions: {
+      loggedInUserId: null,
+      loggedInUserEmail: action.authenticateResult.email
+    }
   });
 };
 
 
 export default function sessions (state = initialState, action) {
   return ({
-    [actionTypes.LOGIN_SUCCESS]: login,
-    [actionTypes.LOGOUT_SUCCESS]: logout
+    [actionTypes.LOGIN_USER_SUCCESS]: loginUser,
+    [actionTypes.LOGOUT_USER_SUCCESS]: logoutUser,
+    [actionTypes.AUTHENTICATE_USER_SUCCESS]: authenticateUser
   }[action.type] || ((s) => s))(state, action);
 }
