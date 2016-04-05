@@ -12,7 +12,7 @@ var app = express();
 if (process.env.NODE_ENV === 'test') {
   var port = 3121;
   var db_success_msg = '';
-  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <==';
+  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <== on port: ' +port;
 }
 else {
 // Fire up DEVELOPMENT database
@@ -34,14 +34,6 @@ else {
 }
 
 // ------------------------------------
-// Mongoose - Models
-// ------------------------------------
-var User = require('./app/models/user');
-var Prompt = require('./app/models/prompt');
-var Examination = require('./app/models/examination');
-var Answer = require('./app/models/answer');
-
-// ------------------------------------
 // Middleware
 // ------------------------------------
 app.use(bodyParser.json());
@@ -49,6 +41,13 @@ app.use(bodyParser.urlencoded( { extended: false } ));
 // app.use(morgan('dev'));
 app.use(cookieParser());
 
+// ------------------------------------
+// Mongoose - Models
+// ------------------------------------
+var User = require('./app/models/user');
+var Prompt = require('./app/models/prompt');
+var Examination = require('./app/models/examination');
+var Answer = require('./app/models/answer');
 
 // ------------------------------------
 // API Routes
