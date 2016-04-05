@@ -60,14 +60,15 @@ exports.initializeExam = function(Examination, User) {
         if (!user) {
           return res.json({ success: false, message: 'This user does not exist!' });
         } else {
+
           // -----------------------
           // Send Email to Candidate
           // -----------------------
           var mailOptions = {
-              from: '"Yarbles the Pirate 👥" <shrugsandhugs10000@gmail.com>', // sender address
+              from: config.email.auth.sender_name+ ' ' +config.email.auth.user, // sender address
               to: user.email, // list of receivers
-              subject: 'Hello ✔', // Subject line
-              text: 'listn you are going to take an exam now or you will be fired! Go to http://localhost:3000/exams/' +exam.id+ ' immediately!', // plaintext body
+              subject: '✔✔✔ Hello TEST TIME ✔✔✔', // Subject line
+              text: 'Listen you are going to take an exam now or you will be fired!\n\nGo to http://localhost:3000/exams/' +exam.id+ ' immediately!', // plaintext body
               // html: '<b>Hello world 🐴</b>' // html body
           };
           // send mail with defined transport object
@@ -77,6 +78,7 @@ exports.initializeExam = function(Examination, User) {
               }
               console.log('Message sent: ' + info.response);
           });
+
 
           // save user object
           user.currentExam = true;

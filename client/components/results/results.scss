@@ -33,6 +33,7 @@ $field-color: lighten( $div-color, 3% );
   display: inline-flex;
   width: 100%;
   overflow: scroll;
+  white-space: pre-wrap;
 } 
 .answers-view .ques-ans-block {
   flex-direction: row;
