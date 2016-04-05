@@ -10,14 +10,17 @@ var request = require('request');
 var mongoose = require('mongoose');
 var sinon = require('sinon');
 
-// var User = require('../app/models/user');
-// var UserModel = mongoose.model('User');
+var UserTest = require('../app/models/user');
+// var UserModelTest = mongoose.model('User');
+
+var UserRoutesTest = require('../app/routes/userRoutes');
+
 var server = require('../server');
 
 // var myStub = sinon.stub(UserModel, 'addUser');
 
 
-describe('User routes', function() {  
+describe ('User routes', function() {  
   // before(function(done){
     // sinon
     //   .stub(request, 'get')
@@ -27,7 +30,23 @@ describe('User routes', function() {
     // console.log(mongoose.Model);
   // });
 
-  it('should get ALL candidates (non-admin user) on /queryAllCandidates GET', function(done) {
+  // beforeEach (function(done) {  
+  //     //add some test data    
+  //     customer.register('test@test.com', 'password', 'password', function(doc){      
+  //       currentCustomer = doc;      
+  //       done();    
+  //     });  
+  //   });  
+
+  afterEach (function(done) {    
+
+    //delete all the customer records    
+    UserTest.remove({}, function() {     
+      done();    
+    }); 
+  }); 
+
+  it ('should get ALL candidates (non-admin user) on /queryAllCandidates GET', function(done) {
     chai.request(server)
       .get('/api/queryAllCandidates')
       .end(function(err, res){
@@ -59,7 +78,7 @@ describe('User routes', function() {
   //   });
   // });
 
-  it('should add a SINGLE candidate (non-admin user) on /addCandidate POST', function(done) {
+  it ('should add a SINGLE candidate (non-admin user) on /addCandidate POST', function(done) {
     chai.request(server)
       .post('/api/addCandidate')
       .send({
@@ -76,11 +95,10 @@ describe('User routes', function() {
         expect(res.body).to.be.a('object');
         expect(res.body).to.have.property('firstName');
         expect(res.body.firstName).to.equal('johnbang');
-        // expect(res.body).to.have.property('lastName');
-        // expect(res.body).to.have.property('email');
-        // expect(res.body).to.have.property('admin');
-        // expect(res.body).to.have.property('currentExam');
+        expect(res.body.lastName).to.equal('johnbang');
+        expect(res.body.email).to.equal('johnbang');
         expect(res.body.currentExam).to.be.null;
+
         done();
       });
   });
