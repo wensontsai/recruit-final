@@ -5,34 +5,33 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var jwt = require('jsonwebtoken');
 
-// ~> IF: TESTING <~
-if (process.env.NODE_ENV === 'test') {
-  var port = 3121;
-  var config = require ('./config_test');
-  var db_success_msg = '';
-  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <==';
-} else {
-  var port = process.env.PORT || 3001;
-  var config = require ('./config');
-  var db_success_msg = '~~~ > > > DEV ENV: Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~';
-  var server_success_msg = '==> 🌎  DEV ENV: Magic is happening at http://localhost:' +port;
-}
-
+var config = require ('./config');
 var app = express();
 
-// ------------------------------------
-// Mongo DB Connect
-// ------------------------------------
+// ~~~~~> TESTING: tests spin up test DB from individual specs <~~~~~
+if (process.env.NODE_ENV === 'test') {
+  var port = 3121;
+  var db_success_msg = '';
+  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <==';
+}
+else {
+// Fire up DEVELOPMENT database
+  var port = process.env.PORT || 3001;
+  var db_success_msg = '~~~ > > > DEV ENV: Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~';
+  var server_success_msg = '==> 🌎  DEV ENV: Magic is happening at http://localhost:' +port;
 
-mongoose.connect(config.database, function(err){
-  if(err){
-    console.log('connection error', err);
-  } else {
-    console.log(db_success_msg);
-  }
-});
-app.set('secret', config.secret); // sets secret variable
-
+  // ------------------------------------
+  // Mongo DB Connect
+  // ------------------------------------
+  mongoose.connect(config.db.dev, function(err){
+    if(err){
+      console.log('connection error', err);
+    } else {
+      console.log(db_success_msg);
+    }
+  });
+  app.set('secret', config.secret); // sets secret variable
+}
 
 // ------------------------------------
 // Mongoose - Models

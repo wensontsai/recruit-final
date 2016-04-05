@@ -1,7 +1,7 @@
-// CREATE TWO FILES:  'config.js' <~ MAIN CONFIG FILE
-//                    'config_test.js' <~ TEST CONFIG FILE
-
 module.exports = {
     'secret': '<secret>',
-    'database': 'mongodb://localhost/<database_name>'
+    'database': {
+      'dev': 'mongodb://localhost/<database_name>',
+      'test': 'mongodb://localhost/<test_database_name>'
+    }
 };
