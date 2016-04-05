@@ -2,33 +2,28 @@ import * as actionTypes from '../actionTypes/sessions';
 import merge from 'lodash.merge';
 
 const initialState = {
-  candidates: {
-    candidatesAll: [],
-    actionStatus: ''
+  sessions: {
+    loggedInUserId: null
   }
 };
 
-const queryAllCandidates = (state, action) => {
+const login = (state, action) => {
   return merge({}, state, {
-    candidates: {
-      candidatesAll: action.queryResult,
-      actionStatus: 'queryAllCandidates successful!'
-    }
+
+
   });
 };
 
-const addCandidate = (state, action) => {
+const logout = (state, action) => {
   return merge({}, state, {
-    candidates: {
-      candidatesAll: action.queryResult,
-      actionStatus: 'Adding Candidate Successful!'
-    }
+
   });
 };
 
 
 export default function sessions (state = initialState, action) {
   return ({
-
+    [actionTypes.LOGIN_SUCCESS]: login,
+    [actionTypes.LOGOUT_SUCCESS]: logout
   }[action.type] || ((s) => s))(state, action);
 }

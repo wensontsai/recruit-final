@@ -7,56 +7,31 @@ var Api = require('../utils/api');
 export function login (data) {
   return async dispatch => {
     try {
-      const addResult = await post('/api/loginUser', data);
+      const loginResult = await post('/api/loginUser', data);
       dispatch({
-        type: actionTypes.ADD_CANDIDATE_SUCCESS
+        type: actionTypes.LOGIN_SUCCESS,
+        loginResult: loginResult
       });
-
-      const queryResult = await get('/api/queryAllCandidates');
-      dispatch({
-        type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
-        queryResult: queryResult
-      });
-
     } catch(e) {
       dispatch({
-        type: actionTypes.ADD_CANDIDATE_ERROR,
-        ERROR: e
-      }),
-      dispatch({
-        type: actionTypes.QUERY_ALL_CANDIDATES_ERROR,
+        type: actionTypes.LOGIN_ERROR,
         ERROR: e
       });
     }
   };
 }
 
-export function sendEmail (userId) {
+export function logout (data) {
   return async dispatch => {
     try {
-      const data = {
-        data: {
-          userId: userId
-        }
-      }
-      const addResult = await post('/api/initializeExam', data);
+      const logoutResult = await post('/api/logoutUser', data);
       dispatch({
-        type: actionTypes.SEND_EMAIL_SUCCESS
+        type: actionTypes.LOGOUT_SUCCESS,
+        logoutResult: logoutResult
       });
-
-      const queryResult = await get('/api/queryAllCandidates');
-      dispatch({
-        type: actionTypes.QUERY_ALL_CANDIDATES_SUCCESS,
-        queryResult: queryResult
-      });
-
     } catch(e) {
       dispatch({
-        type: actionTypes.SEND_EMAIL_ERROR,
-        ERROR: e
-      }),
-      dispatch({
-        type: actionTypes.QUERY_ALL_CANDIDATES_ERROR,
+        type: actionTypes.LOGOUT_ERROR,
         ERROR: e
       });
     }
