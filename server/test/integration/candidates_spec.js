@@ -12,12 +12,12 @@ var sinon = require('sinon');
 
 // var api = supertest('http://localhost:3000');
 
-var UserTest = require('../app/models/user');
+var UserTest = require('../../app/models/user');
 // var UserModelTest = mongoose.model('User');
 
-var UserRoutesTest = require('../app/routes/userRoutes');
+var UserRoutesTest = require('../../app/routes/userRoutes');
 
-var server = require('../server');
+var server = require('../../server');
 
 // var myStub = sinon.stub(UserModel, 'addUser');
 
