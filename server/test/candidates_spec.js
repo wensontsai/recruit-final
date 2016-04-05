@@ -10,6 +10,8 @@ var request = require('request');
 var mongoose = require('mongoose');
 var sinon = require('sinon');
 
+// var api = supertest('http://localhost:3000');
+
 var UserTest = require('../app/models/user');
 // var UserModelTest = mongoose.model('User');
 
@@ -38,14 +40,6 @@ describe ('User routes', function() {
   //     });  
   //   });  
 
-  afterEach (function(done) {    
-
-    //delete all the customer records    
-    UserTest.remove({}, function() {     
-      done();    
-    }); 
-  }); 
-
   it ('should get ALL candidates (non-admin user) on /queryAllCandidates GET', function(done) {
     chai.request(server)
       .get('/api/queryAllCandidates')
@@ -57,26 +51,6 @@ describe ('User routes', function() {
       });
   });
   
-  // it('#findUnicorns', function(done) {
-
-  //   // test setup
-  //   var unicorns = [ 'unicorn1', 'unicorn2' ];
-  //   var query = { world: '1' };
-
-  //   // mocking MongoDB
-  //   sinon.stub(UserModel, 'findUnicorns').yields(null, unicorns);
-
-  //   // calling the test case
-  //   User.colorizeUnicorns(query, function(err, coloredUnicorns) {
-
-  //     // asserting
-  //     expect(err).to.be.null;
-  //     expect(coloredUnicorns).to.eql(['unicorn1-pink', 'unicorn2-purple']);
-
-  //     // as our test is asynchronous, we have to tell mocha that it is finished
-  //     done();
-  //   });
-  // });
 
   it ('should add a SINGLE candidate (non-admin user) on /addCandidate POST', function(done) {
     chai.request(server)
@@ -102,6 +76,14 @@ describe ('User routes', function() {
         done();
       });
   });
+
+  afterEach (function(done) {    
+
+    //delete all the customer records    
+    UserTest.remove({}, function() {     
+      done();    
+    }); 
+  }); 
   
   // after(function(done){
   //   request.get.restore();
