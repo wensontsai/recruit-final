@@ -1,3 +1,18 @@
+var nodemailer = require('nodemailer');
+var config = require('../../config');
+
+// create reusable transporter object using the default SMTP transport
+var transporter = nodemailer.createTransport(config.email.host);
+
+
+var smtpTransport = nodemailer.createTransport('SMTP', {
+   service: config.email.service,
+   auth: {
+       user: config.email.auth.user,
+       pass: config.email.auth.pass
+   }
+});
+
 exports.startExam = function(Examination) {
   return function(req, res, next) {
     Examination.findOne({ _id: req.body.data.examId }, function(err, exam) {
@@ -45,7 +60,25 @@ exports.initializeExam = function(Examination, User) {
         if (!user) {
           return res.json({ success: false, message: 'This user does not exist!' });
         } else {
+          // -----------------------
+          // Send Email to Candidate
+          // -----------------------
+          var mailOptions = {
+              from: '"Yarbles the Pirate 👥" <shrugsandhugs10000@gmail.com>', // sender address
+              to: user.email, // list of receivers
+              subject: 'Hello ✔', // Subject line
+              text: 'listn you are going to take an exam now or you will be fired! Go to http://localhost:3000/exams/' +exam.id+ ' immediately!', // plaintext body
+              // html: '<b>Hello world 🐴</b>' // html body
+          };
+          // send mail with defined transport object
+          transporter.sendMail(mailOptions, function(error, info){
+              if(error){
+                  return console.log(error);
+              }
+              console.log('Message sent: ' + info.response);
+          });
 
+          // save user object
           user.currentExam = true;
           user.save(function(err) {
             if (err) {
