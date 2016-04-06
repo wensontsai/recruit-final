@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../actions/sessions';
@@ -18,7 +18,11 @@ class Login extends Component {
 	    }
 	  };
 	}
-	render() {
+	render () {
+		const {
+		  sessions
+		} = this.props;
+		
 		return (
 			<div className='login-container'>
 				<Nav />
@@ -65,7 +69,6 @@ class Login extends Component {
 	      password: this.state.data.password
 	    }
 	  });
-	  console.log(this.state);
 	}
 	handleChangePassword (event) {
 	  this.setState({
@@ -74,15 +77,15 @@ class Login extends Component {
 	      password: event.target.value
 	    }
 	  });
-	  console.log(this.state);
 	}
 	loginUser () {
 		this.props.loginUser(this.state.data);
+		browserHistory.push('/candidates');
 	}
 
 }
 
 export default connect(
-  (state) => ({ session: state.session }),
+  (state) => ({ sessions: state.sessions }),
   { loginUser }
 )(Login);

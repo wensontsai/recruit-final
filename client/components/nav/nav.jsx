@@ -20,7 +20,7 @@ class Nav extends Component {
 					  ? <div className='nav-links'>
 								<Link className='link' to='/candidates' >Candidates</Link>
 								<Link className='link' to='/prompts' >Prompts</Link>
-								<Link className='link' to='/login' >Login</Link>
+								<Link className='link' to='/logout' >Logout</Link>
 							</div>
 					  : <div className='nav-links'>
 					  	</div>

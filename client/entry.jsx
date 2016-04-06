@@ -19,6 +19,7 @@ import './entry.scss';
 // Components
 import Main from './pages/main';
 import Login from './components/auth/login';
+import Logout from './components/auth/logout';
 import Dash from './components/dash/dash';
 import Candidates from './components/candidates/candidates';
 import Prompts from './components/prompts/prompts';
@@ -54,6 +55,7 @@ ReactDOM.render(
       <Route path='/' component={Main} />
       <Route path='/exams/:examId' component={Dash} />
       <Route path='/login' component={Login} />
+      <Route path='/logout' component={Logout} />
       <Route path='/dash' component={Dash} />
       <Route path='/candidates' component={Candidates} />
       <Route path='/prompts' component={Prompts} />

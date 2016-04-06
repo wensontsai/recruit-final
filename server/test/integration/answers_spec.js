@@ -33,7 +33,51 @@ describe ('Answer routes', function() {
     }
   });
 
+  // it ('should get ALL answers for a SINGLE candidate on /queryCandidateAnswers POST', function(done) {
+  //   chai.request(server)
+  //     .post('/api/queryCandidateAnswers')
+  //     .send({
+  //       'firstName': 'test-firstname',
+  //       'lastName': 'test-lastname',
+  //       'email': 'test@test.com',
+  //       'admin': 'N'
+  //     })
+  //     .end(function(err, res){
+  //       expect(err).to.be.null;
+  //       expect(res).to.have.status(200);
+  //       expect(res).to.be.json;
+  //       done();
+  //     });
+  // });
   
+
+  // it ('should add a SINGLE answer on /submitAnswer POST', function(done) {
+  //   chai.request(server)
+  //     .post('/api/submitAnswer')
+  //     .send({
+  //       'firstName': 'test-firstname',
+  //       'lastName': 'test-lastname',
+  //       'email': 'test@test.com',
+  //       'admin': 'N'
+  //     })
+  //     .end(function(err, res){
+  //       expect(err).to.be.null;
+  //       expect(res).to.have.status(200);
+  //       expect(res).to.be.json;
+  //       expect(res.body).to.be.a('object');
+  //       expect(res.body).to.have.property('firstName');
+  //       expect(res.body).to.have.property('lastName');
+  //       expect(res.body).to.have.property('email');
+  //       expect(res.body).to.have.property('admin');
+  //       expect(res.body.firstName).to.equal('test-firstname');
+  //       expect(res.body.lastName).to.equal('test-lastname');
+  //       expect(res.body.email).to.equal('test@test.com');
+  //       expect(res.body.admin).to.equal('N');
+  //       expect(res.body.currentExam).to.be.null;
+
+  //       done();
+  //     });
+  // });
 
 
 
