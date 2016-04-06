@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../../actions/sessions';
@@ -80,7 +80,6 @@ class Login extends Component {
 	}
 	loginUser () {
 		this.props.loginUser(this.state.data);
-		browserHistory.push('/candidates');
 	}
 
 }

@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes/sessions.js';
 import { get, post, del } from '../utils/api';
+import { Link, browserHistory } from 'react-router';
 
 var Api = require('../utils/api');
 
@@ -8,6 +9,13 @@ export function loginUser (data) {
   return async dispatch => {
     try {
       const loginResult = await post('/api/loginUser', data);
+      
+      if (loginResult.success === true) {
+        browserHistory.push('/candidates');
+      } else {
+        console.log(loginResult.message);
+      }
+
       dispatch({
         type: actionTypes.LOGIN_USER_SUCCESS,
         loginResult: loginResult
