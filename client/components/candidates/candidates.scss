@@ -85,8 +85,17 @@ $field-color: lighten( $div-color, 3% );
   margin: 0.25rem;
   flex: 3;
 }
+.candidates-list-view .field.name {
+  flex: 3;
+}
+.candidates-list-view .field.email {
+  flex: 4;
+}
 .candidates-list-view .field.admin {
   flex: 1;
+}
+.candidates-list-view .field.initiate-btn {
+  flex: 2;
 }
 .candidates-list-view .field.results-btn {
   flex: 2;

@@ -19,19 +19,19 @@ class List extends Component {
     return (
       <div className='candidates-list-view'>
         <div className='row header'>
-          <div className='field' >FIRST NAME</div>
-          <div className='field' >LAST NAME</div>
-          <div className='field' >EMAIL</div>
+          <div className='field name' >FIRST NAME</div>
+          <div className='field name' >LAST NAME</div>
+          <div className='field email' >EMAIL</div>
           <div className='field admin' >ADMIN</div>
           <div className='field initiate-btn' >INITIATE EXAM</div>
-          <div className='field results-btn' >CHECK ANSWERS</div>
+          <div className='field results-btn' >VIEW RESULTS</div>
         </div>
         {this.props.candidates.candidates.candidatesAll.map(function(record) {
           return (
             <div className='row' key={record._id}>
-              <div className='field' >{record.firstName}</div>
-              <div className='field' >{record.lastName}</div>
-              <div className='field' >{record.email}</div>
+              <div className='field name' >{record.firstName}</div>
+              <div className='field name' >{record.lastName}</div>
+              <div className='field email' >{record.email}</div>
               <div className='field admin' >{record.admin}</div>
               <div className='field initiate-btn' >
                 {(record.currentExam
