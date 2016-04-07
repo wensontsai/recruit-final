@@ -17,14 +17,18 @@ exports.loginUser = function(User, Session, app) {
       // if(user.password !== req.body.password) {
       //   return res.json({ success: false, message: 'Authentication failed.  Wrong password!' });
       // }
+
+      var expiresIn = '24h';  //expires in 24hrs
+
       var token = jwt.sign(user, config.secret, {
-        expiresIn: 1440 //expires in 24hrs
+        expiresIn: expiresIn
       });
       
       result = {
         success: true,
         message: 'Enjoy your token!',
         token: token,
+        expiresIn: expiresIn,
         userId: user._id,
         userEmail: user.email
       }

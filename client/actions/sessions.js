@@ -8,16 +8,19 @@ var Api = require('../utils/api');
 export function loginUser (data) {
   return async dispatch => {
     try {
-      const loginResult = await post('/api/loginUser', data);
-      
+      const loginResult = await post('/api/loginUser', data);  
       if (loginResult.success === true) {
+        const ms_to_add = loginResult.expiresIn.split('h')[0] * 3600000;
+        const now = new Date();
+        
+        now.setTime(now.getTime() + ms_to_add);
+
         // set Token as cookie
-        // localStorage.setItem('token', loginResult.token);
-        // console.log('if logged in this is token: ', localStorage.getItem('token'));
-        document.cookie = 'token=' +loginResult.token;
+        document.cookie = 'token=' +loginResult.token+ '; expires=' +now.toUTCString() ;
 
         // redirect to Candidates page
         browserHistory.push('/candidates');
+
       } else {
         console.log(loginResult.message);
       }
@@ -39,18 +42,13 @@ export function logoutUser (data) {
   return async dispatch => {
     try {
       const logoutResult = await post('/api/logoutUser', data);
-
-      // localStorage.removeItem('token');
-      // console.log('if logged in this is token: ', localStorage.getItem('token'));
       if (logoutResult.success === true) {
         // Remove cookie on logout success
-        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-
+        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
 
         // redirect to Candidates page
         browserHistory.push('/login');
       }
-     
 
       dispatch({
         type: actionTypes.LOGOUT_USER_SUCCESS,
