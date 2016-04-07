@@ -18,6 +18,7 @@ class Answer extends Component {
         answer: this.props.answer || '',
         questionsAsked: this.props.dash.data.questionsAsked || '',
         questionsTotal: this.props.dash.data.questionsTotal || '',
+        endTime: this.props.dash.data.endTime,
         allPrompts: this.props.dash.data.allPrompts || []
       }
     };
@@ -52,6 +53,7 @@ class Answer extends Component {
         answer: event.target.value,
         questionsAsked: this.props.dash.data.questionsAsked,
         questionsTotal: this.props.dash.data.questionsTotal,
+        endTime: this.props.dash.data.endTime,
         allPrompts: this.props.dash.data.allPrompts
       }
     });
@@ -68,6 +70,7 @@ class Answer extends Component {
           answer: '',
           questionsAsked: this.props.dash.data.questionsAsked +1,
           questionsTotal: this.props.dash.data.questionsTotal,
+          endTime: this.props.dash.data.endTime,
           allPrompts: this.props.dash.data.allPrompts
         } 
       });

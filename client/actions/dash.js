@@ -65,23 +65,33 @@ export function queryAllPrompts () {
 }
 
 export function submitAnswer (data) {
+  // Increment Questions Asked Count
   const newQuestionsAsked = data.questionsAsked +1;
 
+  // Prepare Prompts Array - discard used prompt
   const newAllPrompts = data.allPrompts;
   newAllPrompts.shift();
 
+  // Calculate Time Remaining
+  const now = new Date();
+  const endTime = new Date(data.endTime);
+  const nowTime = new Date(now);
+  const newTimeRemaining = Math.abs(endTime - nowTime);
+
   return async dispatch => {
     try {
+      console.log('action dispatches: ', data);
       const submitResult = await post('/api/submitAnswer', data);
+
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         submitResult: submitResult,
         newQuestionsAsked: newQuestionsAsked,
-        newAllPrompts: newAllPrompts
+        newAllPrompts: newAllPrompts,
+        newTimeRemaining: newTimeRemaining
       });
 
       if (data.questionsAsked === data.questionsTotal) {
-
         const result = await post('/api/finishExam', data);
 
         try {
@@ -98,15 +108,7 @@ export function submitAnswer (data) {
             ERROR: e
           });
         }
-
       }
-      // dispatch({
-      //   type: actionTypes.SELECT_NEXT_PROMPT,
-      //   newAllPrompts: newAllPrompts
-      // }),
-      dispatch({
-        type: actionTypes.SET_TIME_REMAINING,
-      });
 
     } catch(e) {
       dispatch({

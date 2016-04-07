@@ -27,6 +27,7 @@ const startExam = (state, action) => {
     data: {
       questionsAsked: 1,
       questionsTotal: 3,
+      timeRemaining: 7200000,
       endTime: action.result.endTime
     },
     view: {
@@ -58,13 +59,15 @@ const queryAllPrompts = (state, action) => {
 };
 
 const submitAnswer = (state, action) => {
+  console.log('reducer receiving: ', action);
   return merge({}, state, {
     data: {
       questionsAsked: action.newQuestionsAsked,
       timeRemaining: action.submitResult.timeRemaining,
       currentPrompt: action.newAllPrompts[0].question,
       currentPromptId: action.newAllPrompts[0]._id,
-      allPrompts: action.newAllPrompts
+      allPrompts: action.newAllPrompts,
+      timeRemaining: action.newTimeRemaining
     }
   });
 };
@@ -77,39 +80,13 @@ const finishExam = (state, action) => {
   });
 };
 
-// const selectNextPrompt = (state, action) => {
-//   return merge({}, state, {
-//     data: {
-//       currentPrompt: action.newAllPrompts[0].question,
-//       currentPromptId: action.newAllPrompts[0]._id,
-//       allPrompts: action.newAllPrompts
-//     }
-//   });
-// };
-
-const setTimeRemaining = (state, action) => {
-  let now = new Date();
-  let endTime = new Date(state.data.endTime);
-  let nowTime = new Date(now);
-  let timeRemaining = Math.abs(endTime - nowTime);
-  return merge({}, state, {
-    data: {
-      timeRemaining: timeRemaining
-    }
-  });
-}
-
-
 export default function dash (state = initialState, action) {
   return ({
     [actionTypes.START_EXAM_SUCCESS]: startExam,
     [actionTypes.QUERY_EXAM_SUCCESS]: queryExam,
     [actionTypes.QUERY_ALL_PROMPTS_SUCCESS]: queryAllPrompts,
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
-    [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
-
-    // [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt,
-    [actionTypes.SET_TIME_REMAINING]: setTimeRemaining
+    [actionTypes.FINISH_EXAM_SUCCESS]: finishExam
 
   }[action.type] || ((s) => s))(state, action);
 }
