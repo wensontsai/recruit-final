@@ -36,7 +36,7 @@ const store = createStoreWithMiddleware(reducers);
 ReactDOM.render(
   <Provider store={store} >
     <Router history={browserHistory} >
-      <Route path='/' component={Main} />
+      <Route path='/' component={Login} />
       <Route path='/exams/:examId' component={Dash} />
       <Route path='/login' component={Login} />
       <Route path='/logout' component={Logout} />
