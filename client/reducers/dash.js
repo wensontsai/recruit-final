@@ -60,8 +60,11 @@ const queryAllPrompts = (state, action) => {
 const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
-      questionsAsked: action.submitResult.questionsAsked,
-      timeRemaining: action.submitResult.timeRemaining
+      questionsAsked: action.newQuestionsAsked,
+      timeRemaining: action.submitResult.timeRemaining,
+      currentPrompt: action.newAllPrompts[0].question,
+      currentPromptId: action.newAllPrompts[0]._id,
+      allPrompts: action.newAllPrompts
     }
   });
 };
@@ -74,19 +77,15 @@ const finishExam = (state, action) => {
   });
 };
 
-const selectNextPrompt = (state, action) => {
-  let newQuestionsAsked = state.data.questionsAsked +1;
-  let allPrompts = state.data.allPrompts;
-  let newAllPrompts = allPrompts.shift();
-  return merge({}, state, {
-    data: {
-      questionsAsked: newQuestionsAsked,
-      currentPrompt: allPrompts[0].question,
-      currentPromptId: allPrompts[0]._id,
-      allPrompts: newAllPrompts
-    }
-  });
-};
+// const selectNextPrompt = (state, action) => {
+//   return merge({}, state, {
+//     data: {
+//       currentPrompt: action.newAllPrompts[0].question,
+//       currentPromptId: action.newAllPrompts[0]._id,
+//       allPrompts: action.newAllPrompts
+//     }
+//   });
+// };
 
 const setTimeRemaining = (state, action) => {
   let now = new Date();
@@ -109,7 +108,7 @@ export default function dash (state = initialState, action) {
     [actionTypes.SUBMIT_ANSWER_SUCCESS]: submitAnswer,
     [actionTypes.FINISH_EXAM_SUCCESS]: finishExam,
 
-    [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt,
+    // [actionTypes.SELECT_NEXT_PROMPT]: selectNextPrompt,
     [actionTypes.SET_TIME_REMAINING]: setTimeRemaining
 
   }[action.type] || ((s) => s))(state, action);

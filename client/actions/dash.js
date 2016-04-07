@@ -65,12 +65,19 @@ export function queryAllPrompts () {
 }
 
 export function submitAnswer (data) {
+  const newQuestionsAsked = data.questionsAsked +1;
+
+  const newAllPrompts = data.allPrompts;
+  newAllPrompts.shift();
+
   return async dispatch => {
     try {
       const submitResult = await post('/api/submitAnswer', data);
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
-        submitResult: submitResult
+        submitResult: submitResult,
+        newQuestionsAsked: newQuestionsAsked,
+        newAllPrompts: newAllPrompts
       });
 
       if (data.questionsAsked === data.questionsTotal) {
@@ -92,14 +99,14 @@ export function submitAnswer (data) {
           });
         }
 
-      } else {
-        dispatch({
-          type: actionTypes.SELECT_NEXT_PROMPT,
-        }),
-        dispatch({
-          type: actionTypes.SET_TIME_REMAINING,
-        });
       }
+      // dispatch({
+      //   type: actionTypes.SELECT_NEXT_PROMPT,
+      //   newAllPrompts: newAllPrompts
+      // }),
+      dispatch({
+        type: actionTypes.SET_TIME_REMAINING,
+      });
 
     } catch(e) {
       dispatch({

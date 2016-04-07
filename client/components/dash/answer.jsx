@@ -17,7 +17,8 @@ class Answer extends Component {
         promptId: this.props.dash.data.currentPromptId || '',
         answer: this.props.answer || '',
         questionsAsked: this.props.dash.data.questionsAsked || '',
-        questionsTotal: this.props.dash.data.questionsTotal || ''   
+        questionsTotal: this.props.dash.data.questionsTotal || '',
+        allPrompts: this.props.dash.data.allPrompts || []
       }
     };
   }
@@ -50,12 +51,14 @@ class Answer extends Component {
         promptId: this.props.dash.data.currentPromptId,
         answer: event.target.value,
         questionsAsked: this.props.dash.data.questionsAsked,
-        questionsTotal: this.props.dash.data.questionsTotal
+        questionsTotal: this.props.dash.data.questionsTotal,
+        allPrompts: this.props.dash.data.allPrompts
       }
     });
   }
   submitAnswer () {
     if(this.state.data.answer !== ''){
+      console.log('sending to action:', this.state.data);
       this.props.submitAnswer(this.state.data);
       this.setState({ 
         data:{
@@ -64,7 +67,8 @@ class Answer extends Component {
           promptId: this.props.dash.data.currentPromptId,
           answer: '',
           questionsAsked: this.props.dash.data.questionsAsked +1,
-          questionsTotal: this.props.dash.data.questionsTotal
+          questionsTotal: this.props.dash.data.questionsTotal,
+          allPrompts: this.props.dash.data.allPrompts
         } 
       });
     } else {
