@@ -40,7 +40,6 @@ ReactDOM.render(
       <Route path='/exams/:examId' component={Dash} />
       <Route path='/login' component={Login} />
       <Route path='/logout' component={Logout} />
-      <Route path='/dash' component={Dash} />
       <Route path='/candidates' component={Candidates} />
       <Route path='/prompts' component={Prompts} />
       <Route path='/results/:userId' component={Results} />

@@ -8,7 +8,7 @@ import PromptsList from './promptsList';
 
 import { queryAllPromptsList } from '../../actions/prompts';
 
-class Prompts extends Component {
+class Prompts extends Component {z
   componentDidMount () {
     this.props.queryAllPromptsList();
   }

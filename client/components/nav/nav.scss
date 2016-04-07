@@ -1,5 +1,6 @@
 $nav-background: #d62a34;
 $nav-title: white;
+$user-info: tan;
 
 $border-color: #626262;
 $base-color: #DBDBDB;
@@ -31,12 +32,16 @@ $field-color: #f9f9f9;
 	text-decoration: none;
 }
 .nav-links {
+	color: $user-info;
 	display: inline-flex;
 	flex: 0.5;
 	align-items: center;
 	text-align: right;
 }
-.nav-links > a{
+.nav-links .logged-in-user {
+	width: 300px;
+}
+.nav-links > a {
 	padding: 1rem;
 	margin: 0 0 0 1rem;
 }

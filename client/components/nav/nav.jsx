@@ -18,6 +18,9 @@ class Nav extends Component {
 					</div>
 					{(/(^|;)\s*token=/.test(document.cookie)
 					  ? <div className='nav-links'>
+								<div className='logged-in-user'>
+									{ this.props.sessions.sessions.loggedInUserEmail }
+								</div>
 								<Link className='link' to='/candidates' >Candidates</Link>
 								<Link className='link' to='/prompts' >Prompts</Link>
 								<Link className='link' to='/logout' >Logout</Link>
