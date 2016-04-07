@@ -80,7 +80,6 @@ export function submitAnswer (data) {
 
   return async dispatch => {
     try {
-      console.log('action dispatches: ', data);
       const submitResult = await post('/api/submitAnswer', data);
 
       dispatch({

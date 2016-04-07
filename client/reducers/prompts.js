@@ -30,22 +30,16 @@ const addPrompt = (state, action) => {
 };
 
 const toggleEditMode = (state, action) => {
-  const currentPrompts = state;
-  currentPrompts.prompts.editObj[action.data.id] = {
-    mode: true,
-    data: currentPrompts.prompts.editObj[action.data.id].data
-  };
   return merge({}, state, {
     prompts: {
-      promptsAll: currentPrompts.prompts.promptsAll,
+      promptsAll: action.promptsAll,
       actionStatus: 'toggleEditMode successful!',
-      editObj: currentPrompts.prompts.editObj
+      editObj: action.data.editObj
     }
   });
 };
 
 const saveEditPrompt = (state, action) => {
-  console.log(action.editResult);
  return merge({}, state, {
    prompts: {
      promptsAll: action.editResult.prompts,

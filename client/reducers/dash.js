@@ -59,7 +59,6 @@ const queryAllPrompts = (state, action) => {
 };
 
 const submitAnswer = (state, action) => {
-  console.log('reducer receiving: ', action);
   return merge({}, state, {
     data: {
       questionsAsked: action.newQuestionsAsked,

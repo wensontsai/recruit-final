@@ -1,4 +1,4 @@
-// API Action Types :
+// API-Backend Dispatches:
 export const QUERY_ALL_PROMPTS_SUCCESS = 'QUERY_ALL_PROMPTS_SUCCESS';
 export const QUERY_ALL_PROMPTS_ERROR = 'QUERY_ALL_PROMPTS_ERROR';
 
@@ -14,6 +14,6 @@ export const EDIT_PROMPT_ERROR = 'EDIT_PROMPT_ERROR';
 export const DELETE_PROMPT_SUCCESS = 'DELETE_PROMPT_SUCCESS';
 export const DELETE_PROMPT_ERROR = 'DELETE_PROMPT_ERROR';
 
-// ROUTELESS Action Types:
+// UI ONLY Dispatches:
 export const TOGGLE_EDIT_MODE = 'TOGGLE_EDIT_MODE';
 export const SAVE_EDIT_PROMPT = 'SAVE_EDIT_PROMPT';

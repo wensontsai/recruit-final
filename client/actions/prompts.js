@@ -51,7 +51,6 @@ export function addPrompt (data) {
 export function saveEditPrompt (data) {
   return async dispatch => {
     try {
-
       const editResult = await post('/api/editPrompt', data);
       console.log(editResult);
       
@@ -83,14 +82,17 @@ export function deletePrompt (data) {
     }
   };
 }
-
-
 export function toggleEditMode (data) {
-  console.log(data);
+  data.editObj[data.id] = {
+    mode: true,
+    data: data.editObj[data.id].data
+  };
+
   return async dispatch => {
     dispatch({
       type: actionTypes.TOGGLE_EDIT_MODE,
-      data: data
+      data: data,
+      promptsAll: data.promptsAll
     });
   };
 }

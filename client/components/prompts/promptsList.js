@@ -100,7 +100,9 @@ class promptsList extends Component {
   }
   toggleEditMode (id) {
     const data = {
-      id: id
+      id: id,
+      editObj: this.props.prompts.prompts.editObj,
+      promptsAll: this.props.prompts.prompts.promptsAll
     }
     this.props.toggleEditMode(data);
   }

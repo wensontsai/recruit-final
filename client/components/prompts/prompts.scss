@@ -73,6 +73,8 @@ $field-color: lighten( $div-color, 3% );
 }
 .prompts-list-view .react-wrapper .question {
   font-style: italic;
+  margin-right: 5rem;
+  white-space: pre-wrap;
 }
 .prompts-list-view .react-wrapper .field.delete-prompt,
 .prompts-list-view .react-wrapper .field.edit-prompt {
