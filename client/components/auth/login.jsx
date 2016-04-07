@@ -30,6 +30,9 @@ class Login extends Component {
 		    		<div className='pageTitle'>
 		    			Login
 		    		</div>
+		    		<div className='subTitle'>
+		    		Please login to view Admin Dashboard.
+		    		</div>
 		    		<div className='form'>
 		    			<div className='form-elements'>
 			    			<div>

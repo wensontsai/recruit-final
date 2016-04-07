@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import Nav from '../nav/nav';
@@ -17,12 +17,18 @@ class Candidates extends Component {
     return (
         <div className='display-all-container'>
             <Nav />
-            <div className='page'>
-              <AddCandidate />
-              <CandidatesList />
-            </div>
+            {(/(^|;)\s*token=/.test(document.cookie)
+              ? <div className='page'>
+                  <AddCandidate />
+                  <CandidatesList />
+                </div>
+              :  this.redirectToLogin()
+            )}   
         </div>
     );
+  }
+  redirectToLogin () {
+    browserHistory.push('/login');
   }
 }
 

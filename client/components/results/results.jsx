@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import { queryCandidateAnswers } from '../../actions/results';
@@ -30,12 +30,18 @@ class Results extends Component {
     return (
         <div className='displays-all-container'>
             <Nav />
-            <div className='page'>
-              <ProfileResults />
-              <AnswerResults />
-            </div>
+            {(/(^|;)\s*token=/.test(document.cookie)
+              ? <div className='page'>
+                  <ProfileResults />
+                  <AnswerResults />
+                </div>
+              :  this.redirectToLogin()
+            )}
         </div>
     );
+  }
+  redirectToLogin () {
+    browserHistory.push('/login');
   }
   queryCandidateAnswers (data) {
     this.props.queryCandidateAnswers(this.state.data);

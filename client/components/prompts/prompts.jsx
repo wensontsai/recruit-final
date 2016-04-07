@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import Nav from '../nav/nav';
@@ -21,13 +21,20 @@ class Prompts extends Component {
     return (
         <div className='display-all-container'>
             <Nav />
-            <div className='page'>
-              <AddPrompt />
-              <PromptsList />
-            </div>
+            {(/(^|;)\s*token=/.test(document.cookie)
+              ? <div className='page'>
+                  <AddPrompt />
+                  <PromptsList />
+                </div>
+              :  this.redirectToLogin()
+            )}
         </div>
     );
   }
+  redirectToLogin () {
+    browserHistory.push('/login');
+  }
+
 }
 
 export default connect(

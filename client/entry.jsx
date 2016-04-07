@@ -4,7 +4,6 @@ import 'babel-polyfill';
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { browserHistory, Router, Route } from 'react-router';
-import { syncHistory, routeReducer } from 'react-router-redux';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
@@ -15,7 +14,6 @@ import reducers from './reducers';
 // import CSS
 import './entry.scss';
 
-
 // Components
 import Main from './pages/main';
 import Login from './components/auth/login';
@@ -25,28 +23,14 @@ import Candidates from './components/candidates/candidates';
 import Prompts from './components/prompts/prompts';
 import Results from './components/results/results';
 
-
 // Middleware
-
-
-// // adding routing to reducers
-// const reducerRouted = combineReducers(Object.assign({}, reducers, {
-//   routing: routeReducer
-// }));
-// const reduxRouterMiddleware = syncHistory(browserHistory);
-
-
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
-  // reduxRouterMiddleware,
   createLogger(),
 )(createStore);
 
 const store = createStoreWithMiddleware(reducers);
-// const store = createStoreWithMiddleware(reducerRouted);
-
-
 
 
 ReactDOM.render(

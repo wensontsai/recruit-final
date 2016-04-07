@@ -16,13 +16,14 @@ class Nav extends Component {
 					<div className='nav-title'>
 						<Link className='link' to='/' >Recruit</Link>
 					</div>
-					{(this.props.sessions.sessions.loggedInUserId
+					{(/(^|;)\s*token=/.test(document.cookie)
 					  ? <div className='nav-links'>
 								<Link className='link' to='/candidates' >Candidates</Link>
 								<Link className='link' to='/prompts' >Prompts</Link>
 								<Link className='link' to='/logout' >Logout</Link>
 							</div>
 					  : <div className='nav-links'>
+					  		<Link className='link' to='/login' >Login</Link>
 					  	</div>
 					)}
 				</div>
