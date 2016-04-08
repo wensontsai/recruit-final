@@ -16,7 +16,7 @@ class Question extends Component {
             Question prompt:
           </div>
             <div className='question-prompt'>
-              { this.props.dash.data.currentPrompt }
+              "{ this.props.dash.data.currentPrompt }"
             </div>
         </div>
     );

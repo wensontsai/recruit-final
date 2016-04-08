@@ -68,8 +68,10 @@ exports.addPrompt = function(Prompt){
 exports.editPrompt = function(Prompt){
   var results = {};
   return function(req, res, next){
+    console.log(req.body);
     Prompt.findOne({ _id: req.body.id }, function(err, prompt) {
       prompt.question = req.body.question;
+      console.log(prompt.question);
       prompt.save(function(err, prompt){
         if(err) {
           return console.error(err)

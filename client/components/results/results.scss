@@ -39,6 +39,7 @@ $field-color: lighten( $div-color, 3% );
   flex-direction: row;
   display: flex;
   margin: 5rem 0;
+  height: 100%;
 }
 .answers-view .ques-ans-block.header {
   margin: 0 0 3rem 0;

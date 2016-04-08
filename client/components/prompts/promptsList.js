@@ -24,7 +24,7 @@ class promptsList extends Component {
       <div className='prompts-list-view'>
         <div className='row header'>
           <div className='react-wrapper'>
-            <div className='field' >QUESTIONS</div>
+            <div className='field question' >QUESTIONS</div>
             <div className='field edit-prompt' >EDIT</div>
             <div className='field delete-prompt' >DELETE</div>
           </div>
@@ -107,9 +107,15 @@ class promptsList extends Component {
     this.props.toggleEditMode(data);
   }
   saveEditPrompt (id) {
+    var newQuestion = '';
+    if (this.state.data.editObj[id] === undefined ) {
+      newQuestion = this.props.prompts.prompts.editObj[id].data;
+    } else {
+      newQuestion = this.state.data.editObj[id];
+    }
     const data = {
       id: id,
-      question: this.state.data.editObj[id]
+      question: newQuestion
     };
     this.props.saveEditPrompt(data);
   }

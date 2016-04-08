@@ -67,8 +67,8 @@ exports.initializeExam = function(Examination, User) {
           var mailOptions = {
               from: config.email.auth.sender_name+ ' ' +config.email.auth.user, // sender address
               to: user.email, // list of receivers
-              subject: '✔✔✔ Hello TEST TIME ✔✔✔', // Subject line
-              text: 'Listen you are going to take an exam now or you will be fired!\n\nGo to http://localhost:3000/exams/' +exam.id+ ' immediately!', // plaintext body
+              subject: 'Hello ' +user.firstName+ '!', // Subject line
+              text: 'We would like to invite you to participate in a code challenge!\n\nPlease visit http://localhost:3000/exams/' +exam.id+ ' to begin!', // plaintext body
               // html: '<b>Hello world 🐴</b>' // html body
           };
           // send mail with defined transport object

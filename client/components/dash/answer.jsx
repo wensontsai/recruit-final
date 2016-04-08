@@ -28,7 +28,7 @@ class Answer extends Component {
     return (
       <div className='answer-view'>
         <div>
-          Answer area
+          Write your answer here:
         </div>
         <textarea
           type='text'
