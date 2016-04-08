@@ -24,7 +24,6 @@ exports.startExam = function(Examination) {
         var now = new Date();
         exam.startTime = now;
         exam.endTime = new Date(now.getTime() + (2*1000*60*60));
-        // exam.endTime = now.setHours(now.getHours() + 2);
 
         exam.save(function(err) {
           if (err) {
@@ -71,13 +70,14 @@ exports.initializeExam = function(Examination, User) {
               text: 'We would like to invite you to participate in a code challenge!\n\nPlease visit http://localhost:3000/exams/' +exam.id+ ' to begin!', // plaintext body
               // html: '<b>Hello world 🐴</b>' // html body
           };
+          
           // send mail with defined transport object
-          transporter.sendMail(mailOptions, function(error, info){
-              if(error){
-                  return console.log(error);
-              }
-              console.log('Message sent: ' + info.response);
-          });
+          // transporter.sendMail(mailOptions, function(error, info){
+          //     if(error){
+          //         return console.log(error);
+          //     }
+          //     console.log('Message sent: ' + info.response);
+          // });
 
 
           // save user object
