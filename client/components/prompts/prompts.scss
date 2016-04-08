@@ -50,21 +50,18 @@ $field-color: lighten( $div-color, 3% );
   padding: 1rem;
   overflow: scroll;
 }
+.prompts-list-view .row.header {
+  font-weight: 800;
+  font-size: 1em;
+}
 .prompts-list-view .react-wrapper {
+  margin: 0.25rem;
+  min-height: 55px;
   width: 100%;
   padding: 1rem;
   flex: 6 auto;
   flex-direction: row;
   display: inline-flex;
-}
-.prompts-list-view .react-wrapper .row {
-  margin: 0.25rem;
-  display: inline-flex;
-  min-height: 55px;
-}
-.prompts-list-view .react-wrapper .header {
-  font-weight: 800;
-  font-size: 1em;
 }
 .prompts-list-view .react-wrapper .field {
   text-align: left;

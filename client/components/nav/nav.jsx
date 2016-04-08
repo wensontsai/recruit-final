@@ -14,7 +14,7 @@ class Nav extends Component {
 		return (
 				<div className='nav'>
 					<div className='nav-title'>
-						<Link className='link' to='/' >Recruit</Link>
+						<Link className='link' to='/' >RECRUIT</Link>
 					</div>
 					{(/(^|;)\s*token=/.test(document.cookie)
 					  ? <div className='nav-links'>
