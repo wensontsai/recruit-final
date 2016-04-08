@@ -40,6 +40,7 @@ class Profile extends Component {
               Time Remaining:
               <div className='countdown-timer'>
                 <Timer initialTimeRemaining = {this.props.dash.data.timeRemaining}
+                      handleTimeRemaining = {this.handleTimeRemaining()}
                 />
               </div>
               <div className='progress-area'>
@@ -59,7 +60,9 @@ class Profile extends Component {
       </div>
     );
   }
-
+  handleTimeRemaining (time) {
+    console.log('function called');
+  }
   startExam () {
     this.props.startExam(this.props.dash);
     this.props.queryAllPrompts();

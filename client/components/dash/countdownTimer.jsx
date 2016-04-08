@@ -28,7 +28,8 @@ var CountdownTimer = React.createClass({
     interval: React.PropTypes.number,
     formatFunc: React.PropTypes.func,
     tickCallback: React.PropTypes.func,
-    completeCallback: React.PropTypes.func
+    completeCallback: React.PropTypes.func,
+    handleTimeRemaining: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -46,7 +47,8 @@ var CountdownTimer = React.createClass({
     return {
       timeRemaining: this.props.initialTimeRemaining,
       timeoutId: null,
-      prevTime: null
+      prevTime: null,
+      handleTimeRemaining: this.props.handleTimeRemaining
     };
   },
 
@@ -56,7 +58,10 @@ var CountdownTimer = React.createClass({
 
   componentWillReceiveProps: function(newProps) {
     if (this.state.timeoutId) { clearTimeout(this.state.timeoutId); }
-    this.setState({prevTime: null, timeRemaining: newProps.initialTimeRemaining});
+    this.setState({
+      prevTime: null, 
+      timeRemaining: newProps.initialTimeRemaining
+    });
   },
 
   componentDidUpdate: function() {
@@ -126,10 +131,21 @@ var CountdownTimer = React.createClass({
     var timeRemaining = this.state.timeRemaining;
 
     return (
-      <div className='timer'>
+      <div 
+        className='timer'
+        onChange={this.handleTimeRemaining(timeRemaining)}
+      >
         {this.getFormattedTime(timeRemaining)}
       </div>
     );
+  },
+  handleTimeRemaining: function(timeRemaining) {
+
+    // WTF
+    // this.props.parentTimeRemaining(timeRemaining);
+
+    console.log(timeRemaining);
+
   }
 });
 
