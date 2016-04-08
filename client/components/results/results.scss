@@ -8,7 +8,7 @@ $field-color: lighten( $div-color, 3% );
   background-color: $div-color;
   border: $border-color solid 2px;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1.5rem;
   height: 135px;
   flex: 1 auto;
   margin-top: 1rem;
@@ -26,7 +26,7 @@ $field-color: lighten( $div-color, 3% );
   height: 450px;
   border: $border-color solid 2px;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1.5rem;
   -webkit-flex: 1;
   flex: 6 auto;
   flex-direction: column;
@@ -42,6 +42,7 @@ $field-color: lighten( $div-color, 3% );
   height: 100%;
 }
 .answers-view .ques-ans-block.header {
+  height: 50px;
   margin: 0 0 3rem 0;
   font-weight: 800;
   font-size: 1em;

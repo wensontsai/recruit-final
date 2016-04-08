@@ -18,23 +18,23 @@ class Profile extends Component {
       <div className='profile-view'>
         <div className='user-info'>
           <div>
-            Exam ID:{this.props.dash.data.examId}
+            <span className='header'>First Name:</span> {this.props.dash.data.firstName}
           </div>
           <div>
-            First Name: {this.props.dash.data.firstName}
+            <span className='header'>Last Name:</span> {this.props.dash.data.lastName}
           </div>
           <div>
-            Last Name: {this.props.dash.data.lastName}
-          </div>
-          <div>
-            Email: {this.props.dash.data.email}
+            <span className='header'>Email:</span> {this.props.dash.data.email}
           </div>
         </div>
         <div className='exam-status'>
         {(this.props.dash.view.examCompleted
-          ? <div className='row001'>
-              *** Thanks for taking the test !  We will reply to you shortly! ***
-            </div>
+          ? 
+              <div className='status'>
+                *** Thanks for taking the test! <br />
+                We will reply to you shortly! ***
+              </div>
+          
           : this.props.dash.view.showPrompt
           ? <div className='status'>
               Time Remaining:

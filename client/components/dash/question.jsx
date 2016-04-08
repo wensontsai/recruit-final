@@ -12,7 +12,7 @@ class Question extends Component {
   render (){
     return (
         <div className='question-view'>
-          <div>
+          <div className='header'>
             Question prompt:
           </div>
             <div className='question-prompt'>

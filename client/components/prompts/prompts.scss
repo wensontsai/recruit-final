@@ -17,7 +17,7 @@ $field-color: lighten( $div-color, 3% );
   background-color: $div-color;
   border: $border-color solid 2px;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
   height: 135px;
   flex: 1 auto;
   margin-top: 1rem;
@@ -47,12 +47,14 @@ $field-color: lighten( $div-color, 3% );
   height: 450px;
   border: $border-color solid 2px;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1.5rem;
   overflow: scroll;
 }
 .prompts-list-view .row.header {
+  height: 50px;
   font-weight: 800;
   font-size: 1em;
+  margin-top: -35px;
 }
 .prompts-list-view .react-wrapper {
   margin: 0.25rem;

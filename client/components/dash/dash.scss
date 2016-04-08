@@ -27,14 +27,18 @@ $field-color: lighten( $div-color, 3% );
   background-color: $div-color;
   border: $border-color solid 2px;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1.5rem;
   height: 175px;
   flex: 1 auto;
   display: inline-flex;
 }
-.profile-view .user-info{
+.profile-view .user-info {
   flex-direction: column;
   flex: 2;
+}
+.profile-view .user-info .header {
+  font-weight: 800;
+  margin-right: 3rem;
 }
 .profile-view .exam-status{
   flex-direction: column;
@@ -57,6 +61,9 @@ $field-color: lighten( $div-color, 3% );
   margin-right: 1rem;
   word-wrap: break-word;
   max-width: 400px;
+}
+.question-view .header{
+  margin-bottom: 3rem;
 }
 .question-view .question-prompt{
   font-style: italic;

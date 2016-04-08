@@ -23,7 +23,7 @@ class promptsList extends Component {
     return (
       <div className='prompts-list-view'>
         <div className='row header'>
-          <div className='react-wrapper'>
+          <div className='react-wrapper header'>
             <div className='field question' >QUESTIONS</div>
             <div className='field edit-prompt' >EDIT</div>
             <div className='field delete-prompt' >DELETE</div>

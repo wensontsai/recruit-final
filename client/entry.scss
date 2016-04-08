@@ -28,12 +28,14 @@ a:hover {
   height: 100%;
 }
 .page {
+  white-space: pre-wrap;
   color: $font-color;
   background: $body-color;
   margin: 0 auto;
   font-family: 'Montserrat';
 }
 .pageTitle {
+  white-space: pre-wrap;
   font-size: 2rem;
   color: tan;
   padding: 1rem;
