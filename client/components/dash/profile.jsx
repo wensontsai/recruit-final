@@ -13,12 +13,10 @@ class Profile extends Component {
     super (props);
     this.state = {
       data: {
-        timeRemainingNow: ''
+        timeRemainingNow: '',
+        examId: props.dash.data.examId || ''
       }
     }
-  }
-  componentDidMount() {
-      console.log('passed down props',this.props);  
   }
 
   render () {
@@ -48,7 +46,7 @@ class Profile extends Component {
               Time Remaining:
               <div className='countdown-timer'>
                 <Timer initialTimeRemaining = {this.props.dash.data.timeRemaining}
-                      handleTimeRemaining = {this.handleTimeRemaining}
+                      handleTimeRemaining = {this.handleTimeRemaining.bind(this)}
                 />
               </div>
               <div className='progress-area'>
@@ -70,8 +68,12 @@ class Profile extends Component {
   }
   handleTimeRemaining (time) {
     console.log('made the round',time);
-    // console.log(this.props.dash);
-    // this.props.finishExam();
+    console.log(this.props.dash.data.examId);
+    
+    if(time === null){
+      console.log('what we got at disposal')
+      this.props.finishExam(this.props.dash.data);
+    }
   }
   startExam () {
     this.props.startExam(this.props.dash);
