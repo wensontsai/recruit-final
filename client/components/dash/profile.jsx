@@ -67,20 +67,22 @@ class Profile extends Component {
     );
   }
   handleTimeRemaining (time) {
-    console.log('made the round',time);
-    console.log(this.props.dash.data.examId);
-    
+      console.log('what we got at disposal', time);
+      this.setLocalStorageForExam(this.props.dash.data.examId, this.props.dash.data.endTime);
     if(time === null){
-      console.log('what we got at disposal')
       this.props.finishExam(this.props.dash.data);
     }
+  }
+  setLocalStorageForExam (examId, endTime) {
+    console.log('examId',examId);
+    console.log('endTime',endTime);
+    localStorage.setItem('examId', examId);
+    localStorage.setItem('endTime', endTime);
   }
   startExam () {
     this.props.startExam(this.props.dash);
     this.props.queryAllPrompts();
   }
-
-
 }
 
 export default connect(

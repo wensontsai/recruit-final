@@ -137,3 +137,23 @@ export function finishExam (data) {
     }
   };
 }
+export function continueExam (data) {
+  return async dispatch => {
+    const result = await post('/api/finishExam', data);
+
+    try {
+      const result = await post('/api/finishExam', data);
+
+      dispatch({
+        type: actionTypes.FINISH_EXAM_SUCCESS,
+        result: result
+      });
+
+    } catch(e) {
+      dispatch({
+        type: actionTypes.FINISH_EXAM_ERROR,
+        ERROR: e
+      });
+    }
+  };
+}

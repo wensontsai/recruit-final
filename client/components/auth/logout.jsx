@@ -11,14 +11,8 @@ import Nav from '../nav/nav';
 class Logout extends Component {
   constructor (props) {
     super (props);
-    this.state = {
-      data: {
-        loggedInUserId: ''
-      }
-    }
   }
   componentWillMount () {
-    console.log(this.props);
     this.logoutUser ();
   }
   render () {
@@ -33,13 +27,7 @@ class Logout extends Component {
       )
   }
   logoutUser () {
-    this.setState({
-      data: {
-        loggedInUserId: this.props.sessions.loggedInUserId
-      }
-    });
-    this.props.logoutUser(this.state.data);
-    browserHistory.push('/login');
+    this.props.logoutUser(this.props.data);
   }
 
 }

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { queryExam } from '../../actions/dash';
+import { queryExam, continueExam } from '../../actions/dash';
 
 import Nav from '../nav/nav';
 import Answer from '../dash/answer';
@@ -21,6 +21,13 @@ class DisplaysAll extends Component {
 		}
 	}
 	componentDidMount () {
+		if(localStorage.getItem('examId')){
+			console.log('we been here bayforeee');
+			// run an action, 
+			// that sends in ExamId - requeries
+			// sets remaining time
+			// 
+		}
 		this.queryExam(this.state.data);
 	}
 	render () {
@@ -56,5 +63,5 @@ class DisplaysAll extends Component {
 
 export default connect(
 	(state) => ({ dash: state.dash }),
-	{ queryExam }
+	{ queryExam, continueExam }
 )(DisplaysAll);

@@ -17,7 +17,8 @@ export function loginUser (data) {
 
         // set Token as cookie
         document.cookie = 'token=' +loginResult.token+ '; expires=' +now.toUTCString() ;
-
+        // set LocalStorage for UI display in case of refresh
+        localStorage.setItem('loggedInEmail', data.email);
         // redirect to Candidates page
         browserHistory.push('/candidates');
 
@@ -45,6 +46,8 @@ export function logoutUser (data) {
       if (logoutResult.success === true) {
         // Remove cookie on logout success
         document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+        // remove localStorage variables for UI display
+        localStorage.removeItem('loggedInEmail');
 
         // redirect to Candidates page
         browserHistory.push('/login');
