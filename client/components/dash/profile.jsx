@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { startExam, queryAllPrompts } from '../../actions/dash';
+import { startExam, queryAllPrompts, finishExam } from '../../actions/dash';
 
 import Timer from './countdownTimer';
 
@@ -11,6 +11,14 @@ import './dash.scss';
 class Profile extends Component {
   constructor (props) {
     super (props);
+    this.state = {
+      data: {
+        timeRemainingNow: ''
+      }
+    }
+  }
+  componentDidMount() {
+      console.log('passed down props',this.props);  
   }
 
   render () {
@@ -40,7 +48,7 @@ class Profile extends Component {
               Time Remaining:
               <div className='countdown-timer'>
                 <Timer initialTimeRemaining = {this.props.dash.data.timeRemaining}
-                      handleTimeRemaining = {this.handleTimeRemaining()}
+                      handleTimeRemaining = {this.handleTimeRemaining}
                 />
               </div>
               <div className='progress-area'>
@@ -61,7 +69,9 @@ class Profile extends Component {
     );
   }
   handleTimeRemaining (time) {
-    console.log('function called');
+    console.log('made the round',time);
+    // console.log(this.props.dash);
+    // this.props.finishExam();
   }
   startExam () {
     this.props.startExam(this.props.dash);
@@ -73,5 +83,5 @@ class Profile extends Component {
 
 export default connect(
   (state) => ({ dash: state.dash }),
-  { startExam, queryAllPrompts }
+  { startExam, queryAllPrompts, finishExam }
 )(Profile);

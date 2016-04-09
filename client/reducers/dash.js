@@ -27,7 +27,7 @@ const startExam = (state, action) => {
     data: {
       questionsAsked: 1,
       questionsTotal: 3,
-      timeRemaining: 7200000,
+      timeRemaining: 7000,
       endTime: action.result.endTime
     },
     view: {

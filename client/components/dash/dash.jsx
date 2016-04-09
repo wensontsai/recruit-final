@@ -32,7 +32,7 @@ class DisplaysAll extends Component {
 			<div className='display-all-container'>
 				<Nav />
 				<div className='page'>
-					<Profile examId={this.state.examId}/>
+					<Profile examId={this.props.examId}/>
 					{(dash.view.examCompleted
 		        ? <div className='row001'>
 							</div>

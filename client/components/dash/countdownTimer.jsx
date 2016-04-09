@@ -1,4 +1,6 @@
 var React = require('react');
+import { connect } from 'react-redux';
+
 
 // Generic Countdown Timer UI component
 //
@@ -37,7 +39,8 @@ var CountdownTimer = React.createClass({
       interval: 1000,
       formatFunc: null,
       tickCallback: null,
-      completeCallback: null
+      completeCallback: null,
+      handleTimeRemaining: null
     };
   },
 
@@ -53,6 +56,7 @@ var CountdownTimer = React.createClass({
   },
 
   componentDidMount: function() {
+    console.log('*@#$@#$@#$@#$@#$', this.props);
     this.tick();
   },
 
@@ -60,7 +64,8 @@ var CountdownTimer = React.createClass({
     if (this.state.timeoutId) { clearTimeout(this.state.timeoutId); }
     this.setState({
       prevTime: null, 
-      timeRemaining: newProps.initialTimeRemaining
+      timeRemaining: newProps.initialTimeRemaining,
+      handleTimeRemaining: newProps.handleTimeRemaining
     });
   },
 
@@ -100,6 +105,9 @@ var CountdownTimer = React.createClass({
     }
 
     if (countdownComplete) {
+      
+      this.handleTimeRemaining(null);
+
       if (this.props.completeCallback) { this.props.completeCallback(); }
       return;
     }
@@ -133,20 +141,19 @@ var CountdownTimer = React.createClass({
     return (
       <div 
         className='timer'
-        onChange={this.handleTimeRemaining(timeRemaining)}
+        onChange={this.props.handleTimeRemaining(timeRemaining)}
+
       >
         {this.getFormattedTime(timeRemaining)}
       </div>
     );
   },
   handleTimeRemaining: function(timeRemaining) {
-
-    // WTF
-    // this.props.parentTimeRemaining(timeRemaining);
-
-    console.log(timeRemaining);
-
+    this.props.handleTimeRemaining(timeRemaining);
   }
 });
 
-module.exports = CountdownTimer;
+export default connect(
+  (state) => ({ dash: state.dash }),
+  { }
+)(CountdownTimer);
