@@ -46,10 +46,23 @@ config = update(config, {
   module: {
     loaders: {
       $push: [
-        { test: /\.jsx?$/, loaders: ['babel'], exclude: /node_modules/ }
+        { 
+          test: /\.jsx?$/, 
+          loaders: [ 'babel' ], 
+          exclude: /node_modules/ 
+        },
+        {
+          test: /\.scss$/,
+          loaders: [
+              'style',
+              'css',
+              'autoprefixer?browsers=last 3 versions',
+              'sass?outputStyle=expanded'
+          ]
+        }
       ]
     }
-  }
+  },
 });
 
 module.exports = config;
