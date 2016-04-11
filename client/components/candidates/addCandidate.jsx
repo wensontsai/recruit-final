@@ -16,7 +16,9 @@ class AddCandidateView extends Component {
         firstName: this.props.firstName || '',
         lastName: this.props.lastName || '',
         email: this.props.email || '',
-        admin: this.props.admin || ''
+        admin: this.props.admin || '',
+        password: this.props.password || '',
+        password_confirm: this.props.password_confirm || ''
       },
       showStatus: this.props.showStatus || 'true'
     };
@@ -77,11 +79,42 @@ class AddCandidateView extends Component {
               </div>
           </div>
         </div>
+        {(this.state.showStatus
+          ? <div className='action-status'>
+              <ReactCSSTransitionGroup transitionName='example' transitionEnterTimeout={500} transitionLeaveTimeout={300} >
+                  {this.props.candidates.actionStatus}
+              </ReactCSSTransitionGroup>
+            </div>
+          : ''
+        )}
+        <div className={(this.state.data.admin === 'Y'
+            ? 'column'
+            : 'column disabled'
+          )}
+          >
+          <div className='field'>
+            <div>Password:</div>
+            <input    
+              type='text'
+              value={this.state.data.password}
+              onChange={ this.handleChangePassword.bind(this) }
+            />
+          </div>
+          <div className='field'>
+            <div>Confirm Password:</div>
+            <input
+              type='text'
+              value={this.state.data.password_confirm}
+              onChange={ this.handleChangePasswordConfirm.bind(this) }
+            />
+          </div>
+        </div>
+
         <div className='column-submit'>
           <div className='add-candidate'>
             <button className='btn btn-sm add-candidate'
               onClick={() => this.addCandidate(this.hideStatusView.bind(this))}
-              >Add Candidate
+              >Add User
             </button>
           </div>
           {(this.state.showStatus
@@ -102,6 +135,8 @@ class AddCandidateView extends Component {
         firstName: event.target.value,
         lastName: this.state.data.lastName,
         email: this.state.data.email,
+        password: this.state.data.password,
+        password_confirm: this.state.data.password_confirm,
         admin: this.state.data.admin
       }
     });
@@ -112,6 +147,8 @@ class AddCandidateView extends Component {
         firstName: this.state.data.firstName,
         lastName: event.target.value,
         email: this.state.data.email,
+        password: this.state.data.password,
+        password_confirm: this.state.data.password_confirm,
         admin: this.state.data.admin
       }
     });
@@ -122,6 +159,8 @@ class AddCandidateView extends Component {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
         email: event.target.value,
+        password: this.state.data.password,
+        password_confirm: this.state.data.password_confirm,
         admin: this.state.data.admin
       }
     });
@@ -132,6 +171,30 @@ class AddCandidateView extends Component {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
         email: this.state.data.email,
+        password: this.state.data.password,
+        password_confirm: this.state.data.password_confirm,
+        admin: status
+      }
+    });
+  }
+  handleChangePassword (status, event) {
+    this.setState({
+      data: {
+        firstName: this.state.data.firstName,
+        lastName: this.state.data.lastName,
+        password: this.state.data.password,
+        password_confirm: event.target.value,
+        admin: status
+      }
+    });
+  }
+  handleChangePasswordConfirm (status, event) {
+    this.setState({
+      data: {
+        firstName: this.state.data.firstName,
+        lastName: this.state.data.lastName,
+        password: this.state.data.password,
+        password_confirm: event.target.value,
         admin: status
       }
     });
