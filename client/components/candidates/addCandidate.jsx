@@ -95,7 +95,7 @@ class AddCandidateView extends Component {
           <div className='field'>
             <div>Password:</div>
             <input    
-              type='text'
+              type='password'
               value={this.state.data.password}
               onChange={ this.handleChangePassword.bind(this) }
             />
@@ -103,7 +103,7 @@ class AddCandidateView extends Component {
           <div className='field'>
             <div>Confirm Password:</div>
             <input
-              type='text'
+              type='password'
               value={this.state.data.password_confirm}
               onChange={ this.handleChangePasswordConfirm.bind(this) }
             />
@@ -177,31 +177,40 @@ class AddCandidateView extends Component {
       }
     });
   }
-  handleChangePassword (status, event) {
+  handleChangePassword (event) {
     this.setState({
       data: {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
-        password: this.state.data.password,
-        password_confirm: event.target.value,
-        admin: status
+        password: event.target.value,
+        password_confirm: this.state.data.password_confirm,
+        admin: this.state.data.admin
       }
     });
   }
-  handleChangePasswordConfirm (status, event) {
+  handleChangePasswordConfirm (event) {
     this.setState({
       data: {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
         password: this.state.data.password,
         password_confirm: event.target.value,
-        admin: status
+        admin: this.state.data.admin
       }
     });
   }
   addCandidate (hideFunc) {
-    this.props.addCandidate(this.state.data);
-    this.setState({ data:{} });
+    if(this.state.data.admin === 'Y'){
+      if(this.state.data.password === this.state.data.password_confirm){
+        this.props.addCandidate(this.state.data);
+        this.setState({ data:{} });
+      } else {
+        console.log('Passwords don\'t match!');
+      }
+    } else {
+      this.props.addCandidate(this.state.data);
+      this.setState({ data:{} });
+    }
 
     // Reset radio button selections
     const allRadioButtons = document.getElementsByTagName('input');
