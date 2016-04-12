@@ -164,6 +164,7 @@ class AddCandidateView extends Component {
         admin: this.state.data.admin
       }
     });
+    console.log(this.state.data.email);
   }
   handleChangeAdmin (status, event) {
     this.setState({
@@ -182,6 +183,7 @@ class AddCandidateView extends Component {
       data: {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
+        email: this.state.data.email,
         password: event.target.value,
         password_confirm: this.state.data.password_confirm,
         admin: this.state.data.admin
@@ -193,6 +195,7 @@ class AddCandidateView extends Component {
       data: {
         firstName: this.state.data.firstName,
         lastName: this.state.data.lastName,
+        email: this.state.data.email,
         password: this.state.data.password,
         password_confirm: event.target.value,
         admin: this.state.data.admin
@@ -200,10 +203,11 @@ class AddCandidateView extends Component {
     });
   }
   addCandidate (hideFunc) {
-    if(this.state.data.admin === 'Y'){
-      if(this.state.data.password === this.state.data.password_confirm){
+    if(this.state.data.admin === 'Y') {
+      if(this.state.data.password === this.state.data.password_confirm) {
         this.props.addCandidate(this.state.data);
         this.setState({ data:{} });
+
       } else {
         console.log('Passwords don\'t match!');
       }
@@ -229,7 +233,7 @@ class AddCandidateView extends Component {
     this.setState({
       showStatus: false
     });
-    console.log(this);
+    // console.log(this);
   }
 
 }

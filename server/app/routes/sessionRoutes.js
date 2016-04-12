@@ -1,6 +1,9 @@
 var jwt = require('jsonwebtoken');
 var config = require ('../../config');
 
+// bcrypt password hashing
+var bcrypt = require('bcrypt');
+
 exports.loginUser = function(User, Session, app) {
   var result = {};
   return function(req, res, next){
@@ -14,7 +17,9 @@ exports.loginUser = function(User, Session, app) {
       if (user.admin !== 'Y') {
         return res.json({ success: false, message: 'User does not have Admin privileges!' });
       }
-      // if(user.password !== req.body.password) {
+
+      // verify password
+      // if( bcrypt.compareSync(req.body.password, user.password) === false ) {
       //   return res.json({ success: false, message: 'Authentication failed.  Wrong password!' });
       // }
 
