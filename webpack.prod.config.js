@@ -26,7 +26,7 @@ config = update(config, {
       path: SCRIPTS_PATH,
       pathInfo: true,
       publicPath: '/dist/',
-      filename: 'bundle.[hash].min.js'
+      filename: '../../dist/bundle.[hash].min.js'
     }
   },
 
