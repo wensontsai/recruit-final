@@ -4,6 +4,8 @@
 server/config.js
 server/config_test.js
 
+server/static
+
 node_modules
 
 dist
