@@ -3,6 +3,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import config from '../../../server/config';
+
 import './nav.scss';
 
 class Nav extends Component {
@@ -14,7 +16,7 @@ class Nav extends Component {
 		return (
 				<div className='nav'>
 					<div className='nav-title'>
-						<Link className='link' to='/' >RECRUIT</Link>
+						<Link className='link' to='/' >{config.appName}</Link>
 					</div>
 					{(/(^|;)\s*token=/.test(document.cookie)
 					  ? <div className='nav-links'>

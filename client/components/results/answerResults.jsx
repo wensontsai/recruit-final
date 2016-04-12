@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import './results.scss';
 
-
 class AnswerResults extends Component {
   constructor (props) {
     super (props);
