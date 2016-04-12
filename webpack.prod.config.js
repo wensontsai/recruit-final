@@ -49,10 +49,11 @@ config = update(config, {
         {
           test: /\.jsx?$/,
           loaders: [ 'babel' ],
-          query: {
-            presets: ['es2015', 'react']
-          },
-          exclude: /node_modules/
+          exclude: /node_modules/,
+          query:
+                {
+                  presets:['react']
+                }
         },
         {
           test: /\.scss$/,
