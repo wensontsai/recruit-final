@@ -48,12 +48,11 @@ config = update(config, {
       $push: [
         {
           test: /\.jsx?$/,
-          loaders: [ 'babel' ],
+          loader: 'babel',
           exclude: /node_modules/,
-          query:
-                {
-                  presets:['react']
-                }
+          query: {
+            presets: ['es2015', 'react']
+          }
         },
         {
           test: /\.scss$/,
