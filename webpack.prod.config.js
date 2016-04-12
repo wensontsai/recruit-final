@@ -25,7 +25,7 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/static/scripts/',
+      publicPath: '/dist/',
       filename: 'bundle.[hash].min.js'
     }
   },
@@ -37,7 +37,7 @@ config = update(config, {
       new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
       new HtmlWebpackPlugin({
         inject: true,
-        filename: '../../templates/index.html',
+        filename: '../../dist/index.html',
         template: 'client/views/index.tpl'
       })
     ]
