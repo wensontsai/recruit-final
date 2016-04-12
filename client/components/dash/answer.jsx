@@ -60,7 +60,6 @@ class Answer extends Component {
   }
   submitAnswer () {
     if(this.state.data.answer !== ''){
-      console.log('sending to action:', this.state.data);
       this.props.submitAnswer(this.state.data);
       this.setState({ 
         data:{

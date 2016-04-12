@@ -2,7 +2,7 @@ var server = require('./server_test');
 var server = http.createServer(app);
 
 var boot = function () {
-  server.listen6666), function(){
+  server.listen(6666, function() {
   console.info('Express server listening on port ' + 6666);
   });
 }

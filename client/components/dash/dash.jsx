@@ -22,7 +22,6 @@ class DisplaysAll extends Component {
 	}
 	componentDidMount () {
 		if(localStorage.getItem('examId')){
-			console.log('we been here bayforeee');
 			// run an action, 
 			// that sends in ExamId - requeries
 			// sets remaining time
@@ -56,7 +55,6 @@ class DisplaysAll extends Component {
 	}
 
 	queryExam (data){
-		console.log(this.state.data);
 		this.props.queryExam(this.state.data);
 	}
 }

@@ -67,15 +67,12 @@ class Profile extends Component {
     );
   }
   handleTimeRemaining (time) {
-      console.log('what we got at disposal', time);
       this.setLocalStorageForExam(this.props.dash.data.examId, this.props.dash.data.endTime);
     if(time === null){
       this.props.finishExam(this.props.dash.data);
     }
   }
   setLocalStorageForExam (examId, endTime) {
-    console.log('examId',examId);
-    console.log('endTime',endTime);
     localStorage.setItem('examId', examId);
     localStorage.setItem('endTime', endTime);
   }

@@ -8,9 +8,9 @@ exports.submitAnswer = function(Answer, Prompt) {
     });
     Answer.findOne({ examId: req.body.examId, promptId: req.body.promptId }, function(err, answer) {
       if(err) return console.error(err);
-      // if (answer) {
-      //   return res.json( {success: false, message: 'This question has already been answered for this exam session!'} );
-      // } else {
+      if (answer) {
+        return res.json( {success: false, message: 'This question has already been answered for this exam session!'} );
+      } else {
 
          var answer = new Answer({
           userId : req.body.userId,
@@ -25,11 +25,10 @@ exports.submitAnswer = function(Answer, Prompt) {
           if(err) return console.error(err);
           res.json(answer);
         });
-      // }
+      }
     });
   };
 };
-
 exports.queryCandidateAnswers = function(Answer, User) {
   var results = {};
   return function(req, res, next){

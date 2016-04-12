@@ -12,7 +12,6 @@ var smtpTransport = nodemailer.createTransport('SMTP', {
        pass: config.email.auth.pass
    }
 });
-
 exports.startExam = function(Examination) {
   return function(req, res, next) {
     Examination.findOne({ _id: req.body.data.examId }, function(err, exam) {
@@ -39,8 +38,6 @@ exports.startExam = function(Examination) {
     });
   };
 };
-
-
 exports.initializeExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
@@ -100,7 +97,6 @@ exports.initializeExam = function(Examination, User) {
     });
   };
 }
-
 exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
@@ -129,7 +125,6 @@ exports.queryExam = function(Examination, User) {
     });
   };
 }
-
 exports.finishExam = function(Examination, User){
   return function(req, res, next){
     Examination.findOne({ _id: req.body.examId }, function(err, exam) {

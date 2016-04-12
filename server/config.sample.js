@@ -1,7 +1,7 @@
 module.exports = {
   appName: '<app_name>',
   secret: '<secret>',
-  database: {
+  db: {
     dev: 'mongodb://localhost/<database_name>',
     test: 'mongodb://localhost/<test_database_name>'
   },

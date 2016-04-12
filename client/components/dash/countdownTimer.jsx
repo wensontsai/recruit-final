@@ -1,7 +1,6 @@
 var React = require('react');
 import { connect } from 'react-redux';
 
-
 // Generic Countdown Timer UI component
 //
 // https://github.com/uken/react-countdown-timer
@@ -22,6 +21,7 @@ import { connect } from 'react-redux';
 //   - completeCallback(): Function (optional)
 //       A function to call when the countdown completes.
 //
+
 var CountdownTimer = React.createClass({
   displayName: 'CountdownTimer',
 
@@ -56,7 +56,6 @@ var CountdownTimer = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('*@#$@#$@#$@#$@#$', this.props);
     this.tick();
   },
 

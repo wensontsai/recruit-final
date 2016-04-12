@@ -13,6 +13,7 @@ function shuffle(array) {
     }
     return array;
 }
+
 // Route used during examinations
 exports.queryAllPrompts = function(Prompt) {
   return function(req, res, next) {
@@ -23,6 +24,7 @@ exports.queryAllPrompts = function(Prompt) {
     });
   };
 };
+
 // Route used for Admin dashboard
 exports.queryAllPromptsList = function(Prompt) {
   var results = {};
@@ -100,7 +102,6 @@ exports.editPrompt = function(Prompt){
     });
   };
 };
-
 exports.deletePrompt = function(Prompt){
   var results = {};
   return function(req, res, next){

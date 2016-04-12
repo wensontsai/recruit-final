@@ -7,9 +7,7 @@ var bcrypt = require('bcrypt');
 exports.loginUser = function(User, Session, app) {
   var result = {};
   return function(req, res, next){
-    console.log(req.body);
     User.findOne({ email: req.body.email }, function(err, user) {
-      console.log(user);
       if(err) return console.error(err);
       if (!user) {
         return res.json({ success: false, message: 'User Email not found!' });
@@ -37,7 +35,6 @@ exports.loginUser = function(User, Session, app) {
         userId: user._id,
         userEmail: user.email
       }
-      console.log(result);
       res.json(result);
     });
   };
@@ -45,7 +42,6 @@ exports.loginUser = function(User, Session, app) {
 exports.logoutUser = function(User, Session, app) {
   var result = {};
   return function(req, res, next){
-    console.log(req.body);
     // logout session in DB
 
     // on success send back json

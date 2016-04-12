@@ -52,10 +52,10 @@ config = update(config, {
   module: {
     loaders: {
       $push: [
-        { 
-          test: /\.jsx?$/, 
-          loaders: [ 'babel' ], 
-          exclude: /node_modules/ 
+        {
+          test: /\.jsx?$/,
+          loaders: [ 'babel' ],
+          exclude: /node_modules/
         },
         {
           test: /\.scss$/,

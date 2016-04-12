@@ -3,7 +3,6 @@ var bcrypt = require('bcrypt');
 
 exports.addUser = function(User) {
   return function(req, res, next) {
-  console.log(req.body);
     User.findOne({ firstName: req.body.firstName, lastName: req.body.lastName, email: req.body.email }, function(err, user) {
       if(err) return console.error(err);
       if (user) {
