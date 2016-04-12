@@ -49,6 +49,9 @@ config = update(config, {
         {
           test: /\.jsx?$/,
           loaders: [ 'babel' ],
+          query: {
+            presets: ['es2015', 'react']
+          },
           exclude: /node_modules/
         },
         {
