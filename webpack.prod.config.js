@@ -8,7 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var SCRIPTS_PATH = 'server/static/scripts';
-var TEMPLATES_PATH = 'server/static/templates';
+var TEMPLATES_PATH = 'server/static';
 
 config = update(config, {
   bail: { $set: true },
@@ -37,7 +37,7 @@ config = update(config, {
       new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
       new HtmlWebpackPlugin({
         inject: true,
-        filename: '../../static/templates/index.html',
+        filename: '../../static/index.html',
         template: 'client/views/index.tpl'
       })
     ]
