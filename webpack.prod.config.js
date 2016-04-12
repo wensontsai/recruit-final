@@ -7,8 +7,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
-var SCRIPTS_PATH = 'dist';
-var TEMPLATES_PATH = 'dist';
+var SCRIPTS_PATH = 'server/static/scripts';
+var TEMPLATES_PATH = 'server/static/templates';
 
 config = update(config, {
   bail: { $set: true },
@@ -25,8 +25,8 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/dist/',
-      filename: '../../dist/bundle.[hash].min.js'
+      publicPath: '/static/scripts/',
+      filename: 'bundle.[hash].min.js'
     }
   },
 
@@ -37,7 +37,7 @@ config = update(config, {
       new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
       new HtmlWebpackPlugin({
         inject: true,
-        filename: '../../dist/index.html',
+        filename: '../../static/templates/index.html',
         template: 'client/views/index.tpl'
       })
     ]
