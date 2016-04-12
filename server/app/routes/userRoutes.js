@@ -6,9 +6,10 @@ exports.addUser = function(User) {
         return res.json({ success: false, message: 'This user already exists!' });
       } else {
         var user = new User({
-          firstName : req.body.firstName,
-          lastName : req.body.lastName,
-          email : req.body.email,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: req.body.password,
           admin: req.body.admin,
           currentExam: null
         });
