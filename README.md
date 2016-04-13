@@ -27,5 +27,5 @@ run node/express back-end server for API routes:
 
 ## PRODUCTION
 #### Front-End
-build:
+build:  
 ```npm run dist```
