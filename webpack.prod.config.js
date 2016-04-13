@@ -27,7 +27,7 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/static/scripts/',
+      publicPath: '/scripts/', // appended to script tag in index.html 
       filename: 'bundle.[hash].min.js'
     }
   },
