@@ -39,6 +39,11 @@ config = update(config, {
       //   sourceMap: false,
       //   mangle: false 
       // }),
+      new webpack.optimize.UglifyJsPlugin({
+          compress: {
+              warnings: false
+          }
+      }),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
@@ -47,16 +52,37 @@ config = update(config, {
     ]
   },
 
+  // module: {
+  //   loaders: {
+  //     $push: [
+  //       {
+  //         test: /\.jsx?$/,
+  //         loader: 'babel',
+  //         exclude: /node_modules/,
+  //         query: {
+  //           presets: ['es2015', 'react']
+  //         }
+  //       },
+  //       {
+  //         test: /\.scss$/,
+  //         loaders: [
+  //             'style',
+  //             'css',
+  //             'autoprefixer?browsers=last 3 versions',
+  //             'sass?outputStyle=expanded'
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // },
+
   module: {
     loaders: {
       $push: [
         {
           test: /\.jsx?$/,
-          loader: 'babel',
-          exclude: /node_modules/,
-          query: {
-            presets: ['es2015', 'react']
-          }
+          loaders: [ 'babel' ],
+          exclude: /node_modules/
         },
         {
           test: /\.scss$/,
@@ -70,6 +96,7 @@ config = update(config, {
       ]
     }
   },
+
 });
 
 module.exports = config;

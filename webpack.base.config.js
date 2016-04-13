@@ -16,10 +16,10 @@ module.exports = {
     new webpack.DefinePlugin({
       NODE_ENV: process.env.NODE_ENV
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      mangle: false
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: false,
+    //   mangle: false
+    // })
   ],
 
   module: {
