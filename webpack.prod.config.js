@@ -42,11 +42,11 @@ config = update(config, {
       //   mangle: false 
       // }),
 
-      // new webpack.optimize.UglifyJsPlugin({
-      //     compress: {
-      //         warnings: false
-      //     }
-      // }),
+      new webpack.optimize.UglifyJsPlugin({
+          compress: {
+              warnings: true
+          }
+      }),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
@@ -60,11 +60,11 @@ config = update(config, {
       $push: [
         {
           test: /\.jsx?$/,
-          loader: 'babel-loader',
+          loader: 'babel?presets[]=react',
           exclude: /node_modules/,
-          query: {
-            presets: ['es2015', 'stage-1', 'react']
-          }
+          // query: {
+          //   presets: ['es2015', 'stage-0', 'react']
+          // }
         },
         {
           test: /\.scss$/,
