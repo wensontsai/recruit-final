@@ -60,11 +60,16 @@ exports.initializeExam = function(Examination, User) {
           // -----------------------
           // Send Email to Candidate
           // -----------------------
+          if(process.env.NODE_ENV === 'production') {
+            var test_path = 'http://recruit.dressler.io/exams';
+          } else {
+            var test_path = 'http://localhost:3000/exams';
+          }
           var mailOptions = {
               from: config.email.auth.sender_name+ ' ' +config.email.auth.user, // sender address
               to: user.email, // list of receivers
               subject: 'Hello ' +user.firstName+ '!', // Subject line
-              text: 'We would like to invite you to participate in a code challenge!\n\nPlease visit http://localhost:3000/exams/' +exam.id+ ' to begin!', // plaintext body
+              text: 'We would like to invite you to participate in a code challenge!\n\nPlease visit ' +test_path+ '/' +exam.id+ ' to begin!', // plaintext body
               // html: '<b>Hello world 🐴</b>' // html body
           };
           
