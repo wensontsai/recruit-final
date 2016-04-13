@@ -164,7 +164,6 @@ class AddCandidateView extends Component {
         admin: this.state.data.admin
       }
     });
-    console.log(this.state.data.email);
   }
   handleChangeAdmin (status, event) {
     this.setState({
