@@ -36,11 +36,11 @@ config = update(config, {
     $push: [
       new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
       // new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({ 
-        output: { comments: false },
-        sourceMap: false,
-        mangle: false 
-      }),
+      // new webpack.optimize.UglifyJsPlugin({ 
+      //   output: { comments: false },
+      //   sourceMap: false,
+      //   mangle: false 
+      // }),
 
       // new webpack.optimize.UglifyJsPlugin({
       //     compress: {
@@ -60,7 +60,7 @@ config = update(config, {
       $push: [
         {
           test: /\.jsx?$/,
-          loader: 'babel',
+          loader: 'babel-loader',
           exclude: /node_modules/,
           query: {
             presets: ['es2015', 'stage-1', 'react']
