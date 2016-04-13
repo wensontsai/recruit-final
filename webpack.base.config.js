@@ -15,7 +15,11 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       NODE_ENV: process.env.NODE_ENV
-    })
+    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: false,
+    //   mangle: false
+    // })
   ],
 
   module: {
