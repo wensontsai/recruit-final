@@ -15,9 +15,8 @@ var TEMPLATES_PATH = 'server/static';
 config = update(config, {
   debug: { $set: true },
   entry: { $set: ['./client/entry'] },
-  profile: { $set: true },
-
-  // devtool: { $set: '#source-map' },
+  profile: { $set: false },
+  devtool: { $set: '#source-map' },
 
   output: {
     $set: {
@@ -31,6 +30,17 @@ config = update(config, {
   plugins: {
     $push: [
       new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.DefinePlugin({
+        'process.env':{
+         'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin({ 
+        output: { comments: false },
+        sourceMap: false,
+        mangle: false 
+      }),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
