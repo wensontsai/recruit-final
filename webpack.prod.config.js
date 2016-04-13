@@ -27,7 +27,7 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/scripts/',
+      publicPath: '/static/scripts/',
       filename: 'bundle.[hash].min.js'
     }
   },
@@ -51,7 +51,7 @@ config = update(config, {
       // }),
       new HtmlWebpackPlugin({
         inject: true,
-        filename: 'server/static/index.html',
+        filename: '../../static/index.html',
         template: 'client/views/index.tpl'
       }),
     ]

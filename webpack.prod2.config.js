@@ -23,7 +23,7 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/scripts/',
+      publicPath: '/static/scripts/',
       filename: 'bundle.[hash].min.js'
     }
   },
