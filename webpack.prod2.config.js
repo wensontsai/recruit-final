@@ -30,7 +30,7 @@ config = update(config, {
 
   plugins: {
     $push: [
-      // new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
+      new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
