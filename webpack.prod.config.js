@@ -1,9 +1,11 @@
 'use strict';
 
-var update = require('react/lib/update');
 var webpack = require('webpack');
 var config = require('./webpack.base.config.js');
+var update = require('react/lib/update');
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -39,16 +41,16 @@ config = update(config, {
       //   sourceMap: false,
       //   mangle: false 
       // }),
-      new webpack.optimize.UglifyJsPlugin({
-          compress: {
-              warnings: false
-          }
-      }),
+      // new webpack.optimize.UglifyJsPlugin({
+      //     compress: {
+      //         warnings: false
+      //     }
+      // }),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
         template: 'client/views/index.tpl'
-      })
+      }),
     ]
   },
 
