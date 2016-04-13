@@ -35,18 +35,20 @@ config = update(config, {
   plugins: {
     $push: [
       new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
+
       // new webpack.optimize.DedupePlugin(),
+      
       // new webpack.optimize.UglifyJsPlugin({ 
       //   output: { comments: false },
       //   sourceMap: false,
       //   mangle: false 
       // }),
 
-      new webpack.optimize.UglifyJsPlugin({
-          compress: {
-              warnings: true
-          }
-      }),
+      // new webpack.optimize.UglifyJsPlugin({
+      //     compress: {
+      //         warnings: true
+      //     }
+      // }),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
@@ -60,11 +62,11 @@ config = update(config, {
       $push: [
         {
           test: /\.jsx?$/,
-          loader: 'babel?presets[]=react',
+          loader: 'babel',
           exclude: /node_modules/,
-          // query: {
-          //   presets: ['es2015', 'stage-0', 'react']
-          // }
+          query: {
+            presets: ['es2015', 'stage-0', 'react']
+          }
         },
         {
           test: /\.scss$/,
@@ -78,27 +80,6 @@ config = update(config, {
       ]
     }
   },
-
-  // module: {
-  //   loaders: {
-  //     $push: [
-  //       {
-  //         test: /\.jsx?$/,
-  //         loaders: [ 'babel' ],
-  //         exclude: /node_modules/
-  //       },
-  //       {
-  //         test: /\.scss$/,
-  //         loaders: [
-  //             'style',
-  //             'css',
-  //             'autoprefixer?browsers=last 3 versions',
-  //             'sass?outputStyle=expanded'
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // },
 
 });
 
