@@ -13,15 +13,11 @@ var SCRIPTS_PATH = 'server/static/scripts';
 var TEMPLATES_PATH = 'server/static';
 
 config = update(config, {
-  bail: { $set: true },
-
-  entry: { $set: ['./client/entry'] },
-
   debug: { $set: true },
+  entry: { $set: ['./client/entry'] },
+  profile: { $set: true },
 
-  profile: { $set: false },
-
-  devtool: { $set: '#source-map' },
+  // devtool: { $set: '#source-map' },
 
   output: {
     $set: {
@@ -34,26 +30,13 @@ config = update(config, {
 
   plugins: {
     $push: [
-      new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
-
-      // new webpack.optimize.DedupePlugin(),
-
-      // new webpack.optimize.UglifyJsPlugin({ 
-      //   output: { comments: false },
-      //   sourceMap: false,
-      //   mangle: false 
-      // }),
-
-      // new webpack.optimize.UglifyJsPlugin({
-      //     compress: {
-      //         warnings: true
-      //     }
-      // }),
+ 
       new HtmlWebpackPlugin({
         inject: true,
         filename: 'server/static/index.html',
         template: 'client/views/index.tpl'
       }),
+ 
     ]
   },
 
@@ -62,11 +45,8 @@ config = update(config, {
       $push: [
         {
           test: /\.jsx?$/,
-          loader: 'babel',
-          exclude: /node_modules/,
-          query: {
-            presets: ['es2015', 'stage-0', 'react']
-          }
+          loaders: [ 'babel' ],
+          exclude: /node_modules/
         },
         {
           test: /\.scss$/,
