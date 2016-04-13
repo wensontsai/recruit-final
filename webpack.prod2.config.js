@@ -22,7 +22,7 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/scripts/', // appended to script tag in index.html 
+      publicPath: '/scripts/', // appended to script tag in index.html
       filename: 'bundle.[hash].min.js'
     }
   },
@@ -33,10 +33,10 @@ config = update(config, {
       new webpack.optimize.DedupePlugin(),
       new webpack.DefinePlugin({
         'process.env':{
-         'NODE_ENV': JSON.stringify('production')
+          'NODE_ENV': JSON.stringify('production')
         }
       }),
-      new webpack.optimize.UglifyJsPlugin({ 
+      new webpack.optimize.UglifyJsPlugin({
         output: { comments: false },
         sourceMap: false,
         mangle: false 
@@ -46,7 +46,6 @@ config = update(config, {
         filename: '../../static/index.html',
         template: 'client/views/index.tpl'
       }),
- 
     ]
   },
 
