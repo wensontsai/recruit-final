@@ -23,14 +23,14 @@ config = update(config, {
     $set: {
       path: SCRIPTS_PATH,
       pathInfo: true,
-      publicPath: '/static/scripts/',
+      publicPath: '/scripts/',
       filename: 'bundle.[hash].min.js'
     }
   },
 
   plugins: {
     $push: [
- 
+      // new CleanWebpackPlugin([SCRIPTS_PATH, TEMPLATES_PATH]),
       new HtmlWebpackPlugin({
         inject: true,
         filename: '../../static/index.html',
