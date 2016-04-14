@@ -8,13 +8,13 @@ export function startExam (data) {
   return async dispatch => {
     try {
       const result = await post('/api/startExam', data);
+      
+      // set LocalStorage for UI display in case of refresh
+      window.localStorage.setItem('endTime', result.endTime);
 
       dispatch({
         type: actionTypes.START_EXAM_SUCCESS,
         result: result
-      }),
-      dispatch({
-        type: actionTypes.SET_TIME_REMAINING,
       });
 
     } catch(e) {
@@ -31,6 +31,9 @@ export function queryExam (data) {
     try {
       const queryExamResult = await post('/api/queryExam', data);
 
+      if(localStorage.getItem('endTime')){
+        console.log('there is an unfinished exam currrently in progresssso');
+      }
       dispatch({
         type: actionTypes.QUERY_EXAM_SUCCESS,
         queryExamResult: queryExamResult
@@ -120,6 +123,9 @@ console.log(submitResult);
 export function finishExam (data) {
   return async dispatch => {
     const result = await post('/api/finishExam', data);
+
+    // remove localStorage variables for UI display
+    localStorage.removeItem('endTime');
 
     try {
       const result = await post('/api/finishExam', data);

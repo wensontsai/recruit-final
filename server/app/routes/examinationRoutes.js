@@ -70,12 +70,12 @@ exports.initializeExam = function(Examination, User) {
           };
           
           // send mail with defined transport object
-          transporter.sendMail(mailOptions, function(error, info){
-              if(error){
-                  return console.log(error);
-              }
-              console.log('Message sent: ' + info.response);
-          });
+          // transporter.sendMail(mailOptions, function(error, info){
+          //     if(error){
+          //         return console.log(error);
+          //     }
+          //     console.log('Message sent: ' + info.response);
+          // });
 
           // save user object
           user.currentExam = true;

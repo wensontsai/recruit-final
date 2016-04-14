@@ -15,7 +15,19 @@ class Profile extends Component {
       data: {
         timeRemainingNow: '',
         examId: props.dash.data.examId || ''
+      },
+      view: {
+        showPrompt: props.dash.view.showPrompt || ''
       }
+    }
+  }
+  componentWillMount () {
+    if(localStorage.getItem('endTime')){
+      this.setState({
+        view: {
+          showPrompt: true
+        }
+      });
     }
   }
 
@@ -41,7 +53,7 @@ class Profile extends Component {
                 We will reply to you shortly! ***
               </div>
           
-          : this.props.dash.view.showPrompt
+          : this.state.view.showPrompt
           ? <div className='status'>
               Time Remaining:
               <div className='countdown-timer'>
