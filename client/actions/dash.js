@@ -10,7 +10,7 @@ export function startExam (data) {
       const result = await post('/api/startExam', data);
       
       // set LocalStorage for UI display in case of refresh
-      window.localStorage.setItem('endTime', result.endTime);
+      localStorage.setItem('endTime', result.endTime);
 
       dispatch({
         type: actionTypes.START_EXAM_SUCCESS,
