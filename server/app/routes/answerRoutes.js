@@ -1,11 +1,21 @@
-exports.submitAnswer = function(Answer, Prompt) {
+exports.submitAnswer = function(Answer, Prompt, Examination) {
   var promptText = '';
+  var answeredPrompts = [];
   var now = new Date();
 
   return function(req, res, next){
     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt){
       promptText = prompt.question;
     });
+    Examination.findOne({ _id: req.body.examId }, function(err, exam){
+      exam.answeredPrompts.push(req.body.promptId);
+      answeredPrompts = exam.answeredPrompts;
+
+      exam.save(function(err, exam) {
+        if(err) return console.error(err);
+      });
+    });
+
     Answer.findOne({ examId: req.body.examId, promptId: req.body.promptId }, function(err, answer) {
       if(err) return console.error(err);
       if (answer) {
@@ -18,6 +28,7 @@ exports.submitAnswer = function(Answer, Prompt) {
           promptId : req.body.promptId,
           prompt: promptText,
           answer : req.body.answer,
+          answeredPrompts: answeredPrompts,
           endTime : now
         });
 

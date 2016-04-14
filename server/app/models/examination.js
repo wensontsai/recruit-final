@@ -6,5 +6,6 @@ module.exports = mongoose.model('Examination', new Schema({
   timeAllowed : { type : String },
   startTime : { type : String },
   endTime : { type : String },
+  answeredPrompts : { type : Array , "default" : [] },
   completed : { type : String }
 }));

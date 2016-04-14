@@ -81,7 +81,7 @@ export function submitAnswer (data) {
   return async dispatch => {
     try {
       const submitResult = await post('/api/submitAnswer', data);
-
+console.log(submitResult);
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         submitResult: submitResult,

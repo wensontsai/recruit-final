@@ -46,6 +46,7 @@ exports.initializeExam = function(Examination, User) {
       timeAllowed: 7200000,
       startTime: '',
       endTime: '',
+      answeredPrompts: [],
       completed: null
     });
     exam.save(function(error, exam){
@@ -112,6 +113,7 @@ exports.queryExam = function(Examination, User) {
             result = {
               success: true,
               examId: exam._id,
+              answeredPrompts: exam.answeredPrompts,
               userId: user._id,
               firstName: user.firstName,
               lastName: user.lastName,

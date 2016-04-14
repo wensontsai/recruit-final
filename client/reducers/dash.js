@@ -28,7 +28,8 @@ const startExam = (state, action) => {
       questionsAsked: 1,
       questionsTotal: 3,
       timeRemaining: 7200000,
-      endTime: action.result.endTime
+      endTime: action.result.endTime,
+      answeredPrompts: action.result.answeredPrompts
     },
     view: {
       showPrompt: true
@@ -62,11 +63,11 @@ const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
       questionsAsked: action.newQuestionsAsked,
-      timeRemaining: action.submitResult.timeRemaining,
       currentPrompt: action.newAllPrompts[0].question,
       currentPromptId: action.newAllPrompts[0]._id,
       allPrompts: action.newAllPrompts,
-      timeRemaining: action.newTimeRemaining
+      timeRemaining: action.newTimeRemaining,
+      answeredPrompts: action.submitResult.answeredPrompts
     }
   });
 };
