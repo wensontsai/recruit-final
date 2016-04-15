@@ -68,6 +68,7 @@ export function queryAllPrompts () {
     var temp = arr[indexA];
     arr[indexA] = arr[indexB];
     arr[indexB] = temp;
+    return arr;
   };
 
   return async dispatch => {
@@ -87,21 +88,14 @@ export function queryAllPrompts () {
             return localStorage.getItem('answeredPrompts').indexOf(val._id) === -1;
           });
 
-
-          // Prepare Prompts Array - discard used prompt
-          newAllPrompts.shift();
-
           // Put currentPrompt as first item in array
           for(var index in newAllPrompts){
             if(newAllPrompts[index]._id === localStorage.getItem('currentPromptId') ){
               index2Swap = index;
             }
           }
-          swapArrayElements(newAllPrompts, index2Swap, 0);
-
-          // pass Object
-          console.log('@#$@#$@#$@$@#$@#$---->>>>>>',newAllPrompts);
-          passResult = newAllPrompts;
+          passResult = swapArrayElements(newAllPrompts, index2Swap, 0);
+          console.log('@#$@#$@#$@$@#$@#$---->>>>>>',passResult);
           
         } catch(e) {
           dispatch({
@@ -113,6 +107,7 @@ export function queryAllPrompts () {
       } else { 
         // Brand New Exam Start
         localStorage.setItem('currentPromptId', queryPromptResult[0]._id);
+        localStorage.setItem('answeredPrompts', []);
         passResult = queryPromptResult;
       }
       

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Megrim|Flamenco|Monofett|Montserrat:400,700|Lato:100,400,700' rel='stylesheet' type='text/css'>
-    <title><%= htmlWebpackPlugin.options.title || 'Flask React Boilerplate' %></title>
+    <title>Recruit</title>
   </head>
   <body>
     <div class="container">  
