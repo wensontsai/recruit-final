@@ -5,12 +5,16 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
   var results = {};
 
   return function(req, res, next){
+    console.log(req.body);
     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt){
       promptText = prompt.question;
     });
     Examination.findOne({ _id: req.body.examId }, function(err, exam){
       exam.answeredPrompts.push(req.body.promptId);
-      exam.completed = 'Y';
+
+      if(exam.answeredPrompts.length === 3) {
+        exam.completed = 'Y';
+      }
 
       exam.save(function(err, exam) {
         if(err) return console.error(err);
