@@ -48,7 +48,7 @@ exports.initializeExam = function(Examination, User) {
       timeAllowed: 7200000,
       questionsTotal: 3,
       startTime: null,
-      endTime: '',
+      endTime: null,
       answeredPrompts: [],
       completed: null
     });
@@ -121,6 +121,7 @@ exports.queryExam = function(Examination, User) {
               email: user.email,
               examId: exam._id,
               timeAllowed: exam.timeAllowed,
+              questionsTotal: exam.questionsTotal,
               startTime: exam.startTime,
               endTime: exam.endTime,
               answeredPrompts: exam.answeredPrompts,

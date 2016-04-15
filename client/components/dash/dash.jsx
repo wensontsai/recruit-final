@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { queryExam, continueExam } from '../../actions/dash';
+import { queryExam } from '../../actions/dash';
 
 import Nav from '../nav/nav';
 import Answer from '../dash/answer';
@@ -25,7 +25,6 @@ class DisplaysAll extends Component {
 	}
 	componentDidMount () {
 		if(localStorage.getItem('endTime')){
-
 			this.setState({
 				view: {
 					showPrompt: true
@@ -67,5 +66,5 @@ class DisplaysAll extends Component {
 
 export default connect(
 	(state) => ({ dash: state.dash }),
-	{ queryExam, continueExam }
+	{ queryExam }
 )(DisplaysAll);

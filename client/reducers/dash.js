@@ -51,7 +51,11 @@ const queryExam = (state, action) => {
       email: action.queryExamResult.email,
       examId: action.queryExamResult.examId,
 
+      timeRemaining: action.newTimeRemaining,
+
       timeAllowed: action.queryExamResult.timeAllowed,
+      questionsTotal: action.queryExamResult.questionsTotal,
+      questionsAsked: action.queryExamResult.answeredPrompts.length + 1,
       startTime: action.queryExamResult.startTime,
       endTime: action.queryExamResult.endTime,
       answeredPrompts: action.queryExamResult.answeredPrompts,
@@ -62,7 +66,7 @@ const queryExam = (state, action) => {
 const startExam = (state, action) => {
   return merge({}, state, {
     data: {
-      questionsAsked: 1,
+      questionsAsked: action.result.answeredPrompts.length + 1,
       timeRemaining: 7200000,
 
       questionsTotal: action.result.questionsTotal,
@@ -80,7 +84,7 @@ const startExam = (state, action) => {
 const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
-      questionsAsked: action.newQuestionsAsked,
+      questionsAsked: action.submitResult.answeredPrompts.length + 1,
 
       currentPrompt: action.newAllPrompts[0].question,
       currentPromptId: action.newAllPrompts[0]._id,

@@ -80,9 +80,9 @@ class Profile extends Component {
   }
   handleTimeRemaining (time) {
       this.setLocalStorageForExam(time);
-    if(time === null){
-      this.props.finishExam(this.props.dash.data);
-    }
+    // if(time === null){
+    //   this.props.finishExam(this.props.dash.data);
+    // }
   }
   setLocalStorageForExam (time) {
     localStorage.setItem('timeRemaining', time);

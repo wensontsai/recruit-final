@@ -27,16 +27,27 @@ export function startExam (data) {
 }
 
 export function queryExam (data) {
+  var newTimeRemaining;
+
   return async dispatch => {
     try {
       const queryExamResult = await post('/api/queryExam', data);
 
       if(localStorage.getItem('endTime')){
         console.log('there is an unfinished exam currrently in progresssso');
+
+        // Calculate Time Remaining
+        const now = new Date();
+        const endTime = new Date(queryExamResult.endTime);
+        const nowTime = new Date(now);
+        newTimeRemaining = Math.abs(endTime - nowTime);
+        console.log(newTimeRemaining);
       }
+
       dispatch({
         type: actionTypes.QUERY_EXAM_SUCCESS,
-        queryExamResult: queryExamResult
+        queryExamResult: queryExamResult,
+        newTimeRemaining: newTimeRemaining
       });
 
     } catch(e) {
@@ -68,9 +79,6 @@ export function queryAllPrompts () {
 }
 
 export function submitAnswer (data) {
-  // Increment Questions Asked Count
-  const newQuestionsAsked = data.questionsAsked +1;
-
   // Prepare Prompts Array - discard used prompt
   const newAllPrompts = data.allPrompts;
   newAllPrompts.shift();
@@ -87,7 +95,6 @@ export function submitAnswer (data) {
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         submitResult: submitResult,
-        newQuestionsAsked: newQuestionsAsked,
         newAllPrompts: newAllPrompts,
         newTimeRemaining: newTimeRemaining
       });
