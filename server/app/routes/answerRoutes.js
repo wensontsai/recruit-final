@@ -12,7 +12,7 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
     Examination.findOne({ _id: req.body.examId }, function(err, exam){
       exam.answeredPrompts.push(req.body.promptId);
 
-      if(exam.answeredPrompts.length === 3) {
+      if(exam.answeredPrompts.length === exam.questionsTotal) {
         exam.completed = 'Y';
       }
 

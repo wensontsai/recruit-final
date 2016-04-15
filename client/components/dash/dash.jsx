@@ -17,16 +17,22 @@ class DisplaysAll extends Component {
 		this.state = {
 			data: {
 			  examId: props.params.examId || ''   
+			},
+			view: {
+			  showPrompt: props.dash.view.showPrompt || ''
 			}
 		}
 	}
 	componentDidMount () {
-		if(localStorage.getItem('examId')){
-			// run an action, 
-			// that sends in ExamId - requeries
-			// sets remaining time
-			// 
+		if(localStorage.getItem('endTime')){
+
+			this.setState({
+				view: {
+					showPrompt: true
+				}
+			});
 		}
+
 		this.queryExam(this.state.data);
 	}
 	render () {
@@ -39,10 +45,10 @@ class DisplaysAll extends Component {
 				<Nav />
 				<div className='page'>
 					<Profile examId={this.props.examId}/>
-					{(dash.view.examCompleted
+					{(dash.data.completed === 'Y'
 		        ? <div className='row001'>
 							</div>
-		        : dash.view.showPrompt
+		        : dash.data.startTime !== null && dash.data.completed === null
 				        ? <div className='row001'>
 										<Question />
 										<Answer />

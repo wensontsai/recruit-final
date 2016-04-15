@@ -46,6 +46,7 @@ exports.initializeExam = function(Examination, User) {
     var exam = new Examination({
       userId: req.body.data.userId,
       timeAllowed: 7200000,
+      questionsTotal: 3,
       startTime: null,
       endTime: '',
       answeredPrompts: [],
