@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { queryExam } from '../../actions/dash';
+import { queryExam, queryAllPrompts } from '../../actions/dash';
 
 import Nav from '../nav/nav';
 import Answer from '../dash/answer';
@@ -30,6 +30,8 @@ class DisplaysAll extends Component {
 					showPrompt: true
 				}
 			});
+
+			this.props.queryAllPrompts();
 		}
 
 		this.queryExam(this.state.data);
@@ -66,5 +68,5 @@ class DisplaysAll extends Component {
 
 export default connect(
 	(state) => ({ dash: state.dash }),
-	{ queryExam }
+	{ queryExam, queryAllPrompts }
 )(DisplaysAll);

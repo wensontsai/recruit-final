@@ -20,6 +20,7 @@ exports.queryAllPrompts = function(Prompt) {
     Prompt.find({}, function(err, prompts) {
       if(err) return console.error(err);
       var promptsShuffled = shuffle(prompts);
+      console.log(promptsShuffled);
       res.json( promptsShuffled );
     });
   };

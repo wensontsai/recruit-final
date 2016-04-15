@@ -33,15 +33,15 @@ export function queryExam (data) {
     try {
       const queryExamResult = await post('/api/queryExam', data);
 
-      if(localStorage.getItem('endTime')){
+      // IF the exam has already begun (page refresh, navigated away, etc.) //
+      if(localStorage.getItem('endTime')) {
         console.log('there is an unfinished exam currrently in progresssso');
 
-        // Calculate Time Remaining
+        // Re-calculate Time Remaining
         const now = new Date();
         const endTime = new Date(queryExamResult.endTime);
         const nowTime = new Date(now);
         newTimeRemaining = Math.abs(endTime - nowTime);
-        console.log(newTimeRemaining);
       }
 
       dispatch({
@@ -60,13 +60,65 @@ export function queryExam (data) {
 }
 
 export function queryAllPrompts () {
+  var midExamObject = {};
+  var passResult = {};
+  var index2Swap;
+
+  var swapArrayElements = function(arr, indexA, indexB) {
+    var temp = arr[indexA];
+    arr[indexA] = arr[indexB];
+    arr[indexB] = temp;
+  };
+
   return async dispatch => {
     try {
       const queryPromptResult = await get('/api/queryAllPrompts');
 
+      // Exam Has Already Begun
+      if(localStorage.getItem('currentPromptId')) {
+        console.log('gaspacho dispacho');
+
+        // Re-fetch all prompts
+        try {
+          const queryPromptResult = await get('/api/queryAllPrompts');
+
+          // filter for ones already answered
+          var newAllPrompts = queryPromptResult.filter(function(val) {
+            return localStorage.getItem('answeredPrompts').indexOf(val._id) === -1;
+          });
+
+
+          // Prepare Prompts Array - discard used prompt
+          newAllPrompts.shift();
+
+          // Put currentPrompt as first item in array
+          for(var index in newAllPrompts){
+            if(newAllPrompts[index]._id === localStorage.getItem('currentPromptId') ){
+              index2Swap = index;
+            }
+          }
+          swapArrayElements(newAllPrompts, index2Swap, 0);
+
+          // pass Object
+          console.log('@#$@#$@#$@$@#$@#$---->>>>>>',newAllPrompts);
+          passResult = newAllPrompts;
+          
+        } catch(e) {
+          dispatch({
+            type: actionTypes.QUERY_ALL_PROMPTS_ERROR,
+            ERROR: e
+          });
+        }
+
+      } else { 
+        // Brand New Exam Start
+        localStorage.setItem('currentPromptId', queryPromptResult[0]._id);
+        passResult = queryPromptResult;
+      }
+      
       dispatch({
         type: actionTypes.QUERY_ALL_PROMPTS_SUCCESS,
-        queryPromptResult: queryPromptResult
+        queryPromptResult: passResult
       });
 
     } catch(e) {
@@ -83,6 +135,9 @@ export function submitAnswer (data) {
   const newAllPrompts = data.allPrompts;
   newAllPrompts.shift();
 
+  // set LocalStorage for consistency in case of refresh
+  localStorage.setItem('currentPromptId', newAllPrompts[0]._id);
+
   // Calculate Time Remaining
   const now = new Date();
   const endTime = new Date(data.endTime);
@@ -92,6 +147,11 @@ export function submitAnswer (data) {
   return async dispatch => {
     try {
       const submitResult = await post('/api/submitAnswer', data);
+
+      // set answeredPrompts locally
+      console.log('answered prompts array dude ->', submitResult.answeredPrompts);
+      localStorage.setItem('answeredPrompts', submitResult.answeredPrompts);
+
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         submitResult: submitResult,
@@ -99,6 +159,8 @@ export function submitAnswer (data) {
         newTimeRemaining: newTimeRemaining
       });
 
+      // IF questionsTotal has been reached,
+      // FINISH EXAM
       if (data.questionsAsked === data.questionsTotal) {
         const result = await post('/api/finishExam', data);
 
@@ -107,6 +169,8 @@ export function submitAnswer (data) {
           
           // remove localStorage variables for UI display
           localStorage.removeItem('endTime');
+          localStorage.removeItem('currentPromptId');
+          localStorage.removeItem('answeredPrompts');
           
           dispatch({
             type: actionTypes.FINISH_EXAM_SUCCESS,
@@ -137,8 +201,10 @@ export function finishExam (data) {
     try {
       const result = await post('/api/finishExam', data);
 
-      // remove localStorage variables for UI display
+      // Remove localStorage variables used for exam interruptions
       localStorage.removeItem('endTime');
+      localStorage.removeItem('currentPromptId');
+      localStorage.removeItem('answeredPrompts');
 
       dispatch({
         type: actionTypes.FINISH_EXAM_SUCCESS,

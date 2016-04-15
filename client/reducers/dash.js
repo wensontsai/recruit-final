@@ -67,7 +67,7 @@ const startExam = (state, action) => {
   return merge({}, state, {
     data: {
       questionsAsked: action.result.answeredPrompts.length + 1,
-      timeRemaining: 7200000,
+      timeRemaining: action.result.timeAllowed,
 
       questionsTotal: action.result.questionsTotal,
       timeAllowed: action.result.timeAllowed,
