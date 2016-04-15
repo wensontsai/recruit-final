@@ -2,7 +2,9 @@ var nodemailer = require('nodemailer');
 var config = require('../../config');
 
 // create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport(config.email.host);
+var transporter = nodemailer.createTransport(config.email.host, {
+  debug: true,
+});
 
 
 var smtpTransport = nodemailer.createTransport('SMTP', {
@@ -44,7 +46,7 @@ exports.initializeExam = function(Examination, User) {
     var exam = new Examination({
       userId: req.body.data.userId,
       timeAllowed: 7200000,
-      startTime: '',
+      startTime: null,
       endTime: '',
       answeredPrompts: [],
       completed: null
@@ -112,12 +114,16 @@ exports.queryExam = function(Examination, User) {
           } else {
             result = {
               success: true,
-              examId: exam._id,
-              answeredPrompts: exam.answeredPrompts,
               userId: user._id,
               firstName: user.firstName,
               lastName: user.lastName,
-              email: user.email
+              email: user.email,
+              examId: exam._id,
+              timeAllowed: exam.timeAllowed,
+              startTime: exam.startTime,
+              endTime: exam.endTime,
+              answeredPrompts: exam.answeredPrompts,
+              completed: exam.completed
             };
           }
           res.json(result);

@@ -84,7 +84,6 @@ export function submitAnswer (data) {
   return async dispatch => {
     try {
       const submitResult = await post('/api/submitAnswer', data);
-console.log(submitResult);
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         submitResult: submitResult,
@@ -98,7 +97,10 @@ console.log(submitResult);
 
         try {
           const result = await post('/api/finishExam', data);
-
+          
+          // remove localStorage variables for UI display
+          localStorage.removeItem('endTime');
+          
           dispatch({
             type: actionTypes.FINISH_EXAM_SUCCESS,
             result: result
@@ -124,31 +126,12 @@ export function finishExam (data) {
   return async dispatch => {
     const result = await post('/api/finishExam', data);
 
-    // remove localStorage variables for UI display
-    localStorage.removeItem('endTime');
 
     try {
       const result = await post('/api/finishExam', data);
 
-      dispatch({
-        type: actionTypes.FINISH_EXAM_SUCCESS,
-        result: result
-      });
-
-    } catch(e) {
-      dispatch({
-        type: actionTypes.FINISH_EXAM_ERROR,
-        ERROR: e
-      });
-    }
-  };
-}
-export function continueExam (data) {
-  return async dispatch => {
-    const result = await post('/api/finishExam', data);
-
-    try {
-      const result = await post('/api/finishExam', data);
+      // remove localStorage variables for UI display
+      localStorage.removeItem('endTime');
 
       dispatch({
         type: actionTypes.FINISH_EXAM_SUCCESS,

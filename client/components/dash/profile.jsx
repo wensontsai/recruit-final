@@ -46,33 +46,33 @@ class Profile extends Component {
           </div>
         </div>
         <div className='exam-status'>
-        {(this.props.dash.view.examCompleted
-          ? 
-              <div className='status'>
+        {(this.props.dash.data.completed === 'Y'
+          ? <div className='status'>
                 *** Thanks for taking the test! <br />
                 We will reply to you shortly! ***
               </div>
           
-          : this.state.view.showPrompt
-          ? <div className='status'>
-              Time Remaining:
-              <div className='countdown-timer'>
-                <Timer initialTimeRemaining = {this.props.dash.data.timeRemaining}
-                      handleTimeRemaining = {this.handleTimeRemaining.bind(this)}
-                />
+          : this.props.dash.data.startTime === null
+            ? <div className='status'>
+                You have 2 hours to complete the exam.<br />
+                When you are ready to begin click below:<br />
+                <button className='btn btn-sm start-exam'
+                  onClick={() => this.startExam ()}
+                  >Start Exam
+                </button>
               </div>
-              <div className='progress-area'>
-                You are on question # {this.props.dash.data.questionsAsked} out of {this.props.dash.data.questionsTotal}
+              
+            : <div className='status'>
+                Time Remaining:
+                <div className='countdown-timer'>
+                  <Timer initialTimeRemaining = {this.props.dash.data.timeRemaining}
+                        handleTimeRemaining = {this.handleTimeRemaining.bind(this)}
+                  />
+                </div>
+                <div className='progress-area'>
+                  You are on question # {this.props.dash.data.questionsAsked} out of {this.props.dash.data.questionsTotal}
+                </div>
               </div>
-            </div>
-          : <div className='status'>
-              You have 2 hours to complete the exam.<br />
-              When you are ready to begin click below:<br />
-              <button className='btn btn-sm start-exam'
-                onClick={() => this.startExam ()}
-                >Start Exam
-              </button>
-            </div>
         )}
         </div>
       </div>

@@ -3,50 +3,33 @@ import merge from 'lodash.merge';
 
 const initialState = {
   data: {
+    // User data
     userId: '',
     firstName: '',
     lastName: '',
     email: '',
-    examId: '',
-    questionsAsked: 0,
-    questionsTotal: 0,
-    timeRemaining: 0,
-    endTime: '',
+    
+    // Prompt selection UI
     currentPrompt: '',
     currentPromptId: false,
-    allPrompts: []
+    allPrompts: [],
+    questionsAsked: 0,
+    questionsTotal: 0,
+    
+    timeRemaining: 0,
+    
+    // Prompt data
+    examId: '',
+    timeAllowed: '',
+    startTime: null,
+    endTime: '',
+    answeredPrompts: [],
+    completed: null,
   },
   view: {
     showPrompt: null,
     examCompleted: false
   }
-};
-
-const startExam = (state, action) => {
-  return merge({}, state, {
-    data: {
-      questionsAsked: 1,
-      questionsTotal: 3,
-      timeRemaining: 7200000,
-      endTime: action.result.endTime,
-      answeredPrompts: action.result.answeredPrompts
-    },
-    view: {
-      showPrompt: true
-    }
-  });
-};
-
-const queryExam = (state, action) => {
-  return merge({}, state, {
-    data: {
-      userId: action.queryExamResult.userId,
-      firstName: action.queryExamResult.firstName,
-      lastName: action.queryExamResult.lastName,
-      examId: action.queryExamResult.examId,
-      email: action.queryExamResult.email
-    }
-  });
 };
 
 const queryAllPrompts = (state, action) => {
@@ -59,21 +42,63 @@ const queryAllPrompts = (state, action) => {
   });
 };
 
+const queryExam = (state, action) => {
+  return merge({}, state, {
+    data: {
+      userId: action.queryExamResult.userId,
+      firstName: action.queryExamResult.firstName,
+      lastName: action.queryExamResult.lastName,
+      email: action.queryExamResult.email,
+      examId: action.queryExamResult.examId,
+
+      timeAllowed: action.queryExamResult.timeAllowed,
+      startTime: action.queryExamResult.startTime,
+      endTime: action.queryExamResult.endTime,
+      answeredPrompts: action.queryExamResult.answeredPrompts,
+      completed: action.queryExamResult.completed
+    }
+  });
+};
+const startExam = (state, action) => {
+  return merge({}, state, {
+    data: {
+      questionsAsked: 1,
+      questionsTotal: 3,
+      timeRemaining: 7200000,
+
+      timeAllowed: action.result.timeAllowed,
+      startTime: action.result.startTime,
+      endTime: action.result.endTime,
+      answeredPrompts: action.result.answeredPrompts,
+      completed: action.result.completed
+    },
+    view: {
+      showPrompt: true
+    }
+  });
+};
 const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
       questionsAsked: action.newQuestionsAsked,
+
       currentPrompt: action.newAllPrompts[0].question,
       currentPromptId: action.newAllPrompts[0]._id,
       allPrompts: action.newAllPrompts,
+
       timeRemaining: action.newTimeRemaining,
-      answeredPrompts: action.submitResult.answeredPrompts
+
+      answeredPrompts: action.submitResult.answeredPrompts,
+      completed: action.submitResult.completed
     }
   });
 };
 
 const finishExam = (state, action) => {
   return merge({}, state, {
+    data: {
+      completed: action.result.completed
+    },
     view: {
       examCompleted: true
     }
