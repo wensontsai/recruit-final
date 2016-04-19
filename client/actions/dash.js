@@ -9,7 +9,7 @@ export function startExam (data) {
   localStorage.removeItem('endTime');
   localStorage.removeItem('currentPromptId');
   localStorage.removeItem('answeredPrompts');
-  
+
   return async dispatch => {
     try {
       const result = await post('/api/startExam', data);
@@ -17,9 +17,17 @@ export function startExam (data) {
       // set LocalStorage for UI display in case of refresh
       localStorage.setItem('endTime', result.endTime);
 
+      // determine questionsAsked count
+      if(result.answeredPrompts === undefined) {
+        var questionsAsked = 1;
+      } else {
+        var questionsAsked = result.answeredPrompts.length + 1
+      }
+console.log('start exam questionsAsked: ',questionsAsked);
       dispatch({
         type: actionTypes.START_EXAM_SUCCESS,
-        result: result
+        result: result,
+        questionsAsked: questionsAsked
       });
 
     } catch(e) {
@@ -48,11 +56,19 @@ export function queryExam (data) {
         const nowTime = new Date(now);
         newTimeRemaining = Math.abs(endTime - nowTime);
       }
+      // determine questionsAsked count
+      if(queryExamResult.answeredPrompts === undefined) {
+        var questionsAsked = 1;
+      } else {
+        var questionsAsked = queryExamResult.answeredPrompts.length + 1
+      }
+      console.log('query exam questionsAsked: ',questionsAsked);
 
       dispatch({
         type: actionTypes.QUERY_EXAM_SUCCESS,
         queryExamResult: queryExamResult,
-        newTimeRemaining: newTimeRemaining
+        newTimeRemaining: newTimeRemaining,
+        questionsAsked: questionsAsked
       });
 
     } catch(e) {
@@ -82,8 +98,6 @@ export function queryAllPrompts () {
 
       // Exam Has Already Begun
       if(localStorage.getItem('currentPromptId')) {
-        console.log('gaspacho dispacho');
-
         // Re-fetch all prompts
         try {
           const queryPromptResult = await get('/api/queryAllPrompts');
@@ -94,7 +108,7 @@ export function queryAllPrompts () {
           });
 
           // Put currentPrompt as first item in array
-          for(var index in newAllPrompts){
+          for(var index in newAllPrompts) {
             if(newAllPrompts[index]._id === localStorage.getItem('currentPromptId') ){
               index2Swap = index;
             }
@@ -148,14 +162,21 @@ export function submitAnswer (data) {
       const submitResult = await post('/api/submitAnswer', data);
 
       // set answeredPrompts locally
-      console.log('answered prompts array dude ->', submitResult.answeredPrompts);
       localStorage.setItem('answeredPrompts', submitResult.answeredPrompts);
+      // determine questionsAsked count
+      if(submitResult.answeredPrompts === undefined) {
+        var questionsAsked = 1;
+      } else {
+        var questionsAsked = submitResult.answeredPrompts.length + 1
+      }
+      console.log('submit answer questionsAsked: ',questionsAsked);
 
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
         submitResult: submitResult,
         newAllPrompts: newAllPrompts,
-        newTimeRemaining: newTimeRemaining
+        newTimeRemaining: newTimeRemaining,
+        questionsAsked: questionsAsked
       });
 
       // IF questionsTotal has been reached,
