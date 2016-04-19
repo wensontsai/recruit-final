@@ -5,7 +5,6 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
   var results = {};
 
   return function(req, res, next){
-    console.log(req.body);
     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt){
       promptText = prompt.question;
     });
@@ -44,8 +43,6 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
                   answeredPrompts : exam.answeredPrompts,
                   completed : exam.completed
                 };
-
-                console.log(results);
                 res.json(results);
               });
             }

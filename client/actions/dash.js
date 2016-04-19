@@ -8,6 +8,10 @@ export function startExam (data) {
   return async dispatch => {
     try {
       const result = await post('/api/startExam', data);
+      // clear localStorage variables used for exam interruptions
+      localStorage.removeItem('endTime');
+      localStorage.removeItem('currentPromptId');
+      localStorage.removeItem('answeredPrompts');
       
       // set LocalStorage for UI display in case of refresh
       localStorage.setItem('endTime', result.endTime);
@@ -95,7 +99,6 @@ export function queryAllPrompts () {
             }
           }
           passResult = swapArrayElements(newAllPrompts, index2Swap, 0);
-          console.log('@#$@#$@#$@$@#$@#$---->>>>>>',passResult);
           
         } catch(e) {
           dispatch({
