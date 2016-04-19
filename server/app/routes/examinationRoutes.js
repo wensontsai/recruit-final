@@ -1,8 +1,6 @@
 var nodemailer = require('nodemailer');
 var config = require('../../config');
 
-var Q = require('q');
-
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport(config.email.host, {
   debug: true,
@@ -123,23 +121,26 @@ exports.queryExam = function(Examination, User) {
             result['userId'] = user._id;
             result['firstName'] = user.firstName;
             result['lastName'] = user.lastName;
-            result['email'] = user.email;           
+            result['email'] = user.email;         
             return result;
+          }, function(err) {
+              console.error('User query error => ', err);
+              res.status(500).send(err);
           })
+      }, function(err) {
+          console.error('Exam query error => ', err);
+          res.status(500).send(err);
       })
       .then(function() {
         res.json(result);
       })
-      .catch(function(err) {
-        console.log('error:', err);
-        res.json({ success: false, message: 'Error!' });
-      });
 
   }
 }
 
-exports.finishExam = function(Examination, User){
-  return function(req, res, next){
+exports.finishExam = function(Examination, User) {
+  return function(req, res, next) {
+
     Examination.findOne({ _id: req.body.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
@@ -156,7 +157,7 @@ exports.finishExam = function(Examination, User){
           }
         });
       }
-      User.findOne({ _id: exam.userId}, function(err, user) {
+      User.findOne({ _id: exam.userId }, function(err, user) {
         user.completed = 'Y';
         user.save(function(err) {
           if (err) {
@@ -173,6 +174,9 @@ exports.finishExam = function(Examination, User){
       
       });
     });
+
+
+
   };
 };
 
