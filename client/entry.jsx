@@ -27,7 +27,7 @@ import Results from './components/results/results';
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
-  // createLogger(),
+  createLogger(),
 )(createStore);
 
 const store = createStoreWithMiddleware(reducers);

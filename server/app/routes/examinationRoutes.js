@@ -1,6 +1,8 @@
 var nodemailer = require('nodemailer');
 var config = require('../../config');
 
+var Q = require('q');
+
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport(config.email.host, {
   debug: true,
@@ -103,37 +105,39 @@ exports.initializeExam = function(Examination, User) {
 exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
-    Examination.findOne({ _id: req.body.examId }, function(err, exam) {
-      if(err) return console.error(err);
-      if (!exam) {
-        return res.json({ success: false, message: 'This exam does not exist!' });
-      } else {
-        User.findOne({ _id: exam.userId }, function(err, user) {
-          if(err) return console.error(err);
-          if (!user) {
-            return res.json({ success: false, message: 'This user does not exist!' });
-          } else {
-            result = {
-              success: true,
-              userId: user._id,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
-              examId: exam._id,
-              timeAllowed: exam.timeAllowed,
-              questionsTotal: exam.questionsTotal,
-              startTime: exam.startTime,
-              endTime: exam.endTime,
-              answeredPrompts: exam.answeredPrompts,
-              completed: exam.completed
-            };
-          }
-          res.json(result);
-        });
-      }
-    });
-  };
+
+    Examination.findOne( { _id: req.body.examId } )
+      .exec()
+      .then (function(exam) {
+        result['examId'] = exam._id;
+        result['timeAllowed'] = exam.timeAllowed;
+        result['questionsTotal'] = exam.questionsTotal;
+        result['startTime'] = exam.startTime;
+        result['endTime'] = exam.endTime;
+        result['answeredPrompts'] = exam.answeredPrompts;
+        result['completed'] = exam.completed;
+
+        return User.findOne( { _id:  exam.userId } )
+          .exec()
+          .then (function(user) {
+            result['userId'] = user._id;
+            result['firstName'] = user.firstName;
+            result['lastName'] = user.lastName;
+            result['email'] = user.email;           
+            return result;
+          })
+      })
+      .then(function() {
+        res.json(result);
+      })
+      .catch(function(err) {
+        console.log('error:', err);
+        res.json({ success: false, message: 'Error!' });
+      });
+
+  }
 }
+
 exports.finishExam = function(Examination, User){
   return function(req, res, next){
     Examination.findOne({ _id: req.body.examId }, function(err, exam) {

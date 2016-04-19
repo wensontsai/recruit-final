@@ -17,7 +17,8 @@
     "express": "^4.13.3",
     "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.2.5",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "async": "^1.5.2",
