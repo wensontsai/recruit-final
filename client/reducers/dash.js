@@ -55,7 +55,7 @@ const queryExam = (state, action) => {
 
       timeAllowed: action.queryExamResult.timeAllowed,
       questionsTotal: action.queryExamResult.questionsTotal,
-      questionsAsked: action.queryExamResult.answeredPrompts.length + 1,
+      questionsAsked: action.queryExamResult.answeredPrompts.length + 1 || 1,
       startTime: action.queryExamResult.startTime,
       endTime: action.queryExamResult.endTime,
       answeredPrompts: action.queryExamResult.answeredPrompts,
@@ -66,7 +66,7 @@ const queryExam = (state, action) => {
 const startExam = (state, action) => {
   return merge({}, state, {
     data: {
-      questionsAsked: action.result.answeredPrompts.length + 1,
+      questionsAsked: action.result.answeredPrompts.length + 1 || 1,
       timeRemaining: action.result.timeAllowed,
 
       questionsTotal: action.result.questionsTotal,
@@ -84,7 +84,7 @@ const startExam = (state, action) => {
 const submitAnswer = (state, action) => {
   return merge({}, state, {
     data: {
-      questionsAsked: action.submitResult.answeredPrompts.length + 1,
+      questionsAsked: action.submitResult.answeredPrompts.length + 1 || 1,
 
       currentPrompt: action.newAllPrompts[0].question,
       currentPromptId: action.newAllPrompts[0]._id,
