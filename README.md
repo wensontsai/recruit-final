@@ -10,27 +10,25 @@ Platform for tech-testing potential hires.  Built in Node, React, Redux, Express
 ```npm i -g mocha```
 
 ### Run 
-1.  Front-End
-Run tests:  
+1.  Front-End 
+  1. Run tests:  
 ```npm run test:watch```
 
-Run webpack to compile front-end in dev mode:  
+  2. Run webpack to compile front-end in dev mode:  
 ```npm start```
 
-2.  Back-End
-Run tests:  
+2.  Back-End 
+  1.  Run tests:  
 ```cd server && npm run test:watch```
 
-Run node/express back-end server for API routes:  
+  2.  Run node/express back-end server for API routes:  
 ```cd server && nodemon server.js```
 
 
 ## PRODUCTION
 ### Run 
-1.  Front-End
-Build:  
+1.  Front-End build:  
 ```npm run dist```
 
-2.  Back-End
-Restart server:  
+2.  Back-End restart server:  
 ```pm2 restart <job#>```
