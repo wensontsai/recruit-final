@@ -1,5 +1,5 @@
 # Recruit
-Platform for tech-testing potential hires.  Built with Node, React, Redux, Express, with MongoDB as data store.
+Platform for tech-testing potential hires.  Built in Node, React, Redux, Express, with MongoDB as data store.
 
 ## DEVELOPMENT
 ### Setup
@@ -11,21 +11,25 @@ Platform for tech-testing potential hires.  Built with Node, React, Redux, Expre
 
 ### Run 
 #### Front-End
-run tests:  
+Run tests:  
 ```npm run test:watch```
 
-run webpack to compile front-end in dev mode:  
+Run webpack to compile front-end in dev mode:  
 ```npm start```
 
 #### Back-End
-run tests:  
+Run tests:  
 ```cd server && npm run test:watch```
 
-run node/express back-end server for API routes:  
+Run node/express back-end server for API routes:  
 ```cd server && nodemon server.js```
 
 
 ## PRODUCTION
 #### Front-End
-build:  
+Build:  
 ```npm run dist```
+
+#### Back-End
+Restart server:
+```pm2 restart <job#>```

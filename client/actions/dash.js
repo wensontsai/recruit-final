@@ -5,6 +5,8 @@ import merge from 'lodash.merge';
 var Api = require('../utils/api');
 
 export function startExam (data) {
+  var questionsAsked;
+
   // clear localStorage variables used for exam interruptions
   localStorage.removeItem('endTime');
   localStorage.removeItem('currentPromptId');
@@ -18,12 +20,8 @@ export function startExam (data) {
       localStorage.setItem('endTime', result.endTime);
 
       // determine questionsAsked count
-      if(result.answeredPrompts === undefined) {
-        var questionsAsked = 1;
-      } else {
-        var questionsAsked = result.answeredPrompts.length + 1
-      }
-console.log('start exam questionsAsked: ',questionsAsked);
+      result.answeredPrompts ? questionsAsked = result.answeredPrompts.length + 1 : questionsAsked = 1;
+
       dispatch({
         type: actionTypes.START_EXAM_SUCCESS,
         result: result,
@@ -41,6 +39,7 @@ console.log('start exam questionsAsked: ',questionsAsked);
 
 export function queryExam (data) {
   var newTimeRemaining;
+  var questionsAsked;
 
   return async dispatch => {
     try {
@@ -56,13 +55,9 @@ export function queryExam (data) {
         const nowTime = new Date(now);
         newTimeRemaining = Math.abs(endTime - nowTime);
       }
-      // determine questionsAsked count
-      if(queryExamResult.answeredPrompts === undefined) {
-        var questionsAsked = 1;
-      } else {
-        var questionsAsked = queryExamResult.answeredPrompts.length + 1
-      }
-      console.log('query exam questionsAsked: ',questionsAsked);
+
+      //determine questionsAsked count
+      queryExamResult.answeredPrompts ? questionsAsked = queryExamResult.answeredPrompts.length + 1 : questionsAsked = 1;
 
       dispatch({
         type: actionTypes.QUERY_EXAM_SUCCESS,
@@ -144,6 +139,8 @@ export function queryAllPrompts () {
 }
 
 export function submitAnswer (data) {
+  var questionsAsked;
+
   // Prepare Prompts Array - discard used prompt
   const newAllPrompts = data.allPrompts;
   newAllPrompts.shift();
@@ -163,13 +160,9 @@ export function submitAnswer (data) {
 
       // set answeredPrompts locally
       localStorage.setItem('answeredPrompts', submitResult.answeredPrompts);
+
       // determine questionsAsked count
-      if(submitResult.answeredPrompts === undefined) {
-        var questionsAsked = 1;
-      } else {
-        var questionsAsked = submitResult.answeredPrompts.length + 1
-      }
-      console.log('submit answer questionsAsked: ',questionsAsked);
+      submitResult.answeredPrompts ? questionsAsked = submitResult.answeredPrompts.length + 1 : questionsAsked = 1;
 
       dispatch({
         type: actionTypes.SUBMIT_ANSWER_SUCCESS,
