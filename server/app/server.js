@@ -1,14 +1,11 @@
-// var express = require('express');
-
-import express from 'express';
-
+var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var jwt = require('jsonwebtoken');
 
-var config = require ('./config');
+var config = require ('../config');
 var app = express();
 
 // ~~~~~> TESTING: tests spin up test DB from individual specs <~~~~~
@@ -26,8 +23,8 @@ else {
   // ------------------------------------
   // Mongo DB Connect
   // ------------------------------------
-  mongoose.connect(config.db.dev, function(err){
-    if(err){
+  mongoose.connect(config.db.dev, function(err) {
+    if(err) {
       console.log('connection error', err);
     } else {
       console.log(db_success_msg);

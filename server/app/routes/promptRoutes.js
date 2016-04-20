@@ -50,17 +50,17 @@ exports.queryAllPromptsList = function(Prompt) {
     });
   };
 };
-exports.addPrompt = function(Prompt){
-  return function(req, res, next){
+exports.addPrompt = function(Prompt) {
+  return function(req, res, next) {
     Prompt.findOne({ question: req.body.question }, function(err, prompt) {
       if(err) return console.error(err);
       if (prompt) {
-        return res.json( {success: false, message: 'This prompt already exists!'} );
+        return res.json( { success: false, message: 'This prompt already exists!' } );
       } else {
         var prompt = new Prompt({
           question : req.body.question
         });
-        prompt.save(function(err, prompt){
+        prompt.save(function(err, prompt) {
           if(err) return console.error(err);
           res.json(prompt);
         });
@@ -68,14 +68,14 @@ exports.addPrompt = function(Prompt){
     });
   };
 };
-exports.editPrompt = function(Prompt){
+exports.editPrompt = function(Prompt) {
   var results = {};
-  return function(req, res, next){
+  return function(req, res, next) {
     console.log(req.body);
     Prompt.findOne({ _id: req.body.id }, function(err, prompt) {
       prompt.question = req.body.question;
       console.log(prompt.question);
-      prompt.save(function(err, prompt){
+      prompt.save(function(err, prompt) {
         if(err) {
           return console.error(err)
         } else {
@@ -103,9 +103,9 @@ exports.editPrompt = function(Prompt){
     });
   };
 };
-exports.deletePrompt = function(Prompt){
+exports.deletePrompt = function(Prompt) {
   var results = {};
-  return function(req, res, next){
+  return function(req, res, next) {
     Prompt.remove({ _id: req.body.promptId }, function(err) {
       if (err) {
         return console.error(err)

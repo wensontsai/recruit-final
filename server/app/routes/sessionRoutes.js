@@ -1,12 +1,13 @@
 var jwt = require('jsonwebtoken');
-var config = require ('../config');
+var config = require ('../../config');
 
 // bcrypt password hashing
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 exports.loginUser = function(User, Session, app) {
   var result = {};
-  return function(req, res, next){
+  return function(req, res, next) {
     User.findOne({ email: req.body.email }, function(err, user) {
       if(err) return console.error(err);
       if (!user) {
@@ -52,7 +53,7 @@ exports.logoutUser = function(User, Session, app) {
   };
 }
 exports.authenticateUser = function(User, Session, app) {
-  return function(req, res, next){
+  return function(req, res, next) {
     User.findOne({ name: req.body.email }, function(err, user) {
       if(err) return console.error(err);
       if (!user) {

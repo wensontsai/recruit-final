@@ -21,11 +21,8 @@ Platform for tech-testing potential hires.  Built in Node, React, Redux, Express
   1.  Run tests:  
 ```cd server && npm run test:watch```
 
-  2.  Build back-end (ES6/ES7 transpiling => ES5):  
-```cd server && npm run build```
-
-  3.  Run node/express back-end server for API routes:  
-```cd server && nodemon build/server```
+  2.  Run Babel to transpile Node/Express back-end for API routes:  
+```cd server && npm run build-dev:watch```
 
 
 ### PRODUCTION
