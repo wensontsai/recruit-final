@@ -1,25 +1,27 @@
+'use strict';
+
 var express = require('express');
-var config = require ('./config');
+var config = require('./config');
 var app = express();
 
 // ------------------------------------
 // Mongoose - Models
 // ------------------------------------
-var User = require('./app/models/user');
-var Prompt = require('./app/models/prompt');
-var Examination = require('./app/models/examination');
-var Answer = require('./app/models/answer');
+var User = require('./models/user');
+var Prompt = require('./models/prompt');
+var Examination = require('./models/examination');
+var Answer = require('./models/answer');
 
 // ------------------------------------
 // API Routes
 // ------------------------------------
-var apiRoutes = express.Router ();
+var apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
-var promptRoutes = require('./app/routes/promptRoutes');
-var examinationRoutes = require('./app/routes/examinationRoutes');
-var answerRoutes = require('./app/routes/answerRoutes');
-var userRoutes = require('./app/routes/userRoutes');
+var promptRoutes = require('./routes/promptRoutes');
+var examinationRoutes = require('./routes/examinationRoutes');
+var answerRoutes = require('./routes/answerRoutes');
+var userRoutes = require('./routes/userRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
@@ -40,3 +42,4 @@ apiRoutes.post('/deletePrompt', promptRoutes.deletePrompt(Prompt));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 
 module.exports = app;
+//# sourceMappingURL=server_test.js.map

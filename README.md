@@ -21,8 +21,11 @@ Platform for tech-testing potential hires.  Built in Node, React, Redux, Express
   1.  Run tests:  
 ```cd server && npm run test:watch```
 
-  2.  Run node/express back-end server for API routes:  
-```cd server && nodemon server.js```
+  2.  Build back-end (ES6/ES7 transpiling => ES5):  
+```cd server && npm run build```
+
+  3.  Run node/express back-end server for API routes:  
+```cd server && nodemon build/server```
 
 
 ### PRODUCTION
@@ -32,3 +35,7 @@ Platform for tech-testing potential hires.  Built in Node, React, Redux, Express
 
 2.  Restart Server:  
 ```pm2 restart <job#>```
+
+(If there are issues with restart, stop job and start: 
+```cd server/build && pm2 start server.js```
+)

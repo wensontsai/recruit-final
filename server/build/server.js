@@ -1,30 +1,37 @@
-var express = require('express');
-var mongoose = require('mongoose');
+'use strict';
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mongoose = require('mongoose'); // var express = require('express');
+
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 var jwt = require('jsonwebtoken');
 
-var config = require ('./config');
-var app = express();
+var config = require('./config');
+var app = (0, _express2.default)();
 
 // ~~~~~> TESTING: tests spin up test DB from individual specs <~~~~~
 if (process.env.NODE_ENV === 'test') {
   var port = 3121;
   var db_success_msg = '';
-  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <== on port: ' +port;
-}
-else {
-// Fire up DEVELOPMENT database
+  var server_success_msg = '==> 🌎  *** TEST ENV *** fired up <== on port: ' + port;
+} else {
+  // Fire up DEVELOPMENT database
   var port = process.env.PORT || 3001;
   var db_success_msg = '~~~ > > > DEV ENV: Connected to MongoDB boyyÿÿÿÿÿÿ < < < ~~~';
-  var server_success_msg = '==> 🌎  DEV ENV: Magic is happening at http://localhost:' +port;
+  var server_success_msg = '==> 🌎  DEV ENV: Magic is happening at http://localhost:' + port;
 
   // ------------------------------------
   // Mongo DB Connect
   // ------------------------------------
-  mongoose.connect(config.db.dev, function(err){
-    if(err){
+  mongoose.connect(config.db.dev, function (err) {
+    if (err) {
       console.log('connection error', err);
     } else {
       console.log(db_success_msg);
@@ -37,10 +44,9 @@ else {
 // Middleware
 // ------------------------------------
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded( { extended: false } ));
+app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(morgan('dev'));
 app.use(cookieParser());
-
 
 // // JWT Token Verification for Admin Routes
 // app.use(function(req, res, next) {
@@ -65,27 +71,26 @@ app.use(cookieParser());
 //   }
 // });
 
-
 // ------------------------------------
 // Mongoose - Models
 // ------------------------------------
-var User = require('./app/models/user');
-var Prompt = require('./app/models/prompt');
-var Examination = require('./app/models/examination');
-var Answer = require('./app/models/answer');
-var Session = require('./app/models/session');
+var User = require('./models/user');
+var Prompt = require('./models/prompt');
+var Examination = require('./models/examination');
+var Answer = require('./models/answer');
+var Session = require('./models/session');
 
 // ------------------------------------
 // API Routes
 // ------------------------------------
-var apiRoutes = express.Router ();
+var apiRoutes = _express2.default.Router();
 app.use('/api', apiRoutes);
 
-var promptRoutes = require('./app/routes/promptRoutes');
-var examinationRoutes = require('./app/routes/examinationRoutes');
-var answerRoutes = require('./app/routes/answerRoutes');
-var userRoutes = require('./app/routes/userRoutes');
-var sessionRoutes = require('./app/routes/sessionRoutes');
+var promptRoutes = require('./routes/promptRoutes');
+var examinationRoutes = require('./routes/examinationRoutes');
+var answerRoutes = require('./routes/answerRoutes');
+var userRoutes = require('./routes/userRoutes');
+var sessionRoutes = require('./routes/sessionRoutes');
 
 // ::::: GET :::::
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
@@ -108,7 +113,6 @@ apiRoutes.post('/loginUser', sessionRoutes.loginUser(User, Session));
 apiRoutes.post('/logoutUser', sessionRoutes.logoutUser(User, Session));
 apiRoutes.post('/authenticateUser', sessionRoutes.authenticateUser(User, Session));
 
-
 // ------------------------------------
 // HTTP server
 // ------------------------------------
@@ -116,3 +120,4 @@ app.listen(port);
 console.log(server_success_msg);
 
 module.exports = app;
+//# sourceMappingURL=server.js.map

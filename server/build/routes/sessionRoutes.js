@@ -1,14 +1,16 @@
+'use strict';
+
 var jwt = require('jsonwebtoken');
-var config = require ('../config');
+var config = require('../config');
 
 // bcrypt password hashing
 var bcrypt = require('bcrypt');
 
-exports.loginUser = function(User, Session, app) {
+exports.loginUser = function (User, Session, app) {
   var result = {};
-  return function(req, res, next){
-    User.findOne({ email: req.body.email }, function(err, user) {
-      if(err) return console.error(err);
+  return function (req, res, next) {
+    User.findOne({ email: req.body.email }, function (err, user) {
+      if (err) return console.error(err);
       if (!user) {
         return res.json({ success: false, message: 'User Email not found!' });
       }
@@ -17,16 +19,16 @@ exports.loginUser = function(User, Session, app) {
       }
 
       // verify password
-      if( bcrypt.compareSync(req.body.password, user.password) === false ) {
+      if (bcrypt.compareSync(req.body.password, user.password) === false) {
         return res.json({ success: false, message: 'Authentication failed.  Wrong password!' });
       }
 
-      var expiresIn = '24h';  //expires in 24hrs
+      var expiresIn = '24h'; //expires in 24hrs
 
       var token = jwt.sign(user, config.secret, {
         expiresIn: expiresIn
       });
-      
+
       result = {
         success: true,
         message: 'Enjoy your token!',
@@ -34,34 +36,34 @@ exports.loginUser = function(User, Session, app) {
         expiresIn: expiresIn,
         userId: user._id,
         userEmail: user.email
-      }
+      };
       res.json(result);
     });
   };
-}
-exports.logoutUser = function(User, Session, app) {
+};
+exports.logoutUser = function (User, Session, app) {
   var result = {};
-  return function(req, res, next){
+  return function (req, res, next) {
     // logout session in DB
 
     // on success send back json
     result = {
       success: true
-    }
+    };
     res.json(result);
   };
-}
-exports.authenticateUser = function(User, Session, app) {
-  return function(req, res, next){
-    User.findOne({ name: req.body.email }, function(err, user) {
-      if(err) return console.error(err);
+};
+exports.authenticateUser = function (User, Session, app) {
+  return function (req, res, next) {
+    User.findOne({ name: req.body.email }, function (err, user) {
+      if (err) return console.error(err);
       if (!user) {
         return res.json({ success: false, message: 'User Email not found!' });
       }
       if (user.admin !== 'Y') {
         return res.json({ success: false, message: 'User does not have Admin privileges!' });
       }
-      if(user.password !== req.body.password) {
+      if (user.password !== req.body.password) {
         return res.json({ success: false, message: 'Authentication failed.  Wrong password!' });
       }
       var token = jwt.sign(user, app.get('secret'), {
@@ -75,4 +77,5 @@ exports.authenticateUser = function(User, Session, app) {
       });
     });
   };
-}
+};
+//# sourceMappingURL=sessionRoutes.js.map

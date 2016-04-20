@@ -1,11 +1,11 @@
-var nodemailer = require('nodemailer');
-var config = require('../../config');
+// var nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+var config = require('../config');
 
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport(config.email.host, {
   debug: true,
 });
-
 
 var smtpTransport = nodemailer.createTransport('SMTP', {
    service: config.email.service,
@@ -14,6 +14,7 @@ var smtpTransport = nodemailer.createTransport('SMTP', {
        pass: config.email.auth.pass
    }
 });
+
 exports.startExam = function(Examination) {
   return function(req, res, next) {
     Examination.findOne({ _id: req.body.data.examId }, function(err, exam) {
