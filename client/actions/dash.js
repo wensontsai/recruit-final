@@ -43,7 +43,7 @@ export function queryExam (data) {
 
   return async dispatch => {
     try {
-      const queryExamResult = await post('/api/queryExam', data);
+      const queryExamResult = await get('/api/queryExam/' +data.examId);
 
       // IF the exam has already begun (page refresh, navigated away, etc.) //
       if(localStorage.getItem('endTime')) {

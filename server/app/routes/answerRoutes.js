@@ -56,16 +56,15 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
 exports.queryCandidateAnswers = function(Answer, User) {
   return function(req, res, next) {
     var results = {};
-    
-    Answer.find({ userId: req.body.userId })
+    Answer.find({ userId: req.params.userId })
       .exec()
       .then (function(answers) {
         results['allAnswers'] = answers;
 
-        return User.findOne({ _id: req.body.userId })
+        return User.findOne({ _id: req.params.userId })
           .exec()
           .then (function(user) {
-            results['userId'] = req.body.userId;
+            results['userId'] = req.params.userId;
             results['firstName'] = user.firstName;
             results['lastName'] = user.lastName;
             results['email'] = user.email;
@@ -82,12 +81,12 @@ exports.queryCandidateAnswers = function(Answer, User) {
         res.json(results);
       })
 
-    // Answer.find({ userId: req.body.userId }, function(err, answers) {
+    // Answer.find({ userId: req.params.userId }, function(err, answers) {
     //   if(err) return console.error(err);
-    //   User.findOne({ _id: req.body.userId }, function(err, user) {
+    //   User.findOne({ _id: req.params.userId }, function(err, user) {
     //     if(err) return console.error(err);
     //     results = {
-    //       userId: req.body.userId,
+    //       userId: req.params.userId,
     //       firstName: user.firstName,
     //       lastName: user.lastName,
     //       email: user.email,

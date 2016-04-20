@@ -6,10 +6,10 @@ var Api = require('../utils/api');
 export function queryCandidateAnswers (data) {
   return async dispatch => {
     try {
-      const queryResult = await post('/api/queryCandidateAnswers', data);
+      const queryResult = await get('/api/queryCandidateAnswers/' +data.userId);
       dispatch({
         type: actionTypes.QUERY_CANDIDATE_ANSWERS_SUCCESS,
-        queryResult: queryResult 
+        queryResult: queryResult
       });
 
     } catch(e) {

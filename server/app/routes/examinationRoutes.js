@@ -105,7 +105,7 @@ exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
 
-    Examination.findOne( { _id: req.body.examId } )
+    Examination.findOne( { _id: req.params.examId } )
       .exec()
       .then (function(exam) {
         result['examId'] = exam._id;

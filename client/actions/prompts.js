@@ -68,7 +68,7 @@ export function saveEditPrompt (data) {
 export function deletePrompt (data) {
   return async dispatch => {
     try {
-      const deleteResult = await post('/api/deletePrompt', data);
+      const deleteResult = await del('/api/deletePrompt/' +data.promptId);
       dispatch({
         type: actionTypes.DELETE_PROMPT_SUCCESS,
         deleteResult: deleteResult

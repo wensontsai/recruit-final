@@ -106,7 +106,7 @@ exports.editPrompt = function(Prompt) {
 exports.deletePrompt = function(Prompt) {
   var results = {};
   return function(req, res, next) {
-    Prompt.remove({ _id: req.body.promptId }, function(err) {
+    Prompt.remove({ _id: req.params.promptId }, function(err) {
       if (err) {
         return console.error(err)
       } else {

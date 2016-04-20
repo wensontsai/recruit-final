@@ -88,25 +88,26 @@ var userRoutes = require('./routes/userRoutes');
 var sessionRoutes = require('./routes/sessionRoutes');
 
 // ::::: GET :::::
+apiRoutes.get('/queryCandidateAnswers/:userId', answerRoutes.queryCandidateAnswers(Answer, User));
+apiRoutes.get('/queryExam/:examId', examinationRoutes.queryExam(Examination, User));
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
 apiRoutes.get('/queryAllPromptsList', promptRoutes.queryAllPromptsList(Prompt));
 apiRoutes.get('/queryAllCandidates', userRoutes.queryAllUsers(User));
 
 // ::::: POST :::::
 apiRoutes.post('/submitAnswer', answerRoutes.submitAnswer(Answer, Prompt, Examination));
-apiRoutes.post('/queryCandidateAnswers', answerRoutes.queryCandidateAnswers(Answer, User));
-apiRoutes.post('/queryExam', examinationRoutes.queryExam(Examination, User));
 apiRoutes.post('/initializeExam', examinationRoutes.initializeExam(Examination, User));
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
 apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination, User));
 apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
-apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
-apiRoutes.post('/editPrompt', promptRoutes.editPrompt(Prompt));
-apiRoutes.post('/deletePrompt', promptRoutes.deletePrompt(Prompt));
 apiRoutes.post('/addCandidate', userRoutes.addUser(User));
 apiRoutes.post('/loginUser', sessionRoutes.loginUser(User, Session));
 apiRoutes.post('/logoutUser', sessionRoutes.logoutUser(User, Session));
 apiRoutes.post('/authenticateUser', sessionRoutes.authenticateUser(User, Session));
+apiRoutes.post('/editPrompt', promptRoutes.editPrompt(Prompt));
+
+// ::::: DELETE :::::
+apiRoutes.delete('/deletePrompt/:promptId', promptRoutes.deletePrompt(Prompt));
 
 
 // ------------------------------------
