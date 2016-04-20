@@ -33,9 +33,12 @@ Platform for tech-testing potential hires.  Built in Node, React, Redux, Express
 1.  Build Client:  
 ```npm run dist```
 
-2.  Restart Server:  
+2.  Build Server:  
+```cd server && npm run build```
+
+3.  Restart Server:  
 ```pm2 restart <job#>```
 
-(If there are issues with restart, stop job and start: 
+(If there are issues with restart, stop job and start fresh: 
 ```cd server/build && pm2 start server.js```
 )
