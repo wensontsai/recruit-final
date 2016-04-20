@@ -54,21 +54,49 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
   };
 };
 exports.queryCandidateAnswers = function(Answer, User) {
-  var results = {};
   return function(req, res, next) {
-    Answer.find({ userId: req.body.userId }, function(err, answers) {
-      if(err) return console.error(err);
-      User.findOne({ _id: req.body.userId }, function(err, user) {
-        if(err) return console.error(err);
-        results = {
-          userId: req.body.userId,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          allAnswers: answers,
-        };
+    var results = {};
+    
+    Answer.find({ userId: req.body.userId })
+      .exec()
+      .then (function(answers) {
+        results['allAnswers'] = answers;
+
+        return User.findOne({ _id: req.body.userId })
+          .exec()
+          .then (function(user) {
+            results['userId'] = req.body.userId;
+            results['firstName'] = user.firstName;
+            results['lastName'] = user.lastName;
+            results['email'] = user.email;
+            return results;
+          }, function(err) {
+              console.error('User query error => ', err);
+              res.status(500).send(err);
+          })
+      }, function(err) {
+          console.error('Answer query error => ', err);
+          res.status(500).send(err);
+      })
+      .then(function() {
         res.json(results);
-      });
-    });
+      })
+
+    // Answer.find({ userId: req.body.userId }, function(err, answers) {
+    //   if(err) return console.error(err);
+    //   User.findOne({ _id: req.body.userId }, function(err, user) {
+    //     if(err) return console.error(err);
+    //     results = {
+    //       userId: req.body.userId,
+    //       firstName: user.firstName,
+    //       lastName: user.lastName,
+    //       email: user.email,
+    //       allAnswers: answers,
+    //     };
+    //     res.json(results);
+    //   });
+    // });
+
+
   };
 };
