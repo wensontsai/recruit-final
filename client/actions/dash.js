@@ -1,3 +1,4 @@
+import * as actionTypesNotifications from '../actionTypes/notifications.js';
 import * as actionTypes from '../actionTypes/dash.js';
 import { get, post, del } from '../utils/api';
 import merge from 'lodash.merge';
@@ -40,15 +41,15 @@ export function startExam (data) {
 export function queryExam (data) {
   var newTimeRemaining;
   var questionsAsked;
+  var notifications;
 
   return async dispatch => {
     try {
-      const queryExamResult = await get('/api/queryExam/' +data.examId);
+       const queryExamResult = await get('/api/queryExam/' +data.examId);
 
       // IF the exam has already begun (page refresh, navigated away, etc.) //
       if(localStorage.getItem('endTime')) {
         console.log('there is an unfinished exam currrently in progresssso');
-
         // Re-calculate Time Remaining
         const now = new Date();
         const endTime = new Date(queryExamResult.endTime);
@@ -67,9 +68,14 @@ export function queryExam (data) {
       });
 
     } catch(e) {
+      const notifications = e.error;
       dispatch({
         type: actionTypes.QUERY_EXAM_ERROR,
         ERROR: e
+      }),
+      dispatch({
+        type: actionTypesNotifications.ADD_NOTIFICATION,
+        notifications: notifications
       });
     }
   };

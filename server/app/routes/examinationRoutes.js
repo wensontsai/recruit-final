@@ -126,11 +126,22 @@ exports.queryExam = function(Examination, User) {
             return result;
           }, function(err) {
               console.error('User query error => ', err);
-              res.status(500).send(err);
+              res.status(500).json({
+                error:
+                  { message: 'The user for this exam does not exist!',
+                    level: 'function => queryExam'
+                  }
+              });
           })
       }, function(err) {
           console.error('Exam query error => ', err);
-          res.status(500).send(err);
+          res.status(500).json({
+            error:
+              { message: 'This exam does not exist!',
+                level: 'function => queryExam',
+                type: 'warning'
+              }
+          });
       })
       .then(function() {
         res.json(result);

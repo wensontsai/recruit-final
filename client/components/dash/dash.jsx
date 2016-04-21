@@ -8,6 +8,7 @@ import Nav from '../nav/nav';
 import Answer from '../dash/answer';
 import Question from '../dash/question';
 import Profile from '../dash/profile';
+import Notifications from '../notifications/notifications';
 
 import './dash.scss';
 
@@ -16,7 +17,7 @@ class DisplaysAll extends Component {
 		super(props);
 		this.state = {
 			data: {
-			  examId: props.params.examId || ''   
+			  examId: props.params.examId || ''  
 			},
 			view: {
 			  showPrompt: props.dash.view.showPrompt || ''
@@ -24,7 +25,7 @@ class DisplaysAll extends Component {
 		}
 	}
 	componentDidMount () {
-		if(localStorage.getItem('endTime')){
+		if(localStorage.getItem('endTime')) {
 			this.setState({
 				view: {
 					showPrompt: true
@@ -38,12 +39,13 @@ class DisplaysAll extends Component {
 	}
 	render () {
 		const {
-			dash
+			dash,
 		} = this.props;
 
 		return (
 			<div className='display-all-container'>
 				<Nav />
+				<Notifications />
 				<div className='page'>
 					<Profile examId={this.props.examId}/>
 					{(dash.data.completed === 'Y'
@@ -61,7 +63,7 @@ class DisplaysAll extends Component {
 		);
 	}
 
-	queryExam (data){
+	queryExam (data) {
 		this.props.queryExam(this.state.data);
 	}
 }

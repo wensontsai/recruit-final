@@ -50,8 +50,9 @@ async function request({ url, data, params = {} }) {
     }
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
-    window.alert(JSON.stringify(await err.response.json()));
-    throw  err;
+    // window.alert(JSON.stringify(await err.response.json()));
+    // throw  err;
+    throw await err.response.json();
   }
 }
 

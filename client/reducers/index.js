@@ -4,13 +4,15 @@ import candidates from './candidates';
 import results from './results';
 import prompts from './prompts';
 import sessions from './sessions';
+import notifications from './notifications';
 
 const reducers = combineReducers({
   dash,
   candidates,
   results,
   prompts,
-  sessions
+  sessions,
+  notifications
 });
 
 export default reducers;

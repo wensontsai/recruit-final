@@ -1,0 +1,13 @@
+.notifications-container {
+  height: 2.75rem;
+  padding: 3px;
+  text-align: center;
+}
+.notifications-container:after {
+    transition: all 5s linear;
+    background: blue;
+}
+
+.notifications-container.warning {
+  background-color: pink;
+}
