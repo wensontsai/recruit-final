@@ -42,28 +42,30 @@ app.use(bodyParser.urlencoded( { extended: false } ));
 app.use(cookieParser());
 
 
-// // JWT Token Verification for Admin Routes
-// app.use(function(req, res, next) {
-//   // check header, or url parameters, or post parameters for token
-//   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-//   // decode token
-//   if (token) {
-//     // verify secret and check expiration
-//     jwt.verify(token, app.get('secret'), function(err, decoded) {
-//       if (err) {
-//         return res.json( { success: false, message: 'Failed to authenticate token!' } );
-//       }
-//       req.decoded = decoded;
-//       res.cookie(token, 'cookie_value').send('Token is set as cookie');
-//       // next();
-//     });
-//   } else {
-//     return res.status(403).send({
-//       success: false,
-//       message: 'No token provided!'
-//     });
-//   }
-// });
+// JWT Token Verification for Admin Routes
+function isAuthenticated(req, res, next) {
+  // check header, or url parameters, or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  // decode token
+  if (token) {
+    // verify secret and check expiration
+    jwt.verify(token, app.get('secret'), function(err, decoded) {
+      if (err) {
+        return res.json( { success: false, message: 'Failed to authenticate token!' } );
+      }
+      req.decoded = decoded;
+      console.log('token decoded successfully ->');
+      // res.cookie(token, 'cookie_value').send('Token is set as cookie');
+      next();
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided!'
+    });
+  }
+
+}
 
 
 // ------------------------------------
@@ -88,26 +90,26 @@ var userRoutes = require('./routes/userRoutes');
 var sessionRoutes = require('./routes/sessionRoutes');
 
 // ::::: GET :::::
-apiRoutes.get('/queryCandidateAnswers/:userId', answerRoutes.queryCandidateAnswers(Answer, User));
+apiRoutes.get('/queryCandidateAnswers/:userId', isAuthenticated, answerRoutes.queryCandidateAnswers(Answer, User));
 apiRoutes.get('/queryExam/:examId', examinationRoutes.queryExam(Examination, User));
 apiRoutes.get('/queryAllPrompts', promptRoutes.queryAllPrompts(Prompt));
-apiRoutes.get('/queryAllPromptsList', promptRoutes.queryAllPromptsList(Prompt));
-apiRoutes.get('/queryAllCandidates', userRoutes.queryAllUsers(User));
+apiRoutes.get('/queryAllPromptsList', isAuthenticated, promptRoutes.queryAllPromptsList(Prompt));
+apiRoutes.get('/queryAllCandidates', isAuthenticated, userRoutes.queryAllUsers(User));
 
 // ::::: POST :::::
 apiRoutes.post('/submitAnswer', answerRoutes.submitAnswer(Answer, Prompt, Examination));
 apiRoutes.post('/initializeExam', examinationRoutes.initializeExam(Examination, User));
 apiRoutes.post('/startExam', examinationRoutes.startExam(Examination));
 apiRoutes.post('/finishExam', examinationRoutes.finishExam(Examination, User));
-apiRoutes.post('/addPrompt', promptRoutes.addPrompt(Prompt));
-apiRoutes.post('/addCandidate', userRoutes.addUser(User));
+apiRoutes.post('/addPrompt', isAuthenticated, promptRoutes.addPrompt(Prompt));
+apiRoutes.post('/addCandidate', isAuthenticated, userRoutes.addUser(User));
 apiRoutes.post('/loginUser', sessionRoutes.loginUser(User, Session));
-apiRoutes.post('/logoutUser', sessionRoutes.logoutUser(User, Session));
+apiRoutes.post('/logoutUser', isAuthenticated, sessionRoutes.logoutUser(User, Session));
 apiRoutes.post('/authenticateUser', sessionRoutes.authenticateUser(User, Session));
-apiRoutes.post('/editPrompt', promptRoutes.editPrompt(Prompt));
+apiRoutes.post('/editPrompt', isAuthenticated, promptRoutes.editPrompt(Prompt));
 
 // ::::: DELETE :::::
-apiRoutes.delete('/deletePrompt/:promptId', promptRoutes.deletePrompt(Prompt));
+apiRoutes.delete('/deletePrompt/:promptId', isAuthenticated, promptRoutes.deletePrompt(Prompt));
 
 
 // ------------------------------------

@@ -60,7 +60,6 @@ class AddPromptView extends Component {
   }
 
   addPrompt (hideFunc) {
-    console.log(this.state.data);
     this.props.addPrompt(this.state.data);
     this.setState({ data:{} });
 
@@ -70,7 +69,6 @@ class AddPromptView extends Component {
     this.setState({
       showStatus: false
     });
-    console.log(this);
   }
 
 }
