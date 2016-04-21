@@ -1,17 +1,17 @@
 function shuffle(array) {
-    var counter = array.length;
-    // While there are elements in the array
-    while (counter > 0) {
-        // Pick a random index
-        var index = Math.floor(Math.random() * counter);
-        // Decrease counter by 1
-        counter--;
-        // And swap the last element with it
-        var temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-    }
-    return array;
+  var counter = array.length;
+  // While there are elements in the array
+  while (counter > 0) {
+      // Pick a random index
+      var index = Math.floor(Math.random() * counter);
+      // Decrease counter by 1
+      counter--;
+      // And swap the last element with it
+      var temp = array[counter];
+      array[counter] = array[index];
+      array[index] = temp;
+  }
+  return array;
 }
 
 // Route used during examinations
@@ -34,7 +34,7 @@ exports.queryAllPromptsList = function(Prompt) {
       var editObj = {};
 
       for(var key in prompts) {
-          if(prompts.hasOwnProperty(key)) {
+          if (prompts.hasOwnProperty(key)) {
             editObj[prompts[key]._id] = {
               mode: null,
               data: prompts[key].question
@@ -81,7 +81,7 @@ exports.editPrompt = function(Prompt) {
             var editObj = {};
 
             for(var key in prompts) {
-                if(prompts.hasOwnProperty(key)) {
+                if (prompts.hasOwnProperty(key)) {
                   editObj[prompts[key]._id] = {
                     mode: null,
                     data: prompts[key].question
@@ -93,7 +93,7 @@ exports.editPrompt = function(Prompt) {
               editObj
             }
             res.json( results );
-          });       
+          });      
         }
 
       });
@@ -112,7 +112,7 @@ exports.deletePrompt = function(Prompt) {
           var editObj = {};
 
           for(var key in prompts) {
-              if(prompts.hasOwnProperty(key)) {
+              if (prompts.hasOwnProperty(key)) {
                 editObj[prompts[key]._id] = {
                   mode: null,
                   data: prompts[key].question

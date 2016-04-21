@@ -55,7 +55,6 @@ function isAuthenticated(req, res, next) {
       }
       req.decoded = decoded;
       console.log('token decoded successfully ->');
-      // res.cookie(token, 'cookie_value').send('Token is set as cookie');
       next();
     });
   } else {
