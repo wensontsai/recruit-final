@@ -10,7 +10,6 @@ import './prompts.scss';
 class AddPromptView extends Component {
   constructor (props) {
     super (props);
-    // this.hideStatusView = this.hideStatusView.bind(this);
     this.state = {
       data: {
         question: this.props.question || ''
@@ -35,7 +34,7 @@ class AddPromptView extends Component {
         <div className='column-submit'>
           <div className='add-prompt'>
             <button className='btn btn-sm add-prompt'
-              onClick={() => this.addPrompt(this.hideStatusView.bind(this))}
+              onClick={() => this.addPrompt()}
               >Add Prompt
             </button>
           </div>
@@ -58,17 +57,9 @@ class AddPromptView extends Component {
       }
     });
   }
-
-  addPrompt (hideFunc) {
+  addPrompt () {
     this.props.addPrompt(this.state.data);
     this.setState({ data:{} });
-
-    setTimeout(function() { hideFunc() }, 5000);
-  }
-  hideStatusView () {
-    this.setState({
-      showStatus: false
-    });
   }
 
 }
