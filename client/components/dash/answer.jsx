@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { submitAnswer } from '../../actions/dash';
-
+import { addNotifications } from '../../actions/notifications';
 
 import './dash.scss';
 
@@ -59,9 +59,9 @@ class Answer extends Component {
     });
   }
   submitAnswer () {
-    if(this.state.data.answer !== ''){
+    if(this.state.data.answer !== '' || undefined){
       this.props.submitAnswer(this.state.data);
-      this.setState({ 
+      this.setState({
         data:{
           userId: this.props.dash.data.userId,
           examId: this.props.dash.data.examId,
@@ -74,7 +74,11 @@ class Answer extends Component {
         } 
       });
     } else {
-      
+      const notifications = {
+        messagesArray: ['Please enter an answer!']
+      };
+      this.props.addNotifications(notifications);
+      this.setState({ data:{} });
     }
  
   }
@@ -83,5 +87,5 @@ class Answer extends Component {
 
 export default connect(
   (state) => ({ dash: state.dash }),
-  { submitAnswer}
+  { submitAnswer, addNotifications }
 )(Answer);

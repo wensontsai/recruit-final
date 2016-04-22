@@ -200,49 +200,59 @@ class AddCandidateView extends Component {
   }
   addCandidate () {
     // validate email
-    if( this.validateEmail(this.state.data.email) ) {
-      // validate admin is chosen
-      if( this.state.data.admin ) {
-        // If admin, validate that passwords match
-        if(this.state.data.admin === 'Y') {
-          if(this.state.data.password === this.state.data.password_confirm) {
-            this.props.addCandidate(this.state.data);
-            this.setState({ data:{} });
+    if( this.state.data.firstName ) {
+      // validate email
+      if( this.validateEmail(this.state.data.email) ) {
+        // validate admin is chosen
+        if( this.state.data.admin ) {
+          // If admin, validate that passwords match
+          if(this.state.data.admin === 'Y') {
+            if(this.state.data.password === this.state.data.password_confirm) {
+              this.props.addCandidate(this.state.data);
+              this.setState({ data:{} });
+            } else {
+              const notifications = {
+                messagesArray: ['Passwords do not match!   Please re-enter.']
+              };
+              this.props.addNotifications(notifications);
+              this.setState({ data:{} });
+            }
           } else {
-            const notifications = {
-              messagesArray: ['Passwords do not match!   Please re-enter.']
-            };
-            this.props.addNotifications(notifications);
+            this.props.addCandidate(this.state.data);
             this.setState({ data:{} });
           }
         } else {
-          this.props.addCandidate(this.state.data);
+          const notifications = {
+            messagesArray: ['Please select Admin: Y or N!']
+          };
+          this.props.addNotifications(notifications);
           this.setState({ data:{} });
         }
       } else {
         const notifications = {
-          messagesArray: ['Please select Admin: Y or N!']
+          messagesArray: ['Please re-enter a proper email!']
         };
         this.props.addNotifications(notifications);
         this.setState({ data:{} });
       }
     } else {
       const notifications = {
-        messagesArray: ['Please re-enter a proper email!']
+        messagesArray: ['Please enter a First Name!']
       };
       this.props.addNotifications(notifications);
       this.setState({ data:{} });
     }
 
-    // Reset radio button selections
-    const allRadioButtons = document.getElementsByTagName('input');
-    for (let i = 0; i < allRadioButtons.length; i++)
-    {
-      if (allRadioButtons[i].type == 'radio')
+      // Reset radio button selections
+      const allRadioButtons = document.getElementsByTagName('input');
+      for (let i = 0; i < allRadioButtons.length; i++)
       {
-        allRadioButtons[i].checked = false;
+        if (allRadioButtons[i].type == 'radio')
+        {
+          allRadioButtons[i].checked = false;
+        }
       }
-    }
+
   }
 
 }
