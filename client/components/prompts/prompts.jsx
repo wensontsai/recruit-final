@@ -3,6 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import Nav from '../nav/nav';
+import Notifications from '../notifications/notifications';
 import AddPrompt from './addPrompt';
 import PromptsList from './promptsList';
 
@@ -15,12 +16,14 @@ class Prompts extends Component {
 
   render (){
     const {
-      prompts
+      prompts,
+      notifications
     } = this.props;
 
     return (
         <div className='display-all-container'>
             <Nav />
+            <Notifications />
             {(/(^|;)\s*token=/.test(document.cookie)
               ? <div className='page'>
                   <AddPrompt />
@@ -38,6 +41,6 @@ class Prompts extends Component {
 }
 
 export default connect(
-  (state) => ({ prompts: state.prompts }),
+  (state) => ({ prompts: state.prompts, notifications: state.notifications }),
   { queryAllPromptsList }
 )(Prompts);

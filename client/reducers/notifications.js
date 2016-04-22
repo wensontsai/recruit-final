@@ -5,7 +5,7 @@ const initialState = {
   messagesArray: []
 };
 
-const addNotification = (state, action) => {
+const addNotifications = (state, action) => {
   return merge({}, state, {
     messagesArray: action.notifications.messagesArray,
     level: action.notifications.level,
@@ -14,7 +14,7 @@ const addNotification = (state, action) => {
     customComponent: action.notifications.customComponent
   });
 };
-const clearNotification = (state, action) => {
+const clearNotifications = (state, action) => {
   return merge({}, state, {
     messagesArray: action.notifications.messagesArray
   });
@@ -22,8 +22,8 @@ const clearNotification = (state, action) => {
 
 export default function notifications (state = initialState, action) {
   return ({
-    [actionTypes.ADD_NOTIFICATION]: addNotification,
-    [actionTypes.CLEAR_NOTIFICATION]: clearNotification
+    [actionTypes.ADD_NOTIFICATIONS]: addNotifications,
+    [actionTypes.CLEAR_NOTIFICATIONS]: clearNotifications
 
   }[action.type] || ((s) => s))(state, action);
 }

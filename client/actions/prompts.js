@@ -1,3 +1,4 @@
+import * as actionTypesNotifications from '../actionTypes/notifications.js';
 import * as actionTypes from '../actionTypes/prompts.js';
 import { get, post, del } from '../utils/api';
 
@@ -36,9 +37,14 @@ export function addPrompt (data) {
       });
 
     } catch(e) {
+      const notifications = e.error;
       dispatch({
         type: actionTypes.ADD_PROMPT_ERROR,
         ERROR: e
+      }),
+      dispatch({
+        type: actionTypesNotifications.ADD_NOTIFICATIONS,
+        notifications: notifications
       }),
       dispatch({
         type: actionTypes.QUERY_ALL_PROMPTS_LIST_ERROR,

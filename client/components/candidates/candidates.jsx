@@ -3,6 +3,7 @@ import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 import Nav from '../nav/nav';
+import Notifications from '../notifications/notifications';
 import AddCandidate from './addCandidate';
 import CandidatesList from './candidatesList';
 
@@ -11,12 +12,14 @@ import './candidates.scss';
 class Candidates extends Component {
   render () {
     const {
-      candidates
+      candidates,
+      notifications
     } = this.props;
 
     return (
         <div className='display-all-container'>
             <Nav />
+            <Notifications />
             {(/(^|;)\s*token=/.test(document.cookie)
               ? <div className='page'>
                   <AddCandidate />
@@ -33,6 +36,6 @@ class Candidates extends Component {
 }
 
 export default connect(
-  (state) => ({ candidates: state.candidates }),
+  (state) => ({ candidates: state.candidates, notifications: state.notifications }),
   {}
 )(Candidates);

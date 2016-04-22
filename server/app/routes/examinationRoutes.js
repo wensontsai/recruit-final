@@ -1,5 +1,7 @@
-// var nodemailer = require('nodemailer');
 import nodemailer from 'nodemailer';
+
+var Notifications = require('../notifications');
+
 var config = require('../../config');
 
 // create reusable transporter object using the default SMTP transport
@@ -17,10 +19,17 @@ var smtpTransport = nodemailer.createTransport('SMTP', {
 
 exports.startExam = function(Examination) {
   return function(req, res, next) {
+    var messagesArray = [];
+
     Examination.findOne({ _id: req.body.data.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
-        return res.json({ success: false, message: 'No examination exists for that code!' });
+        Notifications.prepareMessagesArray(messagesArray, 'No examination exists for that code!');
+        return res.status(500).json({
+          error:
+            { messagesArray: messagesArray,
+            }
+        });
       }
       if (exam) {
         var now = new Date();
@@ -43,6 +52,8 @@ exports.startExam = function(Examination) {
 exports.initializeExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
+    var messagesArray = [];
+
     var exam = new Examination({
       userId: req.body.data.userId,
       timeAllowed: 7200000,
@@ -58,7 +69,12 @@ exports.initializeExam = function(Examination, User) {
       User.findOne({ _id: req.body.data.userId }, function(err, user) {
         if(err) return console.error(err);
         if (!user) {
-          return res.json({ success: false, message: 'This user does not exist!' });
+          Notifications.prepareMessagesArray(messagesArray, 'This user does not exist!');
+          return res.status(500).json({
+            error:
+              { messagesArray: messagesArray,
+              }
+          });
         } else {
 
           // -----------------------
@@ -125,17 +141,16 @@ exports.queryExam = function(Examination, User) {
             result['email'] = user.email;       
             return result;
           }, function(err) {
-              console.error('User query error => ', err);
-              messagesArray.push('This User does not exist !');
+              Notifications.prepareMessagesArray(messagesArray, 'This User does not exist  !');
               return res.status(500).json({
                 error:
                   { messagesArray: messagesArray,
                   }
               });
+
           })
       }, function(err) {
-          console.error('Exam query error => ', err);
-          messagesArray.push('This exam does not exist !');
+          Notifications.prepareMessagesArray(messagesArray, 'This exam does not exist !');
           return res.status(500).json({
             error:
               { messagesArray: messagesArray,
@@ -151,11 +166,18 @@ exports.queryExam = function(Examination, User) {
 
 exports.finishExam = function(Examination, User) {
   return function(req, res, next) {
-
+    var messagesArray = [];
+    
     Examination.findOne({ _id: req.body.examId }, function(err, exam) {
       if(err) return console.error(err);
       if (!exam) {
-        return res.json( { success: false, message: 'No examination exists for that code!' } );
+        Notifications.prepareMessagesArray(messagesArray, 'No examination exists for that code!');
+        return res.status(500).json({
+          error:
+            { messagesArray: messagesArray,
+            }
+        });
+
       }
       if (exam) {
         exam.completed = 'Y';

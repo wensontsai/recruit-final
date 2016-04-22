@@ -31,6 +31,7 @@ export function loginUser (data) {
         type: actionTypes.LOGIN_USER_SUCCESS,
         loginResult: loginResult
       });
+
     } catch(e) {
       const notifications = e.error;
       console.log('sessions action thing->',notifications);
@@ -39,7 +40,7 @@ export function loginUser (data) {
         ERROR: e
       }),
       dispatch({
-        type: actionTypesNotifications.ADD_NOTIFICATION,
+        type: actionTypesNotifications.ADD_NOTIFICATIONS,
         notifications: notifications
       });
     }

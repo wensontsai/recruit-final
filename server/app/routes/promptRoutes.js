@@ -1,3 +1,5 @@
+var Notifications = require('../notifications');
+
 function shuffle(array) {
   var counter = array.length;
   // While there are elements in the array
@@ -50,15 +52,14 @@ exports.queryAllPromptsList = function(Prompt) {
   };
 };
 exports.addPrompt = function(Prompt) {
-  var messagesArray = [];
-  
   return function(req, res, next) {
+    var messagesArray = [];
+
     Prompt.findOne({ question: req.body.question }, function(err, prompt) {
       if(err) return console.error(err);
       if (prompt) {
-        console.error('Prompt save error => ', err);
-        messagesArray.push('This prompt already exists!');
-        res.status(500).json({
+        Notifications.prepareMessagesArray(messagesArray, 'This prompt already exists!');
+        return res.status(500).json({
           error:
             { messagesArray: messagesArray,
             }
@@ -76,8 +77,9 @@ exports.addPrompt = function(Prompt) {
   };
 };
 exports.editPrompt = function(Prompt) {
-  var results = {};
   return function(req, res, next) {
+    var results = {};
+
     Prompt.findOne({ _id: req.body.id }, function(err, prompt) {
       prompt.question = req.body.question;
       prompt.save(function(err, prompt) {
@@ -109,8 +111,9 @@ exports.editPrompt = function(Prompt) {
   };
 };
 exports.deletePrompt = function(Prompt) {
-  var results = {};
   return function(req, res, next) {
+    var results = {};
+    
     Prompt.remove({ _id: req.params.promptId }, function(err) {
       if (err) {
         return console.error(err)

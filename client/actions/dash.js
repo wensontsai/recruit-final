@@ -74,7 +74,7 @@ export function queryExam (data) {
         ERROR: e
       }),
       dispatch({
-        type: actionTypesNotifications.ADD_NOTIFICATION,
+        type: actionTypesNotifications.ADD_NOTIFICATIONS,
         notifications: notifications
       });
     }

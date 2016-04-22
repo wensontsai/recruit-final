@@ -7,10 +7,10 @@ var Notifications = require('../notifications');
 import bcrypt from 'bcrypt';
 
 exports.loginUser = function(User, Session, app) {
-  var result = {};
-  var messagesArray = [];
-  
   return function(req, res, next) {
+    var result = {};
+    var messagesArray = [];
+
     User.findOne({ email: req.body.email }, function(err, user) {
       if(err) return console.error(err);
       if (!user) {
@@ -58,8 +58,8 @@ exports.loginUser = function(User, Session, app) {
   };
 }
 exports.logoutUser = function(User, Session, app) {
-  var result = {};
   return function(req, res, next){
+  var result = {};
     // logout session in DB
 
     // on success send back json

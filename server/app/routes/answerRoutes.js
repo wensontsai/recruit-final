@@ -1,11 +1,14 @@
+var Notifications = require('../notifications');
+
 exports.submitAnswer = function(Answer, Prompt, Examination) {
-  var promptText = '';
   var answeredPrompts = [];
-  var now = new Date();
-  var results = {};
-  var messagesArray = [];
 
   return function(req, res, next) {
+    var now = new Date();
+    var results = {};
+    var messagesArray = [];
+    var promptText = '';
+
     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt) {
       promptText = prompt.question;
     });
@@ -21,8 +24,7 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
           Answer.findOne({ examId: req.body.examId, promptId: req.body.promptId }, function(err, answer) {
             if(err) return console.error(err);
             if (answer) {
-              console.error('Answer save error => ', err);
-              messagesArray.push('This question has already been answered for this exam session!');
+              Notifications.prepareMessagesArray(messagesArray, 'This question has already been answered for this exam session!');
               return res.status(500).json({
                 error:
                   { messagesArray: messagesArray,
@@ -56,13 +58,12 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
           });
       });
     });
-
-
   };
 };
 exports.queryCandidateAnswers = function(Answer, User) {
   return function(req, res, next) {
     var results = {};
+
     Answer.find({ userId: req.params.userId })
       .exec()
       .then (function(answers) {
