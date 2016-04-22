@@ -7,6 +7,7 @@ import { loginUser } from '../../actions/sessions';
 import './auth.scss';
 
 import Nav from '../nav/nav';
+import Notifications from '../notifications/notifications';
 
 class Login extends Component {
 	constructor (props) {
@@ -20,12 +21,14 @@ class Login extends Component {
 	}
 	render () {
 		const {
-		  sessions
+		  sessions,
+		  notifications
 		} = this.props;
 		
 		return (
 				<div className='login-container'>
 					<Nav />
+					<Notifications />
 					{(/(^|;)\s*token=/.test(document.cookie)
 					  ? this.redirectToCandidates()
 					  : <div className='page'>
@@ -89,11 +92,17 @@ class Login extends Component {
 	}
 	loginUser () {
 		this.props.loginUser(this.state.data);
+		this.setState({
+		  data: {
+		    email: '',
+		    password: ''
+		  }
+		});
 	}
 
 }
 
 export default connect(
-  (state) => ({ sessions: state.sessions }),
+  (state) => ({ sessions: state.sessions, notifications: state.notifications }),
   { loginUser }
 )(Login);

@@ -1,25 +1,42 @@
 var jwt = require('jsonwebtoken');
 var config = require ('../../config');
 
+var Notifications = require('../notifications');
+
 // bcrypt password hashing
-// var bcrypt = require('bcrypt');
 import bcrypt from 'bcrypt';
 
 exports.loginUser = function(User, Session, app) {
   var result = {};
+  var messagesArray = [];
+  
   return function(req, res, next) {
     User.findOne({ email: req.body.email }, function(err, user) {
       if(err) return console.error(err);
       if (!user) {
-        return res.json({ success: false, message: 'User Email not found!' });
+        Notifications.prepareMessagesArray(messagesArray, 'User Email not found!');
+        return res.status(500).json({
+          error:
+            { messagesArray: messagesArray,
+            }
+        });
       }
       if (user.admin !== 'Y') {
-        return res.json({ success: false, message: 'User does not have Admin privileges!' });
+        Notifications.prepareMessagesArray(messagesArray, 'User does not have Admin privileges!');
+        return res.status(500).json({
+          error:
+            { messagesArray: messagesArray,
+            }
+        });
       }
-
       // verify password
       if( bcrypt.compareSync(req.body.password, user.password) === false ) {
-        return res.json({ success: false, message: 'Authentication failed.  Wrong password!' });
+        Notifications.prepareMessagesArray(messagesArray, 'Authentication failed.  Wrong password!');
+        return res.status(500).json({
+          error:
+            { messagesArray: messagesArray,
+            }
+        });
       }
 
       var expiresIn = '24h';  //expires in 24hrs
@@ -52,6 +69,7 @@ exports.logoutUser = function(User, Session, app) {
     res.json(result);
   };
 }
+
 exports.authenticateUser = function(User, Session, app) {
   return function(req, res, next) {
     User.findOne({ name: req.body.email }, function(err, user) {

@@ -26,20 +26,10 @@ const logoutUser = (state, action) => {
   });
 };
 
-const authenticateUser = (state, action) => {
-  return merge({}, state, {
-    sessions: {
-      loggedInUserId: null,
-      loggedInUserEmail: action.authenticateResult.email
-    }
-  });
-};
-
 
 export default function sessions (state = initialState, action) {
   return ({
     [actionTypes.LOGIN_USER_SUCCESS]: loginUser,
-    [actionTypes.LOGOUT_USER_SUCCESS]: logoutUser,
-    [actionTypes.AUTHENTICATE_USER_SUCCESS]: authenticateUser
+    [actionTypes.LOGOUT_USER_SUCCESS]: logoutUser
   }[action.type] || ((s) => s))(state, action);
 }

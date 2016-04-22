@@ -50,11 +50,19 @@ exports.queryAllPromptsList = function(Prompt) {
   };
 };
 exports.addPrompt = function(Prompt) {
+  var messagesArray = [];
+  
   return function(req, res, next) {
     Prompt.findOne({ question: req.body.question }, function(err, prompt) {
       if(err) return console.error(err);
       if (prompt) {
-        return res.json( { success: false, message: 'This prompt already exists!' } );
+        console.error('Prompt save error => ', err);
+        messagesArray.push('This prompt already exists!');
+        res.status(500).json({
+          error:
+            { messagesArray: messagesArray,
+            }
+        });
       } else {
         var prompt = new Prompt({
           question : req.body.question

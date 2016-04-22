@@ -36,7 +36,6 @@ exports.startExam = function(Examination) {
           }
         });
       }
-
       res.json(exam);
     });
   };
@@ -104,6 +103,7 @@ exports.initializeExam = function(Examination, User) {
 exports.queryExam = function(Examination, User) {
   return function(req, res, next) {
     var result = {};
+    var messagesArray = [];
 
     Examination.findOne( { _id: req.params.examId } )
       .exec()
@@ -122,24 +122,23 @@ exports.queryExam = function(Examination, User) {
             result['userId'] = user._id;
             result['firstName'] = user.firstName;
             result['lastName'] = user.lastName;
-            result['email'] = user.email;         
+            result['email'] = user.email;       
             return result;
           }, function(err) {
               console.error('User query error => ', err);
-              res.status(500).json({
+              messagesArray.push('This User does not exist !');
+              return res.status(500).json({
                 error:
-                  { message: 'The user for this exam does not exist!',
-                    level: 'function => queryExam'
+                  { messagesArray: messagesArray,
                   }
               });
           })
       }, function(err) {
           console.error('Exam query error => ', err);
-          res.status(500).json({
+          messagesArray.push('This exam does not exist !');
+          return res.status(500).json({
             error:
-              { message: 'This exam does not exist!',
-                level: 'function => queryExam',
-                type: 'warning'
+              { messagesArray: messagesArray,
               }
           });
       })

@@ -1,3 +1,4 @@
+import * as actionTypesNotifications from '../actionTypes/notifications.js';
 import * as actionTypes from '../actionTypes/sessions.js';
 import { get, post, del } from '../utils/api';
 import { Link, browserHistory } from 'react-router';
@@ -31,9 +32,15 @@ export function loginUser (data) {
         loginResult: loginResult
       });
     } catch(e) {
+      const notifications = e.error;
+      console.log('sessions action thing->',notifications);
       dispatch({
         type: actionTypes.LOGIN_USER_ERROR,
         ERROR: e
+      }),
+      dispatch({
+        type: actionTypesNotifications.ADD_NOTIFICATION,
+        notifications: notifications
       });
     }
   };
@@ -66,19 +73,3 @@ export function logoutUser (data) {
   };
 }
 
-export function authenticateUser (data) {
-  return async dispatch => {
-    try {
-      const authenticateResult = await post('/api/authenticateUser', data);
-      dispatch({
-        type: actionTypes.AUTHENTICATE_USER_SUCCESS,
-        authenticateResult: authenticateResult
-      });
-    } catch(e) {
-      dispatch({
-        type: actionTypes.AUTHENTICATE_USER_ERROR,
-        ERROR: e
-      });
-    }
-  };
-}

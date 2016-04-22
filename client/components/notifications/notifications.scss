@@ -1,13 +1,23 @@
-.notifications-container {
+.notifications-container{
   height: 2.75rem;
-  padding: 3px;
   text-align: center;
 }
-.notifications-container:after {
-    transition: all 5s linear;
-    background: blue;
-}
-
-.notifications-container.warning {
+.notifications-container div{
+  padding: 3px;
+  height: 100%;
   background-color: pink;
+}
+.example-enter {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+.example-leave {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+.example-leave.example-leave-active {
+  opacity: 0.01;
 }

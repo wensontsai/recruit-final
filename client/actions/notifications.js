@@ -8,11 +8,13 @@ export function addNotifications (notifications) {
     });
   };
 }
-export function clearNotifications () {
-  console.log("@##$%#$%#$%#$%#$% helllo i'm here!");
+export function clearNotifications (notifications) {
+  console.log('action now', notifications);
+  notifications.messagesArray.shift();
   return async dispatch => {
     dispatch({
       type: actionTypes.CLEAR_NOTIFICATION,
+      notifications: notifications
     });
   };
 }

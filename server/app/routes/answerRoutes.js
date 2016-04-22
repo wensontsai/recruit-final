@@ -3,6 +3,7 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
   var answeredPrompts = [];
   var now = new Date();
   var results = {};
+  var messagesArray = [];
 
   return function(req, res, next) {
     Prompt.findOne({ _id: req.body.promptId }, function(err, prompt) {
@@ -20,7 +21,13 @@ exports.submitAnswer = function(Answer, Prompt, Examination) {
           Answer.findOne({ examId: req.body.examId, promptId: req.body.promptId }, function(err, answer) {
             if(err) return console.error(err);
             if (answer) {
-              return res.json( { success: false, message: 'This question has already been answered for this exam session!' } );
+              console.error('Answer save error => ', err);
+              messagesArray.push('This question has already been answered for this exam session!');
+              return res.status(500).json({
+                error:
+                  { messagesArray: messagesArray,
+                  }
+              });
             } else {
 
                var answer = new Answer({
@@ -80,22 +87,5 @@ exports.queryCandidateAnswers = function(Answer, User) {
       .then(function() {
         res.json(results);
       })
-
-    // Answer.find({ userId: req.params.userId }, function(err, answers) {
-    //   if(err) return console.error(err);
-    //   User.findOne({ _id: req.params.userId }, function(err, user) {
-    //     if(err) return console.error(err);
-    //     results = {
-    //       userId: req.params.userId,
-    //       firstName: user.firstName,
-    //       lastName: user.lastName,
-    //       email: user.email,
-    //       allAnswers: answers,
-    //     };
-    //     res.json(results);
-    //   });
-    // });
-
-
   };
 };

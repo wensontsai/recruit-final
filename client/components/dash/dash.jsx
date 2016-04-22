@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { queryExam, queryAllPrompts } from '../../actions/dash';
 
@@ -40,6 +41,7 @@ class DisplaysAll extends Component {
 	render () {
 		const {
 			dash,
+			notifications
 		} = this.props;
 
 		return (
@@ -69,6 +71,6 @@ class DisplaysAll extends Component {
 }
 
 export default connect(
-	(state) => ({ dash: state.dash }),
+	(state) => ({ dash: state.dash, notifications: state.notifications }),
 	{ queryExam, queryAllPrompts }
 )(DisplaysAll);

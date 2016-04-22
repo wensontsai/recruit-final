@@ -2,16 +2,12 @@ import * as actionTypes from '../actionTypes/notifications';
 import merge from 'lodash.merge';
 
 const initialState = {
-  message: '',
-  level: '',
-  dismissAfter: '',
-  type: '',
-  customComponent: ''
+  messagesArray: []
 };
 
 const addNotification = (state, action) => {
   return merge({}, state, {
-    message: action.notifications.message,
+    messagesArray: action.notifications.messagesArray,
     level: action.notifications.level,
     dismissAfter: action.notifications.dismissAfter,
     type: action.notifications.type,
@@ -20,10 +16,7 @@ const addNotification = (state, action) => {
 };
 const clearNotification = (state, action) => {
   return merge({}, state, {
-    message: '',
-    level: '',
-    dismissAfter: '',
-    customComponent: ''
+    messagesArray: action.notifications.messagesArray
   });
 };
 
