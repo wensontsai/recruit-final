@@ -24,10 +24,11 @@ import './notifications.scss';
     render () {
       const items = this.props.notifications.messagesArray.map(function(item, i) {
           return (
-            <div key={i} onClick={this.handleRemove.bind(this, i)}>
+            <div className='item' key={i} onClick={this.handleRemove.bind(this, i)}>
               <div className='message'>
                 {item}
               </div>
+              <a className='boxclose' id='boxclose'></a>
             </div>
           );
         }.bind(this));
