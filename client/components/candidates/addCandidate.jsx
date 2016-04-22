@@ -4,13 +4,14 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { addCandidate } from '../../actions/candidates';
+import { addNotifications } from '../../actions/notifications';
 
 import './candidates.scss';
+
 
 class AddCandidateView extends Component {
   constructor (props) {
     super (props);
-    // this.hideStatusView = this.hideStatusView.bind(this);
     this.state = {
       data: {
         firstName: this.props.firstName || '',
@@ -19,9 +20,13 @@ class AddCandidateView extends Component {
         admin: this.props.admin || '',
         password: this.props.password || '',
         password_confirm: this.props.password_confirm || ''
-      },
-      showStatus: this.props.showStatus || 'true'
+      }
     };
+  }
+
+  validateEmail (email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 
   render () {
@@ -113,18 +118,10 @@ class AddCandidateView extends Component {
         <div className='column-submit'>
           <div className='add-candidate'>
             <button className='btn btn-sm add-candidate'
-              onClick={() => this.addCandidate(this.hideStatusView.bind(this))}
+              onClick={() => this.addCandidate()}
               >Add User
             </button>
           </div>
-          {(this.state.showStatus
-            ? <div className='action-status'>
-                <ReactCSSTransitionGroup transitionName='example' transitionEnterTimeout={500} transitionLeaveTimeout={300} >
-                    {this.props.candidates.actionStatus}
-                </ReactCSSTransitionGroup>
-              </div>
-            : ''
-          )}
         </div>
       </div>
     );
@@ -201,17 +198,39 @@ class AddCandidateView extends Component {
       }
     });
   }
-  addCandidate (hideFunc) {
-    if(this.state.data.admin === 'Y') {
-      if(this.state.data.password === this.state.data.password_confirm) {
-        this.props.addCandidate(this.state.data);
-        this.setState({ data:{} });
-
+  addCandidate () {
+    // validate email
+    if( this.validateEmail(this.state.data.email) ) {
+      // validate admin is chosen
+      if( this.state.data.admin ) {
+        // If admin, validate that passwords match
+        if(this.state.data.admin === 'Y') {
+          if(this.state.data.password === this.state.data.password_confirm) {
+            this.props.addCandidate(this.state.data);
+            this.setState({ data:{} });
+          } else {
+            const notifications = {
+              messagesArray: ['Passwords do not match!   Please re-enter.']
+            };
+            this.props.addNotifications(notifications);
+            this.setState({ data:{} });
+          }
+        } else {
+          this.props.addCandidate(this.state.data);
+          this.setState({ data:{} });
+        }
       } else {
-        console.log('Passwords don\'t match!');
+        const notifications = {
+          messagesArray: ['Please select Admin: Y or N!']
+        };
+        this.props.addNotifications(notifications);
+        this.setState({ data:{} });
       }
     } else {
-      this.props.addCandidate(this.state.data);
+      const notifications = {
+        messagesArray: ['Please re-enter a proper email!']
+      };
+      this.props.addNotifications(notifications);
       this.setState({ data:{} });
     }
 
@@ -224,20 +243,11 @@ class AddCandidateView extends Component {
         allRadioButtons[i].checked = false;
       }
     }
-
-    // notifications
-    setTimeout(function() { hideFunc() }, 5000);
-  }
-  hideStatusView () {
-    this.setState({
-      showStatus: false
-    });
-    // console.log(this);
   }
 
 }
 
 export default connect(
   (state) => ({ candidates: state.candidates }),
-  { addCandidate }
+  { addCandidate, addNotifications }
 )(AddCandidateView);

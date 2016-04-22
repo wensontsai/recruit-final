@@ -4,6 +4,7 @@
   opacity: 0.9;
   left: 35%;
   text-align: center;
+  white-space: pre-wrap;
 }
 .notifications-container div{
   padding: 3px;
@@ -11,7 +12,6 @@
   background-color: pink;
   cursor: pointer;
 }
-
 a.boxclose{
   float:right;
   margin-top:-23px;
@@ -23,7 +23,6 @@ a.boxclose{
   line-height: 0px;
   padding: 11px 5px;       
 }
-
 .boxclose:before {
   content: "×";
 }
