@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var sinon = require('sinon');
 var api = supertest('http://localhost:3121');
 var config = require ('../../config');
-var server = require('../../server');
+var server = require('../../app/server');
 
 var UserTest = require('../../app/models/user');
 // var myStub = sinon.stub(UserModel, 'addUser');

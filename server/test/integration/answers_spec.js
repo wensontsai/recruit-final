@@ -9,11 +9,11 @@ var mongoose = require('mongoose');
 var sinon = require('sinon');
 var api = supertest('http://localhost:3121');
 var config = require ('../../config');
-var server = require('../../server');
+var server = require('../../app/server');
 
 var AnswerTest = require('../../app/models/answer');
 
-describe ('Answer routes', function() {  
+describe ('Answer routes', function() { 
   beforeEach(function (done) {
     function clearDB() {
       for (var i in mongoose.connection.collections) {
